@@ -39,7 +39,7 @@ public class ConnexionServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			user.setMotDePasse("");
 			session.setAttribute("user", user);
-			response.sendRedirect(request.getContextPath() + "/accueil");
+			response.sendRedirect(request.getContextPath() + "");
 		}
 
 	}

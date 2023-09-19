@@ -1,19 +1,18 @@
 package fr.eni.encheres.dal;
 
-//import java.util.List;
-
+import java.util.List;
 import fr.eni.encheres.bo.Enchere;
 
 public interface EnchereDao {
-	
-	void saveEnchere(Enchere enchere);
 
-//	List<Enchere> findByEncherir(String montantEnchere);
+	void save(Enchere enchere);
 
-	void modifyEnchere(Enchere enchere);
-	
-	void removeEnchere(int id);
-	
+	List<Enchere> findAll();
+
+	void modify(Enchere enchere);
+
+	void remove(int id);
+
 //	void encherir(Enchere enchere);
-	
+
 }
