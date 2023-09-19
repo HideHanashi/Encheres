@@ -43,7 +43,7 @@ public class UtilisateursManager {
 		utilisateurDao.save(user);
 	}
 
-	public void modifyUtilisateur(Utilisateur user) throws JDBCException {
+	public void modifyUtilisateur(Utilisateur user) throws BLLException {
 		utilisateurDao.modify(user);
 	}
 
