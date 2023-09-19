@@ -23,11 +23,11 @@
 		<title>LOSNA</title>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container"><!-- headerblock -->
 			<header class="row navbarbackground fixed-top">
 				<nav class="navbar navbar-expand-lg bg-body-tertiary bg-tertiary">
 				  <div class="container-fluid">
-				    <a class="navbar-brand titlenavbar" href="${ pageContext.request.contextPath }/accueil">LOSNA</a>
+				    <a class="navbar-brand titlenavbar" href="${ pageContext.request.contextPath }">LOSNA</a>
 				    
 				    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
 				    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" 
@@ -36,7 +36,7 @@
 				    </button>
 				    
 				    <form class="d-flex" role="search">
-				        <input class="form-control me-5 navbarsearch" type="search" name="q" 
+				        <input class="form-control me-3 navbarsearch" type="search" name="q" 
 				        placeholder="Rechercher . . ." aria-label="Search">
 				    </form>
 				    
@@ -44,11 +44,11 @@
 				      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 				      
 				        <li class="nav-item">
-				          <a class="nav-link active" aria-current="page" href="${ pageContext.request.contextPath }/accueil">Accueil</a>
+				          <a class="nav-link active" aria-current="page" href="${ pageContext.request.contextPath }">Accueil</a>
 				        </li>
 				        
 				        <li class="nav-item">
-				          <a class="nav-link" href="${ pageContext.request.contextPath }/nouvelle-vente">Enchï¿½re</a>
+				          <a class="nav-link" href="${ pageContext.request.contextPath }/nouvelle-vente">Enchère</a>
 				        </li>
 				        
 				        <li class="nav-item dropdown">
