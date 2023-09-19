@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.titlenavbar {
+	font-weight: bold;
+	font-size: x-large;
+}
+
+.navbarsearch {
+	font-size: small;
+}
+
+.mdpforget {
+	font-size: small;
+}
+
+.navbarbackground {
+	background-color: rgb(249, 249, 249);
+}

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf" %>
 <main class="row">
-	<div class="col">	
+	<div class="col position-absolute top-50 start-50 translate-middle">	
 		<div class="row mt-5">
 			<div class="col-8 offset-2">
 				<c:if test="${ !empty success }">
@@ -17,23 +17,23 @@
 				</c:if>
 				<form method="post">
 					<div class="mb-3">
-						<label for="username" class="form-label">Identifiant: </label> <input
-							type="text" class="form-control" name="username" id="username"
-							placeholder="ex. toto">
+						<label for="username" class="form-label">Adresse mail : </label> <input
+							type="text" class="form-control" name="email" id="email"
+							placeholder="ex. your@email.com">
 					</div>
 					<div class="mb-3">
-						<label for="password" class="form-label">Mot de passe: </label> <input
+						<label for="password" class="form-label">Mot de passe : </label> <input
 							type="password" class="form-control" name="password"
 							id="password">
 					</div>
 					<button class="btn btn-primary" role="button" type="submit">Connexion</button>
-					<div class="mb-3">
+					<div class="mb-5 mt-1 mdpforget">
 						<a href="${ pageContext.request.contextPath }/forget-password">Mot
-							de passe oublié</a>
+							de passe oublié ?</a>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-</main> --%>
+</main>
 <%@ include file="/WEB-INF/fragments/footer.jspf"%>
