@@ -3,6 +3,6 @@
 <%@ include file="/WEB-INF/fragments/header.jspf" %>
 
 <main>
-
+	<h1>LOSNA</h1>
 </main>
 <%@ include file="/WEB-INF/fragments/footer.jspf" %>

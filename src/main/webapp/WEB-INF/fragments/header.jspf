@@ -14,7 +14,7 @@
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
 <!--  <link rel="stylesheet" href="${ pageContext.request.contextPath }/assets/css/style.css" />-->
-<title>ENI-Enchères</title>
+<title>LOSNA</title>
 </head>
 <body>
 	<div class="container">
@@ -25,21 +25,20 @@
 					<div class="collapse navbar-collapse" id="navbarNav">
 						<ul>
 							<li><a class="nav-link active" aria-current="page"
-								href="${ pageContext.request.contextPath }/liste-enchères">Enchères</a>
+								href="${ pageContext.request.contextPath }/liste-enchères">Ench�res</a>
 							</li>
 							<li><a class="nav-link"
 								href="${ pageContext.request.contextPath }/nouvelle-vente">Vendre
-									un article</a></li>
+									un Article</a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="${ pageContext.request.contextPath }/mon-profil">Mon
-									profil</a></li>
+								href="${ pageContext.request.contextPath }/mon-profil">Profil</a></li>
 							<li class="nav-item"><a class="nav-link"
-								href="${ pageContext.request.contextPath }/deconnexion">Déconnexion</a>
+								href="${ pageContext.request.contextPath }/deconnexion">D�connexion</a>
 							</li>
 							<c:if test="${ user == null }">
 								<li><a class="nav-link"
-									href="${ pageContext.request.contextPath }/connexion">S'inscrire
-										- Se connecter</a></li>
+									href="${ pageContext.request.contextPath }/connexion">Inscription
+										- Connexion</a></li>
 							</c:if>
 						</ul>
 					</div>
