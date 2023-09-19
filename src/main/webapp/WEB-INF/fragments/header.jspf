@@ -48,7 +48,7 @@
 				        </li>
 				        
 				        <li class="nav-item">
-				          <a class="nav-link" href="${ pageContext.request.contextPath }/nouvelle-vente">Enchère</a>
+				          <a class="nav-link" href="${ pageContext.request.contextPath }/nouvelle-vente">Enchï¿½re</a>
 				        </li>
 				        
 				        <li class="nav-item dropdown">
@@ -61,7 +61,7 @@
 				            	href="${ pageContext.request.contextPath }/mon-profil">Mon Profil</a></li>
 				            	
 				            	<li><a class="dropdown-item" 
-				            	href="${ pageContext.request.contextPath }/deconnexion">Déconnexion</a></li>
+				            	href="${ pageContext.request.contextPath }/deconnexion">Dï¿½connexion</a></li>
 				            </c:if>
 				            
 				         	<c:if test="${ user == null }">
