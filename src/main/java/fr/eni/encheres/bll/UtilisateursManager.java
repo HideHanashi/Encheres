@@ -2,6 +2,7 @@ package fr.eni.encheres.bll;
 
 import java.util.Random;
 
+import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.ForgetPassword;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
@@ -57,27 +58,27 @@ public class UtilisateursManager {
 
 	// BLL AUTRES
 
-	public void inscription(Utilisateur utilisateur) throws JDBCException, JDBCException {
+	public void inscription(Utilisateur utilisateur) throws JDBCException, BLLException {
 		checkFields(utilisateur);
 		utilisateur.setMotDePasse(PasswordEncoder.hashPassword(utilisateur.getMotDePasse() // PASSWORD NON HACHER
 		));
 		utilisateurDao.save(utilisateur);
 	}
 
-	private void checkFields(Utilisateur utilisateur) throws JDBCException {
+	private void checkFields(Utilisateur utilisateur) throws BLLException {
 		if (utilisateur == null)
-			throw new JDBCException("User est null");
+			throw new BLLException("User est null");
 
 		if (utilisateur.getPseudo().isBlank())
-			throw new JDBCException("L'username est obligatoire !");
+			throw new BLLException("L'username est obligatoire !");
 		if (utilisateur.getEmail().isBlank())
-			throw new JDBCException("L'e-mail est obligatoire !");
+			throw new BLLException("L'e-mail est obligatoire !");
 
 		// VÉRIFIE LA SYNTAXE DE L'EMAIL
 		if (utilisateur.getMotDePasse().isBlank())
-			throw new JDBCException("Le mot de passe est obligatoire !");
+			throw new BLLException("Le mot de passe est obligatoire !");
 		if (utilisateur.getMotDePasse().length() < 8 || utilisateur.getMotDePasse().length() > 35)
-			throw new JDBCException("La taille du mot de passe doit etre entre 8 et 35 carachtères !");
+			throw new BLLException("La taille du mot de passe doit etre entre 8 et 35 carachtères !");
 		// if(!user.getPassword().equals(user.getConfirmpassword))
 	}
 
@@ -90,11 +91,11 @@ public class UtilisateursManager {
 		return null;
 	}
 
-	public ForgetPassword checkEmail(String email) throws JDBCException {
+	public ForgetPassword checkEmail(String email) throws BLLException {
 
 		Utilisateur utilisateur = utilisateurDao.findByEmail(email);
 		if (utilisateur == null)
-			throw new JDBCException("Erreur: l'email n'existe pas");
+			throw new BLLException("Erreur: l'email n'existe pas");
 
 		// GÉNÉRE LE CODE
 		String code = rd.nextLong(1, 9999999999L) + "";
@@ -110,12 +111,12 @@ public class UtilisateursManager {
 		return fp;
 	}
 
-	public void resetPassword(String email, String code, String newPassword) throws JDBCException {
+	public void resetPassword(String email, String code, String newPassword) throws BLLException {
 
 		ForgetPassword fp = DaoFactory.getForgetPasswordDao().resetPassword(email);
 
 		if (!fp.getCode().equals(code))
-			throw new JDBCException("Le code est érroné!");
+			throw new BLLException("Le code est érroné!");
 
 		Utilisateur utilisateur = fp.getUser();
 
