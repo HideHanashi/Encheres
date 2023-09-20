@@ -1,66 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/fragments/header.jspf" %>
+	pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/fragments/header.jspf"%>
 <main class="row">
-	<div class="col position-absolute top-50 start-50 translate-middle">
+	<div class="col">
 		<div class="row text-center mt-4">
-			<h1> Inscription </h1>
+			<h1>Mon profil</h1>
 		</div>
-		<div class="container overflow-hidden text-center">
-			<c:if test="${ ! empty error }">
-				<div class="alert alert-danger">
-					${ error }
+		<div class="row mt-5">
+			<div class="col-4 offset-4">
+				<div class="mb-3">
+					<label for="pseudo" class="form-label">Pseudo : </label> <input
+						type="text" class="form-control" readonly="readonly"
+						value="${ user.pseudo }" id="pseudo" name="pseudo">
 				</div>
-			</c:if>
-			<form method="post" >
-				<div class="row gx-5">
-					<div class="col">
-						<div class="p-3">
-							<label for="pseudo" class="form-label">Pseudo : </label>
-					 		<input type="text" class="form-control" value="${ param.pseudo }" name="pseudo" id="pseudo">
-						</div>
-						<div class="p-3">
-							<label for="nom" class="form-label">Nom : </label>
-							<input type="text" class="form-control" value="${ param.nom }" name="nom" id="nom">
-						</div>
-						<div class="p-3">
-							<label for="prenom" class="form-label">Prénom : </label>
-							<input type="text" class="form-control" value="${ param.prenom }" name="prenom" id="prenom">
-						</div>
-						<div class="p-3">
-					 		<label for="mdp" class="form-label">Mot de passe : </label>
-					 		<input type="password" class="form-control" value="${ param.mdp }" name="mdp" id="mdp">
-						</div>
-						<div class="p-3">
-					 		<label for="email" class="form-label">Email : </label>
-					 		<input type="email" class="form-control" value="${ param.email }" name="email" id="email">
-						</div>
-					</div>
-					<div class="col">
-						<div class="p-3">
-							<label for="telephone" class="form-label">Teléphone : </label>
-							<input type="number" class="form-control" value="${ param.telephone }" name="telephone" id="telephone">
-						</div>
-						<div class="p-3">
-							<label for="codePostal" class="form-label">Code Postal : </label>
-							<input type="number" class="form-control" value="${ param.codePostal }" name="codePostal" id="codePostal">
-						</div>
-						<div class="p-3">
-							<label for="rue" class="form-label">Rue : </label>
-							<input type="text" class="form-control" value="${ param.rue }" name="rue" id="rue">
-						</div>
-						<div class="p-3">
-							<label for="ville" class="form-label">Ville : </label>
-							<input type="text" class="form-control" value="${ param.ville }" name="ville" id="ville">
-						</div>
-						<div class="p-3 mt-4 pt-4">
-							<button class="btn btn-primary" role="button" type="submit" >Inscription</button>
-							<button class="btn btn-secondary" role="button" type="submit" >Annuler</button>
-						</div>
-					</div>
+				<div class="mb-3">
+					<label for="nom" class="form-label">Nom : </label> <input
+						type="text" class="form-control" readonly="readonly"
+						value="${ user.nom }" id="nom" name="nom">
 				</div>
-			</form>
+				<div class="mb-3">
+					<label for="prenom" class="form-label">Prénom : </label> <input
+						type="text" class="form-control" readonly="readonly"
+						value="${ user.prenom }" id="prenom" name="prenom">
+				</div>
+				<div class="mb-3">
+					<label for="mdp" class="form-label">Mot de Passe : </label> <input
+						type="text" class="form-control" readonly="readonly"
+						value="${ user.motDePasse }" id="mdp" name="mdp">
+				</div>
+				<div class="mb-3">
+					<label for="email" class="form-label">Email : </label> <input
+						type="text" class="form-control" readonly="readonly"
+						value="${ user.email }" id="email" name="email">
+				</div>
+				<div class="mb-3">
+					<label for="telephone" class="form-label">Téléphone : </label> <input
+						type="text" class="form-control" readonly="readonly"
+						value="${ user.telephone }" id="telephone" name="telephone">
+				</div>
+				<div class="mb-3">
+					<label for="codePostal" class="form-label">Code Postal : </label> <input
+						type="text" class="form-control" readonly="readonly"
+						value="${ user.codePostal }" id="codePostal" name="codePostal">
+				</div>
+				<div class="mb-3">
+					<label for="rue" class="form-label">Rue : </label> <input
+						type="text" class="form-control" readonly="readonly"
+						value="${ user.rue }" id="rue" name="rue">
+				</div>
+				<div class="mb-3">
+					<label for="ville" class="form-label">Ville : </label> <input
+						type="text" class="form-control" readonly="readonly"
+						value="${ user.ville }" id="ville" name="ville">
+				</div>
+				<form method="POST"
+					action="${ pageContext.request.contextPath }/supprimerprofil"
+					onsubmit="return confirm('Voulez-vous vraiment supprimer votre compte ?')">
+					<div class="mb-3 text-center mt-5">
+						<a class="btn btn-info"
+							href="${ pageContext.request.contextPath }/jeux/modifier?id=${ game.id }"><i
+							class="fa-solid fa-pen"></i></a> <a class="btn btn-primary"
+							href="${ pageContext.request.contextPath }/jeux/ajouter"><i
+							class="fa-solid fa-plus"></i></a>
+						<button type="submit" name="id" value="${ user.noUtilisateur }"
+							class="btn btn-danger">
+							<i class="fa-solid fa-trash"></i>
+						</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 </main>
-<%@ include file="/WEB-INF/fragments/footer.jspf" %>
+<%@ include file="/WEB-INF/fragments/footer.jspf"%>

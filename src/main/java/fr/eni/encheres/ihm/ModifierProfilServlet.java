@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/modifier-mon-profil")
+@WebServlet("/modifiermonprofil")
 public class ModifierProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class ModifierProfilServlet extends HttpServlet {
 			Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue,
 					codePostal, ville);
 			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
-			response.sendRedirect(request.getContextPath() + "/mon-profil");
+			response.sendRedirect(request.getContextPath() + "/monprofil");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
