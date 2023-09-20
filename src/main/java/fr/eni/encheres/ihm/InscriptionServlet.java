@@ -26,8 +26,8 @@ public class InscriptionServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			Utilisateur user = new Utilisateur(request.getParameter("pseudo"), request.getParameter("prenom"),
-					request.getParameter("nom"), request.getParameter("telephone"), request.getParameter("email"),
+			Utilisateur user = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"),
+					request.getParameter("prenom"), request.getParameter("email"), request.getParameter("telephone"),
 					request.getParameter("rue"), request.getParameter("codePostal"), request.getParameter("ville"),
 					request.getParameter("mdp"));
 			// user.setConfirmPassword()
