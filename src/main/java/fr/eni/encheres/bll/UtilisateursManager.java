@@ -1,5 +1,6 @@
 package fr.eni.encheres.bll;
 
+import java.util.List;
 import java.util.Random;
 
 import fr.eni.encheres.bll.exception.BLLException;
@@ -33,6 +34,14 @@ public class UtilisateursManager {
 	// BLL UTILISATEUR
 
 	private UtilisateurDao utilisateurDao = DaoFactory.getUtilisateurDao();
+	public Utilisateur recupUtilisateur(int noUtilisateur) {
+		return utilisateurDao.findOne(noUtilisateur);
+	}
+	
+	public List<Utilisateur> recupTousLesUtilisateurs() {
+		return utilisateurDao.findAll();
+	}
+	
 	private Random rd = new Random();
 
 //	public List<Utilisateur> searchAllUtilisateur() {
@@ -47,8 +56,8 @@ public class UtilisateursManager {
 		utilisateurDao.modify(user);
 	}
 
-	public void removeUtilisateur(int id) {
-		utilisateurDao.remove(id);
+	public void removeUtilisateur(int noUtilisateur) {
+		utilisateurDao.remove(noUtilisateur);
 		;
 	}
 

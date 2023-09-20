@@ -7,12 +7,12 @@
 			<h1> Inscription </h1>
 		</div>
 		<div class="container overflow-hidden text-center">
+			<c:if test="${ ! empty error }">
+				<div class="alert alert-danger">
+					${ error }
+				</div>
+			</c:if>
 			<form method="post" >
-				<c:if test="${ ! empty error }">
-					<div class="alert alert-danger">
-						${ error }
-					</div>
-				</c:if>
 				<div class="row gx-5">
 					<div class="col">
 						<div class="p-3">
