@@ -55,7 +55,7 @@
 						</div>
 						<div class="p-3 mt-4 pt-4">
 							<button class="btn btn-primary" role="button" type="submit" >Inscription</button>
-							<button class="btn btn-secondary" role="button" type="submit" >Annuler</button>
+							<button class="btn btn-secondary" role="button" type="reset">Effacer</button>
 						</div>
 					</div>
 				</div>
