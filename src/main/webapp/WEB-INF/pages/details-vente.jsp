@@ -38,8 +38,8 @@
 		<div class="mb-3">
 			<label for="proposition" class="form-label">Ma proposition: </label>
 			<input type="number" class="form-control" readonly="readonly" value="${ game.vendeur }" id="vendeur" >
+			<button class="btn btn-primary" role="button" type="submit" >Enchérir</button>
 		</div>
-		<button class="btn btn-primary" role="button" type="submit" >Enchérir</button>
 	</div>
 </main>
 <%@ include file="/WEB-INF/fragments/footer.jspf" %>
