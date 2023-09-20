@@ -16,11 +16,7 @@
 							type="password" class="form-control" name="password"
 							id="password">
 					</div>
-					<button class="btn btn-primary" role="button" type="submit">Connexion</button>
-					<div class="mb-5 mt-1 mdpforget">
-						<a href="${ pageContext.request.contextPath }/forget-password">Mot
-							de passe oublié ?</a>
-					</div>
+					<button class="btn btn-primary" role="button" type="submit">Valider</button>
 				</form>
 			</div>
 		</div>
