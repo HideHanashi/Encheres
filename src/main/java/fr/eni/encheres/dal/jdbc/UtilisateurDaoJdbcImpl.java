@@ -15,7 +15,7 @@ import fr.eni.encheres.dal.jdbc.exception.JDBCException;
 public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
 	private static final String INSERT_USER = "INSERT INTO UTILISATEUR (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
-			+ " VALUES (?,?,?,?,?,?,?,?,?)";
+			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	private static final String SELECT_BY_USERNAME = "SELECT * FROM UTILISATEUR WHERE pseudo = ?";
 
@@ -26,7 +26,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email = ?";
 
 	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
-			+ " VALUES (?,?,?,?,?,?,?,?,?) WHERE no_utilisateur = ?";
+			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?) WHERE no_utilisateur = ?";
 
 	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,code_postal,ville)"
 			+ " VALUES (?,?,?) WHERE no_utilisateur = ?";
