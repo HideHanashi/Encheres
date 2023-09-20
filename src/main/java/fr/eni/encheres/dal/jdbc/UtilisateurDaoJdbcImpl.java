@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.UtilisateurDao;
@@ -111,7 +112,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	}
 
 	@Override
-	public void modify(Utilisateur user) throws JDBCException {
+	public void modify(Utilisateur user) throws BLLException {
 		try (Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(UPDATE_USER_USER);) {
 			pstmt.setString(1, user.getPseudo());
@@ -127,13 +128,13 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			if (e.getMessage().contains(UNIQUE_USERNAME_CONSTRAINT)) {
-				throw new JDBCException("L'username est déjà utilisé !");
+				throw new BLLException("L'username est déjà utilisé !");
 			}
 			if (e.getMessage().contains(UNIQUE_TELEPHONE_CONSTRAINT)) {
-				throw new JDBCException("Le numéro de téléphone est déjà utilisé !");
+				throw new BLLException("Le numéro de téléphone est déjà utilisé !");
 			}
 			if (e.getMessage().contains(UNIQUE_EMAIL_CONSTRAINT)) {
-				throw new JDBCException("L'email est déjà utilisé !");
+				throw new BLLException("L'email est déjà utilisé !");
 			}
 			e.printStackTrace();
 		}
