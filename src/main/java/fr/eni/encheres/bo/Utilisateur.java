@@ -22,10 +22,6 @@ public class Utilisateur {
 	private List<ArticleVendu> achete = new ArrayList<ArticleVendu>();
 	private List<ArticleVendu> vendu = new ArrayList<ArticleVendu>();
 
-	public Utilisateur() {
-
-	}
-
 	// RESET PASSWORD
 	public Utilisateur(int noUtilisateur, String motDePasse) {
 		this.noUtilisateur = noUtilisateur;
@@ -34,7 +30,7 @@ public class Utilisateur {
 
 	// CONSTRUCTEUR DE BASE
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String rue, String codePostal, String ville) {
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -44,12 +40,9 @@ public class Utilisateur {
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
-		this.motDePasse = motDePasse;
-		this.credit = credit;
-		this.administrateur = administrateur;
 	}
 
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur(int noUtilisateur,String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse) {
 
 		this.pseudo = pseudo;

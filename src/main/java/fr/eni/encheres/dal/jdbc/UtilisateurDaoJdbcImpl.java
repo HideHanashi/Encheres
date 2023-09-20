@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.Retrait;
@@ -152,6 +153,18 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public Utilisateur findOne(int noUtilisateur) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Utilisateur> findAll() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

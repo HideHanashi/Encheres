@@ -4,12 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import fr.eni.encheres.bo.ForgetPassword;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ForgetPasswordDao;
-import fr.eni.encheres.dal.jdbc.exception.JDBCException;
 
 public class ForgetPasswordDaoJdbcImpl implements ForgetPasswordDao {
 	
