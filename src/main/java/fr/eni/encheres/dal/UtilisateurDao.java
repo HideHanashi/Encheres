@@ -15,6 +15,8 @@ public interface UtilisateurDao {
 	void remove(int noUtilisateur);
 
 	void modify(Utilisateur user) throws BLLException;
+	
+	void modifyPassword(Utilisateur user);
 
 	void modify(Retrait retrait);
 
