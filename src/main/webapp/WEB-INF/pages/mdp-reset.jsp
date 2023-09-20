@@ -5,24 +5,14 @@
 	<div class="col position-absolute top-50 start-50 translate-middle">	
 		<div class="row mt-5">
 			<div class="col-4 offset-4">
-				<h1 class="mb-3"> Connexion </h1>
-				<c:if test="${ !empty success }">
-					<div class="alert alert-success">${ success }</div>
-				</c:if>
-				<c:if test="${ !empty error }">
-					<div class="alert alert-danger">${ error }</div>
-				</c:if>
-				<c:if test="${ param.err == 1 }">
-					<div class="alert alert-danger">Pour mettre un article en enchère vous devez vous connecter.</div>
-				</c:if>
+				<h1 class="mb-3"> Mot de passe oublié </h1>
 				<form method="post">
 					<div class="mb-3">
-						<label for="email" class="form-label">Adresse mail : </label> <input
-							type="email" class="form-control" name="email" id="email"
-							placeholder="ex. your@email.com">
+						<label for="code" class="form-label">Code : </label> <input
+							type="text" class="form-control" name="code" id="code">
 					</div>
 					<div class="mb-3">
-						<label for="password" class="form-label">Mot de passe : </label> <input
+						<label for="password" class="form-label">Nouveau mot de passe : </label> <input
 							type="password" class="form-control" name="password"
 							id="password">
 					</div>
