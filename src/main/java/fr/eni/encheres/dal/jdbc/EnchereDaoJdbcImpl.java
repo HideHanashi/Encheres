@@ -9,8 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
-
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.EnchereDao;
 
 public class EnchereDaoJdbcImpl implements EnchereDao {
@@ -37,7 +38,7 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 
 	private static final String DELETE_ENCHERE = "DELETE ENCHERES WHERE no_article = ?";
 
-	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES" + JOINTURE;
+	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES";
 
 	@Override
 	public void save(Enchere enchere) {
@@ -101,7 +102,7 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 			Enchere enchere = new Enchere();
 			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERES);
 			while (rs.next()) {
-				enchere.getUtilisateur().getNoUtilisateur();
+				enchere.getUtilisateur();
 				enchere.getArticleVendu().getNoArticle();
 				enchere.getDateEnchere();
 				enchere.getMontant_enchere();
