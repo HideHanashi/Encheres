@@ -10,4 +10,14 @@
     <servlet-name>SupprimerServlet</servlet-name>
     <url-pattern>/SupprimerServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VendreArticleServlet</display-name>
+    <servlet-name>VendreArticleServlet</servlet-name>
+    <servlet-class>fr.eni.encheres.ihm.VendreArticleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VendreArticleServlet</servlet-name>
+    <url-pattern>/VendreArticleServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
