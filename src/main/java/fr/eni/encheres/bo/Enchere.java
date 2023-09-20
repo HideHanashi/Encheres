@@ -9,7 +9,7 @@ public class Enchere {
 
 	private ArticleVendu articleVendu;
 	private Utilisateur utilisateur;
-
+	
 	public Enchere() {
 
 	}

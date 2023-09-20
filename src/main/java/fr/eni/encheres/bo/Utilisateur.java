@@ -88,6 +88,10 @@ public class Utilisateur {
 		this.ville = ville;
 	}
 
+	public Utilisateur() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public List<Enchere> getEncherit() {
 		return encherit;
 	}
