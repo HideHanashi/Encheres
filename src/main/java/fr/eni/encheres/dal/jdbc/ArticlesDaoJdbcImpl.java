@@ -15,11 +15,11 @@ import fr.eni.encheres.dal.ArticlesDao;
 public class ArticlesDaoJdbcImpl implements ArticlesDao {
 
 	private static final String SELECT_ALL = "SELECT * FROM ARTICLE_VENDU";
-	private static final String SELECT = "SELECT * FROM ARTICLE_VENDU WHERE noArticle = ?";
-	private static final String SAVE = "INSERT ARTICLE_VENDU (nomArticle,description,dateDebutEncheres,dateFinEncheres,miseAPrix,prixVente,etatVente) VALUES (?,?,?,?,?,?,?)";
-	private static final String DELETE = "DELETE ARTICLE_VENDU WHERE noArticle = ?";
-	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nomArticle=?,description=?,dateDebutEncheres=?,dateFinEncheres=?,miseAPrix=?,prixVente=?,etatVente=? WHERE noArticle = ?";
-	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nomArticle LIKE ? ";
+	private static final String SELECT = "SELECT * FROM ARTICLE_VENDU WHERE no_article = ?";
+	private static final String SAVE = "INSERT ARTICLE_VENDU (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente) VALUES (?,?,?,?,?,?,?)";
+	private static final String DELETE = "DELETE ARTICLE_VENDU WHERE no_article = ?";
+	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";
+	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nom_article LIKE ? ";
 	private static final String FIND_BY_CATEGORY = "SELECT libelle FROM CATEGORIE GROUP BY libelle";
 
 	@Override
@@ -49,9 +49,10 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				return new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"), rs.getString("description"),
-						rs.getDate("dateDebutEncheres").toLocalDate(), rs.getDate("dateFinEncheres").toLocalDate(),
-						rs.getInt("miseAPrix"), rs.getInt("prixVente"), rs.getString("etatVente"));
+				return new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+						rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
+						rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
+						rs.getInt("prix_vente"), rs.getString("etat_vente"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -69,10 +70,10 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			while (rs.next()) {
 				articles.add(
 
-						new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"),
-								rs.getString("description"), rs.getDate("dateDebutEncheres").toLocalDate(),
-								rs.getDate("dateFinEncheres").toLocalDate(), rs.getInt("miseAPrix"),
-								rs.getInt("prixVente"), rs.getString("etatVente"))
+						new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+								rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
+								rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
+								rs.getInt("prix_vente"), rs.getString("etat_vente"))
 
 				);
 			}
@@ -128,10 +129,10 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			while (rs.next()) {
 				articles.add(
 
-						new ArticleVendu(rs.getInt("noArticle"), rs.getString("nomArticle"),
-								rs.getString("description"), rs.getDate("dateDebutEncheres").toLocalDate(),
-								rs.getDate("dateFinEncheres").toLocalDate(), rs.getInt("miseAPrix"),
-								rs.getInt("prixVente"), rs.getString("etatVente")));
+						new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+								rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
+								rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
+								rs.getInt("prix_vente"), rs.getString("etat_vente")));
 			}
 			return articles;
 		} catch (SQLException e) {
@@ -140,20 +141,18 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 		return null;
 
 	}
-	
+
 	@Override
 	public List<String> findByCategorie() {
-		try(
-			Connection connection = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = connection.prepareStatement(FIND_BY_CATEGORY);	
-			) {
+		try (Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(FIND_BY_CATEGORY);) {
 			List<String> categories = new ArrayList<String>();
 			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				categories.add(rs.getString("libelle"));
 			}
 			return categories;
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;

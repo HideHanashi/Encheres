@@ -13,7 +13,7 @@ import fr.eni.encheres.dal.jdbc.exception.JDBCException;
 
 public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
-	private static final String INSERT_USER = "INSERT INTO UTILISATEUR (pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse)"
+	private static final String INSERT_USER = "INSERT INTO UTILISATEUR (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe)"
 			+ " VALUES (?,?,?,?,?,?,?,?,?)";
 
 	private static final String SELECT_BY_USERNAME = "SELECT * FROM UTILISATEUR WHERE pseudo = ?";
@@ -21,13 +21,13 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String UNIQUE_USERNAME_CONSTRAINT = "uq_pseudo_user";
 	private static final String UNIQUE_TELEPHONE_CONSTRAINT = "uq_phone_user";
 	private static final String UNIQUE_EMAIL_CONSTRAINT = "uq_email_user";
-	private static final String DELETE = "DELETE UTILISATEUR WHERE noUtilisateur = ?";
+	private static final String DELETE = "DELETE UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email = ?";
 
-	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET (pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse)"
+	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe)"
 			+ " VALUES (?,?,?,?,?,?,?,?,?) WHERE no_utilisateur = ?";
 
-	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,codePostal,ville)"
+	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,code_postal,ville)"
 			+ " VALUES (?,?,?) WHERE no_utilisateur = ?";
 
 	@Override
@@ -39,9 +39,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				return new Utilisateur(rs.getInt("noUtilisateur"), rs.getString("pseudo"), rs.getString("nom"),
+				return new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
 						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
-						rs.getString("codePostal"), rs.getString("ville"), rs.getString("motDePasse"),
+						rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"),
 						rs.getInt("credit"), rs.getBoolean("administrateur"));
 			}
 		} catch (SQLException e) {
@@ -59,9 +59,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			ResultSet rs = pstmt.executeQuery();
 
 			if (rs.next()) {
-				return new Utilisateur(rs.getInt("noUtilisateur"), rs.getString("pseudo"), rs.getString("nom"),
+				return new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
 						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
-						rs.getString("codePostal"), rs.getString("ville"), rs.getString("motDePasse"),
+						rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"),
 						rs.getInt("credit"), rs.getBoolean("administrateur"));
 			}
 		} catch (SQLException e) {

@@ -29,13 +29,13 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 			+ "SELECT * FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
 			+ "SELECT * FROM RETRAIT r INNER JOIN ARTICLE_VENDU a ON a.no_article = r.no_article";
 
-	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (noUtilisateur,noArticle,dateEnchere,montantEnchere)"
+	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur,no_article,date_encheres,montant_encheres)"
 			+ " VALUES (?,?,?,?)" + JOINTURE;
 
-	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET (noUtilisateur,noArticle,dateEnchere,montantEnchere)"
+	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET (no_utilisateur,no_article,date_encheres,montant_encheres)"
 			+ " VALUES (?,?,?,?) WHERE no_article = ?" + JOINTURE;
 
-	private static final String DELETE_ENCHERE = "DELETE ENCHERES WHERE noArticle = ?";
+	private static final String DELETE_ENCHERE = "DELETE ENCHERES WHERE no_article = ?";
 
 	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES" + JOINTURE;
 
