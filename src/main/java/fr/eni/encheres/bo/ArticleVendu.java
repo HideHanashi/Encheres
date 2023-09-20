@@ -14,19 +14,19 @@ public class ArticleVendu {
 	private int miseAPrix;
 	private int prixVente;
 	private String etatVente;
-	
+
 	private List<Enchere> concerne = new ArrayList<Enchere>();
 	private Utilisateur achete;
 	private Utilisateur vente;
 	private Retrait lieuRetrait;
 	private Categorie categorie;
-	
-	
-	
-	
-	
+
+	public ArticleVendu() {
+
+	}
+
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-						LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente) {
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente) {
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -35,15 +35,13 @@ public class ArticleVendu {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
-		
+
 	}
-	
-	
-	
-	
+
 	public Categorie getCategorie() {
 		return categorie;
 	}
+
 	public void setCategorie(Categorie categorie) {
 		this.categorie = categorie;
 	}
@@ -51,6 +49,7 @@ public class ArticleVendu {
 	public Retrait getRetrait() {
 		return lieuRetrait;
 	}
+
 	public void setRetrait(Retrait retrait) {
 		this.lieuRetrait = retrait;
 	}
@@ -58,6 +57,7 @@ public class ArticleVendu {
 	public Utilisateur getAchete() {
 		return achete;
 	}
+
 	public void setAchete(Utilisateur achete) {
 		this.achete = achete;
 	}
@@ -65,6 +65,7 @@ public class ArticleVendu {
 	public Utilisateur getVente() {
 		return vente;
 	}
+
 	public void setVente(Utilisateur vente) {
 		this.vente = vente;
 	}
@@ -72,6 +73,7 @@ public class ArticleVendu {
 	public List<Enchere> getConcerne() {
 		return concerne;
 	}
+
 	public void setConcerne(List<Enchere> concerne) {
 		this.concerne = concerne;
 	}
@@ -79,60 +81,66 @@ public class ArticleVendu {
 	public int getNoArticle() {
 		return noArticle;
 	}
+
 	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
-	
+
 	public String getNomArticle() {
 		return nomArticle;
 	}
+
 	public void setNomArticle(String nomArticle) {
 		this.nomArticle = nomArticle;
 	}
-	
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public LocalDate getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
+
 	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
-	
+
 	public LocalDate getDateFinEncheres() {
 		return dateFinEncheres;
 	}
+
 	public void setDateFinEncheres(LocalDate dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
-	
+
 	public int getMiseAPrix() {
 		return miseAPrix;
 	}
+
 	public void setMiseAPrix(int miseAPrix) {
 		this.miseAPrix = miseAPrix;
 	}
-	
+
 	public int getPrixVente() {
 		return prixVente;
 	}
+
 	public void setPrixVente(int prixVente) {
 		this.prixVente = prixVente;
 	}
-	
+
 	public String getEtatVente() {
 		return etatVente;
 	}
+
 	public void setEtatVente(String etatVente) {
 		this.etatVente = etatVente;
 	}
-
-
 
 	@Override
 	public String toString() {
@@ -142,5 +150,5 @@ public class ArticleVendu {
 				+ ", achete=" + achete + ", vente=" + vente + ", lieuRetrait=" + lieuRetrait + ", categorie="
 				+ categorie + "]";
 	}
-	
+
 }

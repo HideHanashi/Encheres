@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import fr.eni.encheres.bo.Enchere;
+
 import fr.eni.encheres.dal.EnchereDao;
 
 public class EnchereDaoJdbcImpl implements EnchereDao {
@@ -22,16 +24,20 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 	// c.no_categorie"
 	// "SELECT * FROM RETRAIT r INNER JOIN ARTICLE_VENDU a ON a.no_article =
 	// r.no_article"
+	private static final String JOINTURE = "SELECT * FROM ARTICLE_VENDU a INNER JOIN ENCHERES e ON a.no_article = e.no_article"
+			+ "SELECT * FROM ARTICLE_VENDU a INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur"
+			+ "SELECT * FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
+			+ "SELECT * FROM RETRAIT r INNER JOIN ARTICLE_VENDU a ON a.no_article = r.no_article";
 
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (noUtilisateur,noArticle,dateEnchere,montantEnchere)"
-			+ " VALUES (?,?,?,?)";
+			+ " VALUES (?,?,?,?)" + JOINTURE;
 
 	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET (noUtilisateur,noArticle,dateEnchere,montantEnchere)"
-			+ " VALUES (?,?,?,?) WHERE no_article = ?";
+			+ " VALUES (?,?,?,?) WHERE no_article = ?" + JOINTURE;
 
-	private static final String DELETE_ENCHERE = "DELETE ENCHERES WHERE no_article = ?";
+	private static final String DELETE_ENCHERE = "DELETE ENCHERES WHERE noArticle = ?";
 
-	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES";
+	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES" + JOINTURE;
 
 	@Override
 	public void save(Enchere enchere) {
@@ -90,14 +96,16 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 
 		try (Connection connection = ConnectionProvider.getConnection();
 				Statement stmt = connection.createStatement();) {
+
 			List<Enchere> listEncheres = new ArrayList<>();
+			Enchere enchere = new Enchere();
 			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERES);
 			while (rs.next()) {
-				listEncheres.add(
-
-						new Enchere(rs.getDate("dateDebutEncheres").toLocalDate(), rs.getInt("montantEnchere"))
-
-				);
+				enchere.getUtilisateur().getNoUtilisateur();
+				enchere.getArticleVendu().getNoArticle();
+				enchere.getDateEnchere();
+				enchere.getMontant_enchere();
+				listEncheres.add(enchere);
 			}
 			return listEncheres;
 		} catch (SQLException e) {

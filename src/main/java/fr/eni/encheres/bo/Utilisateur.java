@@ -22,6 +22,10 @@ public class Utilisateur {
 	private List<ArticleVendu> achete = new ArrayList<ArticleVendu>();
 	private List<ArticleVendu> vendu = new ArrayList<ArticleVendu>();
 
+	public Utilisateur() {
+
+	}
+
 	// RESET PASSWORD
 	public Utilisateur(int noUtilisateur, String motDePasse) {
 		this.noUtilisateur = noUtilisateur;

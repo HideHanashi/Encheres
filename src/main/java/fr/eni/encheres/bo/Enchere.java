@@ -10,10 +10,16 @@ public class Enchere {
 	private ArticleVendu articleVendu;
 	private Utilisateur utilisateur;
 
-	public Enchere(LocalDate dateEnchere, int montantEnchere) {
+	public Enchere() {
+
+	}
+
+	public Enchere(LocalDate dateEnchere, int montantEnchere, ArticleVendu articleVendu, Utilisateur utilisateur) {
 		super();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
+		this.articleVendu = articleVendu;
+		this.utilisateur = utilisateur;
 	}
 
 	public Utilisateur getUtilisateur() {
