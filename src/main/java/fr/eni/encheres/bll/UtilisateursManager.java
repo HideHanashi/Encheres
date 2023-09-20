@@ -93,7 +93,7 @@ public class UtilisateursManager {
 
 	public Utilisateur login(String email, String password) {
 		Utilisateur utilisateur = utilisateurDao.findByEmail(email);
-		if (utilisateur != null && utilisateur.getPseudo().equals(email)
+		if (utilisateur != null && utilisateur.getEmail().equals(email)
 				&& PasswordEncoder.verifyPassword(password, utilisateur.getMotDePasse())) {
 			return utilisateur;
 		}
@@ -125,7 +125,7 @@ public class UtilisateursManager {
 		ForgetPassword fp = DaoFactory.getForgetPasswordDao().resetPassword(email);
 
 		if (!fp.getCode().equals(code))
-			throw new BLLException("Le code est érroné!");
+			throw new BLLException("Le code est érroné !");
 
 		Utilisateur utilisateur = fp.getUser();
 
