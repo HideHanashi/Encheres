@@ -29,7 +29,7 @@
 						</div>
 						<div class="p-3">
 					 		<label for="mdp" class="form-label">Mot de passe : </label>
-					 		<input type="text" class="form-control" value="${ param.mdp }" name="mdp" id="mdp">
+					 		<input type="password" class="form-control" value="${ param.mdp }" name="mdp" id="mdp">
 						</div>
 						<div class="p-3">
 					 		<label for="email" class="form-label">Email : </label>

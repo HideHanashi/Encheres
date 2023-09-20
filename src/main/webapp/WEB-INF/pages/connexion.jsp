@@ -28,7 +28,7 @@
 					</div>
 					<button class="btn btn-primary" role="button" type="submit">Connexion</button>
 					<div class="mb-5 mt-1 mdpforget">
-						<a href="${ pageContext.request.contextPath }/forget-password">Mot
+						<a href="${ pageContext.request.contextPath }/oubliepassword">Mot
 							de passe oublié ?</a>
 					</div>
 				</form>
