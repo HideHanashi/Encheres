@@ -11,11 +11,11 @@ import fr.eni.encheres.dal.ForgetPasswordDao;
 
 public class ForgetPasswordDaoJdbcImpl implements ForgetPasswordDao {
 	
-	private static final String INSERT_FORGET_PASSWORD = "INSERT forget_passwords ( code,user_id ) VALUES (?,?)";
-	private static final String SELECT_FOR_RESET_PASSWORD = "SELECT TOP(1) *\r\n"
-			+ "FROM  UTILISATEUR u INNER JOIN forget_passwords fp\r\n"
-			+ "ON u.id = fp.user_id\r\n"
-			+ "WHERE u.email = ? \r\n"
+	private static final String INSERT_FORGET_PASSWORD = "INSERT FORGET_PASSWORD ( code,no_utilisateur ) VALUES (?,?)";
+	private static final String SELECT_FOR_RESET_PASSWORD = "SELECT TOP(1) *"
+			+ "FROM  UTILISATEUR u INNER JOIN forget_passwords fp"
+			+ "ON u.id = fp.no_utilisateur"
+			+ "WHERE u.email = ? "
 			+ "ORDER BY fp.date_created DESC";
 
 	@Override
