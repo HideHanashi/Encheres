@@ -131,7 +131,7 @@ public class UtilisateursManager {
 
 		utilisateur.setMotDePasse(PasswordEncoder.hashPassword(newPassword));
 
-		utilisateurDao.modify(utilisateur);
+		utilisateurDao.modifyPassword(utilisateur);
 
 	}
 

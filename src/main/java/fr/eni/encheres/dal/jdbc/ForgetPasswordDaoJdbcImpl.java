@@ -35,8 +35,6 @@ public class ForgetPasswordDaoJdbcImpl implements ForgetPasswordDao {
 
 	@Override
 	public ForgetPassword resetPassword(String email) {
-		System.out.println("********************");
-		System.out.println(email);
 		try(
 				Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SELECT_FOR_RESET_PASSWORD);

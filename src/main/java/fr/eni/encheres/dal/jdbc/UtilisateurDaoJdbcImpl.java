@@ -36,6 +36,8 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
 	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,code_postal,ville)"
 			+ " VALUES (?,?,?) WHERE no_utilisateur = ?";
+	
+	private static final String UPDATE_PASSWORD_USER = "UPDATE UTILISATEUR SET mot_de_passe = ? WHERE no_utilisateur = ?";
 
 	@Override
 	public Utilisateur findByUsername(String pseudo) {
@@ -147,6 +149,21 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			}
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void modifyPassword(Utilisateur user) {
+		try(
+				Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(UPDATE_PASSWORD_USER);
+					){
+				pstmt.setString(1, user.getMotDePasse());
+				pstmt.setInt(2, user.getNoUtilisateur());
+
+				pstmt.executeUpdate();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
 	}
 
 	@Override

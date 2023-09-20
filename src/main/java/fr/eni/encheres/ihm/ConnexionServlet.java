@@ -33,7 +33,7 @@ public class ConnexionServlet extends HttpServlet {
 		Utilisateur user = UtilisateursManager.getInstance().login(email, password);
 
 		if (user == null) {
-			request.setAttribute("error", "Username ou le mot de passe est éronné");
+			request.setAttribute("error", "Email ou le mot de passe est éronné");
 			doGet(request, response);
 		} else {
 			HttpSession session = request.getSession();
