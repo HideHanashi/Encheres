@@ -28,9 +28,12 @@ public class OubliePasswordServlet extends HttpServlet {
 		try {
 			String email = request.getParameter("email");
 			ForgetPassword fp = UtilisateursManager.getInstance().checkEmail(email);
+			System.out.println("Oui oui ça fonctionne");
 			response.sendRedirect(request.getContextPath() + "/changepassword");
 		} catch (BLLException e) {
-
+			
+			request.setAttribute("error", e.getMessage());
+			doGet(request, response);
 			e.printStackTrace();
 		}
 
