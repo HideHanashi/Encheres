@@ -37,7 +37,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="phone" class="form-label">Tel: </label>
-			<input type="number" class="form-control" readonly="readonly" value="${ game.phone }" id="phone" >
+			<input type="text" class="form-control" readonly="readonly" value="${ game.phone }" id="phone" >
 		</div>
 		<button class="btn btn-primary" role="button" type="submit" >Back</button>
 	</div>
