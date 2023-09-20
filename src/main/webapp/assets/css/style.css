@@ -4,8 +4,14 @@
 	font-family: 'Montserrat', sans-serif;
 }
 
-.headerblock, .footerblock {
+.headerblock {
 	display: block;
+	height: 50px;
+}
+
+.footerblock {
+	display: block;
+	height: 50px;
 }
 
 .titlenavbar {
