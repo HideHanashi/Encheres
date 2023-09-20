@@ -30,6 +30,7 @@ public class NewPasswordServlet extends HttpServlet {
 			UtilisateursManager.getInstance().resetPassword(email, code, newPassword);
 			response.sendRedirect(request.getContextPath() + "/connexion");
 		} catch (BLLException e) {
+			request.setAttribute("error", e.getMessage());
 			doGet(request, response);
 			e.printStackTrace();
 		}

@@ -13,10 +13,10 @@ public class ForgetPasswordDaoJdbcImpl implements ForgetPasswordDao {
 	
 	private static final String INSERT_FORGET_PASSWORD = "INSERT FORGET_PASSWORD ( code,no_utilisateur ) VALUES (?,?)";
 	private static final String SELECT_FOR_RESET_PASSWORD = "SELECT TOP(1) *"
-			+ "FROM  UTILISATEUR u INNER JOIN forget_password fp"
-			+ "ON u.no_utilisateur = fp.no_utilisateur"
-			+ "WHERE u.email = ? "
-			+ "ORDER BY fp.date_created DESC";
+			+ " FROM  UTILISATEUR u INNER JOIN forget_password fp"
+			+ " ON u.no_utilisateur = fp.no_utilisateur"
+			+ " WHERE u.email = ? "
+			+ " ORDER BY fp.date_created DESC";
 
 	@Override
 	public void save(ForgetPassword fp) {
@@ -35,6 +35,8 @@ public class ForgetPasswordDaoJdbcImpl implements ForgetPasswordDao {
 
 	@Override
 	public ForgetPassword resetPassword(String email) {
+		System.out.println("********************");
+		System.out.println(email);
 		try(
 				Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SELECT_FOR_RESET_PASSWORD);
