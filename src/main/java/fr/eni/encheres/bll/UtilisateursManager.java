@@ -141,4 +141,8 @@ public class UtilisateursManager {
 		utilisateurDao.modify(adresse);
 	}
 
+	public void supprimerUtilisateur(int noUtilisateur) {
+		utilisateurDao.remove(noUtilisateur);
+	}
+
 }
