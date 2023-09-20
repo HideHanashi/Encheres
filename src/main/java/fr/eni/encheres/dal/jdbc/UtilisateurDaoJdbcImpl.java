@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bll.exception.BLLException;
@@ -24,7 +26,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String UNIQUE_EMAIL_CONSTRAINT = "uq_email_user";
 	private static final String DELETE = "DELETE UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email = ?";
-
+	private static final String SELECT_ONE = "SELECT * FROM utilisateur WHERE id = ?";
+	private static final String SELECT_ALL = "SELECT * FROM utilisateur";
+	
 	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
 			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?) WHERE no_utilisateur = ?";
 
@@ -157,14 +161,43 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
 	@Override
 	public Utilisateur findOne(int noUtilisateur) {
-		// TODO Auto-generated method stub
+		try(
+				Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_ONE);
+			){
+			pstmt.setInt(1, noUtilisateur);			
+			ResultSet rs =  pstmt.executeQuery();
+			if(rs.next()) {
+				return new Utilisateur(rs.getInt("noUtilisateur"), rs.getString("pseudo"), rs.getString("nom"),
+						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
+						rs.getString("code_postal"), rs.getString("ville"));				
+			}			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}	
 		return null;
 	}
 
 	@Override
 	public List<Utilisateur> findAll() {
-		// TODO Auto-generated method stub
+		try(
+				Connection connection = ConnectionProvider.getConnection();
+				Statement stmt = connection.createStatement();
+			){
+			List<Utilisateur> utilisateur = new ArrayList<Utilisateur>();			
+			ResultSet rs =  stmt.executeQuery(SELECT_ALL);
+			while(rs.next()) {
+				utilisateur.add(
+						
+						new Utilisateur(rs.getInt("noUtilisateur"), rs.getString("pseudo"), rs.getString("nom"),
+										rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
+										rs.getString("codePostal"), rs.getString("ville"))
+						);				
+			}
+			return utilisateur;
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}		
 		return null;
 	}
-
 }
