@@ -13,8 +13,8 @@ public class ForgetPasswordDaoJdbcImpl implements ForgetPasswordDao {
 	
 	private static final String INSERT_FORGET_PASSWORD = "INSERT FORGET_PASSWORD ( code,no_utilisateur ) VALUES (?,?)";
 	private static final String SELECT_FOR_RESET_PASSWORD = "SELECT TOP(1) *"
-			+ "FROM  UTILISATEUR u INNER JOIN forget_passwords fp"
-			+ "ON u.id = fp.no_utilisateur"
+			+ "FROM  UTILISATEUR u INNER JOIN forget_password fp"
+			+ "ON u.no_utilisateur = fp.no_utilisateur"
 			+ "WHERE u.email = ? "
 			+ "ORDER BY fp.date_created DESC";
 
