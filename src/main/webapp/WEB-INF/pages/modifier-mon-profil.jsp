@@ -201,13 +201,15 @@
 			</div>
 			<div class="col">
 				<div class="col d-flex justify-content-center">
-					<button type="submit" name="button" class="btn btn-dark"
-						value="supprimer">Supprimer mon compte</button>
+					<a class="btn btn-info"
+						href="${ pageContext.request.contextPath }/modifiermonprofil">Supprimer
+						mon compte</a>
 				</div>
 			</div>
 			</form>
 		</div>
 	</div>
+
 </main>
 
 <%@ include file="/WEB-INF/fragments/footer.jspf"%>
