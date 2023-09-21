@@ -31,6 +31,10 @@ public class ConnexionServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		Utilisateur user = UtilisateursManager.getInstance().login(email, password);
+		
+//		int noUtilisateur = Integer.parseInt(request.getParameter("noUtilisateur"));
+//		
+//		Utilisateur profil = UtilisateursManager.getInstance().profil(noUtilisateur);
 
 		if (user == null) {
 			request.setAttribute("error", "Email ou le mot de passe est éronné");
@@ -38,6 +42,7 @@ public class ConnexionServlet extends HttpServlet {
 		} else {
 			HttpSession session = request.getSession();
 			user.setMotDePasse("");
+//			session.setAttribute("profil", profil);
 			session.setAttribute("user", user);
 			response.sendRedirect(request.getContextPath() + "");
 		}

@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.encheres.bll.EncheresManager;
+import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 
 @WebServlet("")
 public class AccueilServlet extends HttpServlet {
