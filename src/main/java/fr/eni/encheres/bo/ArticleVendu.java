@@ -16,8 +16,7 @@ public class ArticleVendu {
 	private String etatVente;
 
 	private List<Enchere> concerne = new ArrayList<Enchere>();
-	private Utilisateur achete;
-	private Utilisateur vente;
+	private Utilisateur utilisateur;
 	private Retrait lieuRetrait;
 	private Categorie categorie;
 
@@ -25,6 +24,21 @@ public class ArticleVendu {
 
 	}
 
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, int categorie, String rue,
+			String codePostal, String ville) {
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = miseAPrix;
+		this.etatVente = "En cours";
+		this.categorie = new Categorie(getCategorie().getNoCategorie(categorie));
+		this.lieuRetrait = new Retrait(getRetrait().getRue(rue), 
+							getRetrait().getCodePostal(codePostal), getRetrait().getVille(ville));
+	}	
+	
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente) {
 		this.noArticle = noArticle;
@@ -54,20 +68,12 @@ public class ArticleVendu {
 		this.lieuRetrait = retrait;
 	}
 
-	public Utilisateur getAchete() {
-		return achete;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setAchete(Utilisateur achete) {
-		this.achete = achete;
-	}
-
-	public Utilisateur getVente() {
-		return vente;
-	}
-
-	public void setVente(Utilisateur vente) {
-		this.vente = vente;
+	public void setVente(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
 	public List<Enchere> getConcerne() {
@@ -147,7 +153,7 @@ public class ArticleVendu {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", concerne=" + concerne
-				+ ", achete=" + achete + ", vente=" + vente + ", lieuRetrait=" + lieuRetrait + ", categorie="
+				+ ", utilisateur=" + utilisateur + ", lieuRetrait=" + lieuRetrait + ", categorie="
 				+ categorie + "]";
 	}
 
