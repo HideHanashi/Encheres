@@ -33,7 +33,7 @@ public class EncheresManager {
 	}
 	
 	public List<Enchere> searchEnchere(String query) {
-		return enchereDao.findByName(query);
+		return null;
 	}
 
 	public void modifyEnchere(Enchere enchere) {

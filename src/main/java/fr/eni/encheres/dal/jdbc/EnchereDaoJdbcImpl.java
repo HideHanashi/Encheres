@@ -111,4 +111,6 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 		enchere.setMontant_enchere(rs.getInt("montant_encheres"));
 		return enchere;
 	}
+
+	
 }

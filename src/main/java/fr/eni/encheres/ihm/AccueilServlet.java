@@ -22,13 +22,13 @@ public class AccueilServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		List<Enchere> listEncheres = null;
-		listEncheres = EncheresManager.getInstance().searchAllEncheres();
+
 		if (request.getParameter("q") != null) {
 			listEncheres = EncheresManager.getInstance().searchEnchere(request.getParameter("q"));
 		} else {
 			listEncheres = EncheresManager.getInstance().searchAllEncheres();
 		}
-		
+
 		request.setAttribute("encheres", listEncheres);
 		request.setAttribute("annee", LocalDate.now().getYear());
 

@@ -20,11 +20,14 @@ public class AfficherProfilServlet extends HttpServlet {
 
 		try {
 			// récupérer le param dans url
-			int id = Integer.parseInt(request.getParameter("email"));
-			// récupérer l'objet game
-			Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(id);
+			Utilisateur utilisateur = new Utilisateur();
+
+			int id = Integer.parseInt((String) request.getSession().getAttribute("noUtilisateur"));
+
+			utilisateur = UtilisateursManager.getInstance().recupUtilisateur(id);
+
 			// transmettre l'objet vers la jsp
-			request.setAttribute("user", user);
+			request.setAttribute("user", utilisateur);
 			// forward
 			request.getRequestDispatcher("/WEB-INF/pages/mon-profil.jsp").forward(request, response);
 		} catch (Exception e) {

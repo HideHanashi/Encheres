@@ -2,6 +2,7 @@ package fr.eni.encheres.ihm;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ public class ConnexionServlet extends HttpServlet {
 		String message = (String) request.getSession().getAttribute("success");
 		request.getSession().removeAttribute("success");
 		request.setAttribute("success", message);
+
 		request.getRequestDispatcher("/WEB-INF/pages/connexion.jsp").forward(request, response);
 	}
 
@@ -31,7 +33,7 @@ public class ConnexionServlet extends HttpServlet {
 		String password = request.getParameter("password");
 
 		Utilisateur user = UtilisateursManager.getInstance().login(email, password);
-		
+
 //		int noUtilisateur = Integer.parseInt(request.getParameter("noUtilisateur"));
 //		
 //		Utilisateur profil = UtilisateursManager.getInstance().profil(noUtilisateur);
@@ -40,9 +42,10 @@ public class ConnexionServlet extends HttpServlet {
 			request.setAttribute("error", "Email ou le mot de passe est éronné");
 			doGet(request, response);
 		} else {
+
 			HttpSession session = request.getSession();
 			user.setMotDePasse("");
-//			session.setAttribute("profil", profil);
+
 			session.setAttribute("user", user);
 			response.sendRedirect(request.getContextPath() + "");
 		}
