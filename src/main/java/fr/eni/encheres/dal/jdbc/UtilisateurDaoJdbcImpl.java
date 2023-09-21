@@ -27,8 +27,8 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String DELETE = "DELETE UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email = ?";
 
-	private static final String SELECT_ONE = "SELECT * FROM utilisateur WHERE id = ?";
-	private static final String SELECT_ALL = "SELECT * FROM utilisateur";
+	private static final String SELECT_ONE = "SELECT * FROM UTILISATEUR WHERE no_utilisateur = ?";
+	private static final String SELECT_ALL = "SELECT * FROM UTILISATEUR";
 	
 	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
 			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?) WHERE no_utilisateur = ?";
@@ -189,9 +189,10 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			pstmt.setInt(1, noUtilisateur);			
 			ResultSet rs =  pstmt.executeQuery();
 			if(rs.next()) {
-				return new Utilisateur(rs.getInt("noUtilisateur"), rs.getString("pseudo"), rs.getString("nom"),
+				return new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
 						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
-						rs.getString("code_postal"), rs.getString("ville"));				
+						rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"),
+						rs.getInt("credit"), rs.getBoolean("administrateur"));				
 			}			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -210,9 +211,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			while(rs.next()) {
 				utilisateur.add(
 						
-						new Utilisateur(rs.getInt("noUtilisateur"), rs.getString("pseudo"), rs.getString("nom"),
+						new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
 										rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
-										rs.getString("codePostal"), rs.getString("ville"))
+										rs.getString("code_postal"), rs.getString("ville"))
 						);				
 			}
 			return utilisateur;
