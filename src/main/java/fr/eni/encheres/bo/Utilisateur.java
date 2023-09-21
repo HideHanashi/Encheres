@@ -89,7 +89,7 @@ public class Utilisateur {
 	}
 
 	public Utilisateur() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public List<Enchere> getEncherit() {

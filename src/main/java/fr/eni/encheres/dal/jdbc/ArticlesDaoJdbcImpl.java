@@ -16,7 +16,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 
 	private static final String SELECT_ALL = "SELECT * FROM ARTICLE_VENDU";
 	private static final String SELECT = "SELECT * FROM ARTICLE_VENDU WHERE no_article = ?";
-	private static final String SAVE = "INSERT ARTICLE_VENDU (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente) VALUES (?,?,?,?,?,?,?)";
+	private static final String SAVE = "INSERT ARTICLE_VENDU (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE = "DELETE ARTICLE_VENDU WHERE no_article = ?";
 	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";
 	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nom_article LIKE ? ";
@@ -34,6 +34,8 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			pstmt.setInt(5, articleVendu.getMiseAPrix());
 			pstmt.setInt(6, articleVendu.getPrixVente());
 			pstmt.setString(7, articleVendu.getEtatVente());
+			pstmt.setInt(8, articleVendu.getUtilisateur().getNoUtilisateur());
+			pstmt.setInt(9, articleVendu.getCategorie().getNoCategorie());
 
 			// executer la requete
 			pstmt.executeUpdate();
