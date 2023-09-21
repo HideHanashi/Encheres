@@ -46,7 +46,7 @@ public class ModifierProfilServlet extends HttpServlet {
 			Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone,
 					rue, codePostal, ville, motDePasse);
 			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
-			response.sendRedirect(request.getContextPath() + "/modifier-mon-profil");
+			response.sendRedirect(request.getContextPath() + "/mon-profil");
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
 			doGet(request, response);
