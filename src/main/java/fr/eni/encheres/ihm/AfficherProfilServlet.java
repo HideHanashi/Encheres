@@ -3,7 +3,6 @@ package fr.eni.encheres.ihm;
 import java.io.IOException;
 
 import fr.eni.encheres.bll.UtilisateursManager;
-import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.Utilisateur;
 
 import jakarta.servlet.ServletException;
@@ -21,7 +20,7 @@ public class AfficherProfilServlet extends HttpServlet {
 
 		try {
 			// récupérer le param dans url
-			int id = Integer.parseInt(request.getParameter("noUtilisateur"));
+			int id = Integer.parseInt(request.getParameter("email"));
 			// récupérer l'objet game
 			Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(id);
 			// transmettre l'objet vers la jsp

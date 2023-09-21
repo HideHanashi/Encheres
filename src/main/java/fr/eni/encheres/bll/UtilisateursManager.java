@@ -100,6 +100,14 @@ public class UtilisateursManager {
 		}
 		return null;
 	}
+	
+	public Utilisateur profil(int noUtilisateur) {
+		Utilisateur utilisateur = utilisateurDao.findOne(noUtilisateur);
+		if (utilisateur != null && utilisateur.getNoUtilisateur() == (noUtilisateur)) {
+			return utilisateur;
+		}
+		return null;
+	}
 
 	public ForgetPassword checkEmail(String email) throws BLLException {
 
