@@ -18,10 +18,10 @@ public class Retrait {
 	
 	
 	
-	public ArticleVendu getLieuRetrait() {
+	public ArticleVendu getArticleVendu() {
 		return articleVendu;
 	}
-	public void setLieuRetrait(ArticleVendu articleVendu) {
+	public void setArticleVendu(ArticleVendu articleVendu) {
 		this.articleVendu = articleVendu;
 	}
 
