@@ -3,7 +3,6 @@ package fr.eni.encheres.bll;
 import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
-import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ArticlesDao;
 import fr.eni.encheres.dal.DaoFactory;
 
@@ -13,7 +12,8 @@ public class ArticlesManager {
 
 	private static ArticlesManager instance;
 
-	private ArticlesManager() {
+	public ArticlesManager() {
+		articleDao = DaoFactory.getArticlesDao();
 	}
 
 	public static ArticlesManager getInstance() {
