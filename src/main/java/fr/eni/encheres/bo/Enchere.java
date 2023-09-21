@@ -6,10 +6,10 @@ public class Enchere {
 
 	private LocalDate dateEnchere;
 	private int montantEnchere;
-
+	
 	private ArticleVendu articleVendu;
 	private Utilisateur utilisateur;
-	
+
 	public Enchere() {
 
 	}

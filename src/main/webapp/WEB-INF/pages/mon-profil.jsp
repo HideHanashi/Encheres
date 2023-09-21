@@ -58,10 +58,8 @@
 					onsubmit="return confirm('Voulez-vous vraiment supprimer votre compte ?')">
 					<div class="mb-3 text-center mt-5">
 						<a class="btn btn-info"
-							href="${ pageContext.request.contextPath }/jeux/modifier?id=${ game.id }"><i
-							class="fa-solid fa-pen"></i></a> <a class="btn btn-primary"
-							href="${ pageContext.request.contextPath }/jeux/ajouter"><i
-							class="fa-solid fa-plus"></i></a>
+							href="${ pageContext.request.contextPath }/modifiermonprofil?id=${ user.noUtilisateur }"><i
+							class="fa-solid fa-pen"></i></a>
 						<button type="submit" name="id" value="${ user.noUtilisateur }"
 							class="btn btn-danger">
 							<i class="fa-solid fa-trash"></i>

@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.encheres.bll.ArticlesManager;
+import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
@@ -31,10 +33,10 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 			+ "SELECT * FROM RETRAIT r INNER JOIN ARTICLE_VENDU a ON a.no_article = r.no_article";
 
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur,no_article,date_encheres,montant_encheres)"
-			+ " VALUES (?,?,?,?)" + JOINTURE;
+			+ " VALUES (?,?,?,?)";
 
 	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET (no_utilisateur,no_article,date_encheres,montant_encheres)"
-			+ " VALUES (?,?,?,?) WHERE no_article = ?" + JOINTURE;
+			+ " VALUES (?,?,?,?) WHERE no_article = ?";
 
 	private static final String DELETE_ENCHERE = "DELETE ENCHERES WHERE no_article = ?";
 
@@ -44,15 +46,10 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 	public void save(Enchere enchere) {
 		try (Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(INSERT_ENCHERE);) {
-			pstmt.setString(1, enchere.getArticleVendu().getNomArticle());
-			pstmt.setString(2, enchere.getArticleVendu().getDescription());
-			pstmt.setString(4, enchere.getArticleVendu().getCategorie().getLibelle());
-			pstmt.setInt(4, enchere.getArticleVendu().getMiseAPrix());
-			pstmt.setDate(3, Date.valueOf(enchere.getArticleVendu().getDateDebutEncheres()));
-			pstmt.setDate(3, Date.valueOf(enchere.getArticleVendu().getDateFinEncheres()));
-			pstmt.setString(4, enchere.getArticleVendu().getRetrait().getRue());
-			pstmt.setString(4, enchere.getArticleVendu().getRetrait().getCodePostal());
-			pstmt.setString(4, enchere.getArticleVendu().getRetrait().getVille());
+			pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+			pstmt.setInt(2, enchere.getArticleVendu().getNoArticle());
+			pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
+			pstmt.setInt(4, enchere.getMontant_enchere());
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -64,15 +61,10 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 	public void modify(Enchere enchere) {
 		try (Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(UPDATE_ENCHERE);) {
-			pstmt.setString(1, enchere.getArticleVendu().getNomArticle());
-			pstmt.setString(2, enchere.getArticleVendu().getDescription());
-			pstmt.setString(4, enchere.getArticleVendu().getCategorie().getLibelle());
-			pstmt.setInt(4, enchere.getArticleVendu().getMiseAPrix());
-			pstmt.setDate(3, Date.valueOf(enchere.getArticleVendu().getDateDebutEncheres()));
-			pstmt.setDate(3, Date.valueOf(enchere.getArticleVendu().getDateFinEncheres()));
-			pstmt.setString(4, enchere.getArticleVendu().getRetrait().getRue());
-			pstmt.setString(4, enchere.getArticleVendu().getRetrait().getCodePostal());
-			pstmt.setString(4, enchere.getArticleVendu().getRetrait().getVille());
+			pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+			pstmt.setInt(2, enchere.getArticleVendu().getNoArticle());
+			pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
+			pstmt.setInt(4, enchere.getMontant_enchere());
 
 			pstmt.executeUpdate();
 			pstmt.setInt(4, enchere.getArticleVendu().getNoArticle());
@@ -95,25 +87,28 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 	@Override
 	public List<Enchere> findAll() {
 
-		try (Connection connection = ConnectionProvider.getConnection();
-				Statement stmt = connection.createStatement();) {
+		List<Enchere> listEncheres = new ArrayList<>();
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_ENCHERES)) {
+			ResultSet rs = pstmt.executeQuery();
 
-			List<Enchere> listEncheres = new ArrayList<>();
-			Enchere enchere = new Enchere();
-			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERES);
 			while (rs.next()) {
-				enchere.getUtilisateur();
-				enchere.getArticleVendu();
-				enchere.getDateEnchere();
-				enchere.getMontant_enchere();
-				listEncheres.add(enchere);
+				listEncheres.add(EnchereFromRs(rs));
 			}
-			return listEncheres;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
-
+		return listEncheres;
 	}
 
+	private Enchere EnchereFromRs(ResultSet rs) throws SQLException {
+		Enchere enchere = new Enchere();
+		Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(rs.getInt("no_utilisateur"));
+		ArticleVendu article = ArticlesManager.getInstance().recupArticle(rs.getInt("no_article"));
+		enchere.setUtilisateur(user);
+		enchere.setArticleVendu(article);
+		enchere.setDateEnchere(rs.getDate("date_encheres").toLocalDate());
+		enchere.setMontant_enchere(rs.getInt("montant_encheres"));
+		return enchere;
+	}
 }

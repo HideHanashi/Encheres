@@ -3,6 +3,7 @@ package fr.eni.encheres.bll;
 import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ArticlesDao;
 import fr.eni.encheres.dal.DaoFactory;
 
@@ -52,20 +53,24 @@ public class ArticlesManager {
 	public List<ArticleVendu> searchArticle(String query) {
 		return articleDao.findByName(query);
 	}
-	
-	public List<String> searchByCategories(){
+
+	public List<String> searchByCategories() {
 
 		return articleDao.findByCategorie();
 
 	}
 
+	public ArticleVendu recupArticle(int id) {
+		return articleDao.findOne(id);
+	}
+
 	// BLL VENTE & ACHAT
 
-	//public List<ArticleVendu> listVente() {
-	//	return ArticleDao.findAllVente();
-	//}
+	// public List<ArticleVendu> listVente() {
+	// return ArticleDao.findAllVente();
+	// }
 
-	//public List<ArticleVendu> listAchat() {
-	//	return ArticleDao.findAllAchat();
-	//}
+	// public List<ArticleVendu> listAchat() {
+	// return ArticleDao.findAllAchat();
+	// }
 }
