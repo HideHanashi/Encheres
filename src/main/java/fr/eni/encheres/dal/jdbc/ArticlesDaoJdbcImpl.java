@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.dal.ArticlesDao;
 
 public class ArticlesDaoJdbcImpl implements ArticlesDao {
@@ -145,13 +146,13 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 	}
 
 	@Override
-	public List<String> findByCategorie() {
+	public List<Categorie> findByCategorie() {
 		try (Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(FIND_BY_CATEGORY);) {
-			List<String> categories = new ArrayList<String>();
+			List<Categorie> categories = new ArrayList<Categorie>();
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				categories.add(rs.getString("libelle"));
+				categories.add( new Categorie(rs.getString("libelle")));
 			}
 			return categories;
 		} catch (SQLException e) {

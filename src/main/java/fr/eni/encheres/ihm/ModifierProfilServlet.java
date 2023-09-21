@@ -18,8 +18,7 @@ public class ModifierProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-			request.getRequestDispatcher("/WEB-INF/pages/modifier-mon-profil.jsp")
-				.forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/modifier-mon-profil.jsp").forward(request, response);
 
 	}
 
@@ -36,17 +35,18 @@ public class ModifierProfilServlet extends HttpServlet {
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
 			String motDePasse = "";
-			 if ((request.getParameter("motDePasseActuel") != request.getParameter("nouveauMotDePasse")) && request.getParameter("confirmation") != "") {
-                 if (request.getParameter("nouveauMotDePasse") == request.getParameter("confirmation")) {
-                     motDePasse = request.getParameter("nouveauMotDePasse");
-                 } else {
-                	 throw new BLLException("le mot de passe est incorrect");
-                 }
-             }
-			Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone,
-					rue, codePostal, ville, motDePasse);
+			if ((request.getParameter("motDePasseActuel") != request.getParameter("nouveauMotDePasse"))
+					&& request.getParameter("confirmation") != "") {
+				if (request.getParameter("nouveauMotDePasse") == request.getParameter("confirmation")) {
+					motDePasse = request.getParameter("nouveauMotDePasse");
+				} else {
+					throw new BLLException("le mot de passe est incorrect");
+				}
+			}
+			Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue,
+					codePostal, ville, motDePasse);
 			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
-			response.sendRedirect(request.getContextPath() + "/mon-profil");
+			response.sendRedirect(request.getContextPath() + "/monprofil");
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
 			doGet(request, response);

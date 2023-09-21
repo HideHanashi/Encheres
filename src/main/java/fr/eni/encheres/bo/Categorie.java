@@ -23,6 +23,10 @@ public class Categorie {
 
 
 
+	public Categorie(String libelle) {
+		this.libelle = libelle;
+	}
+
 	public List<ArticleVendu> getCategorieArticle() {
 		return categorieArticle;
 	}

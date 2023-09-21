@@ -24,11 +24,6 @@
 						value="${ user.prenom }" id="prenom" name="prenom">
 				</div>
 				<div class="mb-3">
-					<label for="mdp" class="form-label">Mot de Passe : </label> <input
-						type="text" class="form-control" readonly="readonly"
-						value="${ user.motDePasse }" id="mdp" name="mdp">
-				</div>
-				<div class="mb-3">
 					<label for="email" class="form-label">Email : </label> <input
 						type="text" class="form-control" readonly="readonly"
 						value="${ user.email }" id="email" name="email">
@@ -53,19 +48,12 @@
 						type="text" class="form-control" readonly="readonly"
 						value="${ user.ville }" id="ville" name="ville">
 				</div>
-				<form method="POST"
-					action="${ pageContext.request.contextPath }/supprimerprofil"
-					onsubmit="return confirm('Voulez-vous vraiment supprimer votre compte ?')">
-					<div class="mb-3 text-center mt-5">
-						<a class="btn btn-info"
-							href="${ pageContext.request.contextPath }/modifiermonprofil?id=${ user.noUtilisateur }"><i
-							class="fa-solid fa-pen"></i></a>
-						<button type="submit" name="noUtilisateur"
-							value="${ user.noUtilisateur }" class="btn btn-danger">
-							<i class="fa-solid fa-trash"></i>
-						</button>
-					</div>
-				</form>
+				<div class="mb-3 text-center mt-5">
+					<a class="btn btn-info"
+						href="${ pageContext.request.contextPath }/modifiermonprofil"><i
+						class="fa-solid fa-pen"></i></a>
+				</div>
+
 			</div>
 		</div>
 	</div>
