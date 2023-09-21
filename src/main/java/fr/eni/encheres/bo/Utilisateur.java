@@ -88,6 +88,10 @@ public class Utilisateur {
 		this.ville = ville;
 	}
 
+	public Utilisateur() {
+		
+	}
+  
 	public List<Enchere> getEncherit() {
 		return encherit;
 	}
