@@ -111,9 +111,4 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 		return enchere;
 	}
 
-	@Override
-	public List<Enchere> findByName(String query) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

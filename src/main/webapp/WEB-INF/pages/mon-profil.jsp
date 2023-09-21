@@ -60,8 +60,8 @@
 						<a class="btn btn-info"
 							href="${ pageContext.request.contextPath }/modifiermonprofil?id=${ user.noUtilisateur }"><i
 							class="fa-solid fa-pen"></i></a>
-						<button type="submit" name="noUtilisateur" value="${ user.noUtilisateur }"
-							class="btn btn-danger">
+						<button type="submit" name="noUtilisateur"
+							value="${ user.noUtilisateur }" class="btn btn-danger">
 							<i class="fa-solid fa-trash"></i>
 						</button>
 					</div>

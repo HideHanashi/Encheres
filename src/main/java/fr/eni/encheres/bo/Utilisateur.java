@@ -42,8 +42,25 @@ public class Utilisateur {
 		this.ville = ville;
 	}
 
-	public Utilisateur(int i, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, int j, boolean b) {
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+		this.noUtilisateur = noUtilisateur;
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.email = email;
+		this.telephone = telephone;
+		this.rue = rue;
+		this.codePostal = codePostal;
+		this.ville = ville;
+		this.motDePasse = motDePasse;
+		this.credit = credit;
+		this.administrateur = administrateur;
+	}
+
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse) {
+		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -56,7 +73,7 @@ public class Utilisateur {
 
 	}
 
-	public Utilisateur(int noUtilisateur2, String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse) {
 
 		this.pseudo = pseudo;
@@ -72,9 +89,9 @@ public class Utilisateur {
 	}
 
 	public Utilisateur() {
-		
+
 	}
-  
+
 	public List<Enchere> getEncherit() {
 		return encherit;
 	}

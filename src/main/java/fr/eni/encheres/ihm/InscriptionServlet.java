@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/inscription")
 public class InscriptionServlet extends HttpServlet {
@@ -26,11 +27,13 @@ public class InscriptionServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
+
 			Utilisateur user = new Utilisateur(request.getParameter("pseudo"), request.getParameter("nom"),
 					request.getParameter("prenom"), request.getParameter("email"), request.getParameter("telephone"),
 					request.getParameter("rue"), request.getParameter("codePostal"), request.getParameter("ville"),
 					request.getParameter("mdp"));
 			// user.setConfirmPassword()
+
 			UtilisateursManager.getInstance().inscription(user);
 			// Flash
 			request.getSession().setAttribute("success", "Le compte a bien été créer!");

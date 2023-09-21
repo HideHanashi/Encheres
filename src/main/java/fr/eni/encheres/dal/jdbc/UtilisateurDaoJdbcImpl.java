@@ -29,14 +29,13 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
 	private static final String SELECT_ONE = "SELECT * FROM UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEUR";
-	
+
 	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
 			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?) WHERE no_utilisateur = ?";
 
-
 	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,code_postal,ville)"
 			+ " VALUES (?,?,?) WHERE no_utilisateur = ?";
-	
+
 	private static final String UPDATE_PASSWORD_USER = "UPDATE UTILISATEUR SET mot_de_passe = ? WHERE no_utilisateur = ?";
 
 	@Override
@@ -150,20 +149,18 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void modifyPassword(Utilisateur user) {
-		try(
-				Connection connection = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(UPDATE_PASSWORD_USER);
-					){
-				pstmt.setString(1, user.getMotDePasse());
-				pstmt.setInt(2, user.getNoUtilisateur());
+		try (Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(UPDATE_PASSWORD_USER);) {
+			pstmt.setString(1, user.getMotDePasse());
+			pstmt.setInt(2, user.getNoUtilisateur());
 
-				pstmt.executeUpdate();
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -182,42 +179,39 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
 	@Override
 	public Utilisateur findOne(int noUtilisateur) {
-		try(
-				Connection connection = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(SELECT_ONE);
-			){
-			pstmt.setInt(1, noUtilisateur);			
-			ResultSet rs =  pstmt.executeQuery();
-			if(rs.next()) {
+		try (Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_ONE);) {
+			pstmt.setInt(1, noUtilisateur);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
 				return new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
 						rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
 						rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"),
-						rs.getInt("credit"), rs.getBoolean("administrateur"));				
-			}			
-		}catch(SQLException e) {
+						rs.getInt("credit"), rs.getBoolean("administrateur"));
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}
 		return null;
 	}
 
 	@Override
 	public List<Utilisateur> findAll() {
-		try(
-				Connection connection = ConnectionProvider.getConnection();
-				Statement stmt = connection.createStatement();
-			){
-			List<Utilisateur> utilisateur = new ArrayList<Utilisateur>();			
-			ResultSet rs =  stmt.executeQuery(SELECT_ALL);
-			while(rs.next()) {
+		try (Connection connection = ConnectionProvider.getConnection();
+				Statement stmt = connection.createStatement();) {
+			List<Utilisateur> utilisateur = new ArrayList<Utilisateur>();
+			ResultSet rs = stmt.executeQuery(SELECT_ALL);
+			while (rs.next()) {
 				utilisateur.add(
-						
-						new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"))
-						);				
+
+						new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
+								rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),
+								rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville")));
 			}
 			return utilisateur;
-		}catch(SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
+		}
 		return null;
 	}
 }
