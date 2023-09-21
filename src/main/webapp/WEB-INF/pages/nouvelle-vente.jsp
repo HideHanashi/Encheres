@@ -27,7 +27,7 @@
 						<div class="p-3">
 							<label for="categorie" class="form-label">Catégorie : </label>
 							<select class="form-select" aria-label="Default select example" id="categorie" name="categorie">
-								<option selected>Choisir une catégorie</option>
+								<option selected value="0">Choisir une catégorie</option>
 								<c:forEach var="categorie" items="${ listCategories }" >
 									<option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
 								</c:forEach>
