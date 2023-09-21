@@ -36,9 +36,9 @@ public class ModifierProfilServlet extends HttpServlet {
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
 			String motDePasse = "";
-			 if ((request.getParameter("mdpa") != request.getParameter("nmdp")) && request.getParameter("cmdp") != "") {
-                 if (request.getParameter("nmdp") == request.getParameter("cmdp")) {
-                     motDePasse = request.getParameter("nmdp");
+			 if ((request.getParameter("motDePasseActuel") != request.getParameter("nouveauMotDePasse")) && request.getParameter("confirmation") != "") {
+                 if (request.getParameter("nouveauMotDePasse") == request.getParameter("confirmation")) {
+                     motDePasse = request.getParameter("nouveauMotDePasse");
                  } else {
                 	 throw new BLLException("le mot de passe est incorrect");
                  }

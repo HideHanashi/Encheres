@@ -2,69 +2,198 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf"%>
 <main class="row">
-	<div class="col">
-		<div class="row text-center mt-4">
-			<h1>Mon profil</h1>
-		</div>
-		<div class="row mt-5">
-			<div class="col-4 offset-4">
-				<form action="" method="POST">
-					<div class="mb-3">
-						<label for="pseudo" class="form-label">Pseudo : </label> <input
-							type="text" class="form-control" value="${ user.pseudo }"
-							id="pseudo" name="pseudo">
-					</div>
-					<div class="mb-3">
-						<label for="nom" class="form-label">Nom : </label> <input
-							type="text" class="form-control" value="${ user.nom }" id="nom"
-							name="nom">
-					</div>
-					<div class="mb-3">
-						<label for="prenom" class="form-label">Prénom : </label> <input
-							type="text" class="form-control" value="${ user.prenom }"
-							id="prenom" name="prenom">
-					</div>
-					<div class="mb-3">
-						<label for="mdp" class="form-label">Mot de Passe : </label> <input
-							type="text" class="form-control" value="${ user.motDePasse }"
-							id="mdp" name="mdp">
-					</div>
-					<div class="mb-3">
-						<label for="email" class="form-label">Email : </label> <input
-							type="text" class="form-control" value="${ user.email }"
-							id="email" name="email">
-					</div>
-					<div class="mb-3">
-						<label for="telephone" class="form-label">Téléphone : </label> <input
-							type="text" class="form-control" value="${ user.telephone }"
-							id="telephone" name="telephone">
-					</div>
-					<div class="mb-3">
-						<label for="codePostal" class="form-label">Code Postal : </label>
-						<input type="text" class="form-control"
-							value="${ user.codePostal }" id="codePostal" name="codePostal">
-					</div>
-					<div class="mb-3">
-						<label for="rue" class="form-label">Rue : </label> <input
-							type="text" class="form-control" value="${ user.rue }" id="rue"
-							name="rue">
-					</div>
-					<div class="mb-3">
-						<label for="ville" class="form-label">Ville : </label> <input
-							type="text" class="form-control" value="${ user.ville }"
-							id="ville" name="ville">
-					</div>
-					<div class="mb-3 text-center mt-5">
-						<button class="btn btn-primary" type="submit">
-							<i class="fa-regular fa-floppy-disk"></i>
-						</button>
-						<button class="btn btn-basic" type="reset">
-							<i class="fa-solid fa-rotate-right fa-rotate-180"></i>
-						</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-</main>
+	<div class="container shadow p-4">
+    <h1 class="row d-flex justify-content-center mb-5 p-2">Mon Profil</h1>
+        <div class="p-3">
+            <form action="PageMonProfil" method="post">
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Pseudo: </label>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="w-100" type="text" name="pseudo" id="pseudo" value="${user.pseudo}" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Nom: </label>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="w-100" type="text" name="nom" id="nom" value="${user.nom}" required pattern="[A-Za-z]{1,30}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Prénom: </label>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="w-100" type="text" name="prenom" id="prenom" value="${user.prenom}" required pattern="[A-Za-z]{1,30}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Email: </label>
+                        </div>
+                        <div class="col-8">
+                            <div>
+
+                            </div>
+                            <div class="input-group input-group-md mb-3">
+                                <input class="w-100" type="email" name="email" id="email" value="${user.email}" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Téléphone: </label>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="w-100" type="text" name="telephone" id="telephone" value="${user.telephone}" pattern="^[0-9-.// |]{1,15}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Rue: </label>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="w-100" type="text" name="rue" id="rue" value="${user.rue}" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Code postal: </label>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="w-100" type="text" name="CP" id="codePostal" value="${user.codePostal}" required pattern="[0-9]{5}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Ville: </label>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="w-100" type="text" name="ville" id="ville" value="${user.ville}" required pattern="^[A-Za-z'- ]{1,30}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Mot de passe actuel: </label>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group input-group-sm mb-3">
+                                <input class="w-100" type="password" name="mdpa" id="motPasseActuel" value="${user.motDePasse}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <div class="col-4">
+                            <label></label>
+                        </div>
+                        <div class="col-8">
+                            <label></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Nouveau mot de passe: </label>
+                            </div>
+                            <div class="col-8">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input class="w-100" type="password" name="nmdp" id="nouveauMotPasse">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Confirmation: </label>
+                            </div>
+                            <div class="col-8">
+                                <div class="input-group input-group-sm mb-3">
+                                    <input class="w-100" type="password" name="cmdp" id="confirmationMotPasse">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-2">
+                                <label>Crédit: </label>
+                            </div>
+                            <div class="col-1">
+                                <div class="input-group input-group-sm mb-3">
+                                    <label id="credit" name="credit">${user.credit}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <div class="row mb-3">
+        <div class="col d-flex justify-content-center">
+                <button type="submit" name="button" class="btn btn-dark" value="valider">Enregistrer</button>
+        </div>
+        <div class="col">
+            <div class="col d-flex justify-content-center">
+                <button type="submit" name="button" class="btn btn-dark" value="supprimer">Supprimer mon compte</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div></main>
 <%@ include file="/WEB-INF/fragments/footer.jspf"%>
