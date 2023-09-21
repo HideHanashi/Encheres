@@ -3,6 +3,7 @@ package fr.eni.encheres.bll;
 import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.dal.ArticlesDao;
 import fr.eni.encheres.dal.DaoFactory;
 
@@ -54,7 +55,7 @@ public class ArticlesManager {
 		return articleDao.findByName(query);
 	}
 
-	public List<String> searchByCategories() {
+	public List<Categorie> searchByCategories() {
 
 		return articleDao.findByCategorie();
 
