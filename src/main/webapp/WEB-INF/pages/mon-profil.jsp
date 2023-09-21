@@ -50,8 +50,7 @@
 				</div>
 				<div class="mb-3 text-center mt-5">
 					<a class="btn btn-info"
-						href="${ pageContext.request.contextPath }/modifiermonprofil"><i
-						class="fa-solid fa-pen"></i></a>
+						href="${ pageContext.request.contextPath }/modifiermonprofil">Modifier</a>
 				</div>
 
 			</div>

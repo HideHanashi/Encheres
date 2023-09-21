@@ -38,37 +38,4 @@ public class AfficherProfilServlet extends HttpServlet {
 		}
 	}
 
-//		String pseudo = request.getParameter("pseudo");
-//		String nom = request.getParameter("nom");
-//		String prenom = request.getParameter("prenom");
-//		String email = request.getParameter("email");
-//		String telephone = request.getParameter("telephone");
-//		String rue = request.getParameter("rue");
-//		String code_postal = request.getParameter("code_postal");
-//		String ville = request.getParameter("ville");
-//
-//		request.setAttribute("pseudo", pseudo);
-//		request.setAttribute("nom", nom);
-//		request.setAttribute("prenom", prenom);
-//		request.setAttribute("email", email);
-//		request.setAttribute("telephone", telephone);
-//		request.setAttribute("rue", rue);
-//		request.setAttribute("code_postal", code_postal);
-//		request.setAttribute("ville", ville);
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		try {
-			// récupérer le param dans url
-			int id = Integer.parseInt(request.getParameter("id"));
-			// supprimer un jeu
-			UtilisateursManager.getInstance().removeUtilisateur(id);
-			// redirect
-			response.sendRedirect(request.getContextPath() + "");
-		} catch (Exception e) {
-			response.sendError(500);
-		}
-
-	}
 }
