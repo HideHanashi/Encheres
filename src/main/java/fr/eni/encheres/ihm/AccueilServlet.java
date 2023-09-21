@@ -9,9 +9,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
-import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.EncheresManager;
-import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 
 @WebServlet("")
@@ -23,14 +21,12 @@ public class AccueilServlet extends HttpServlet {
 
 		List<Enchere> listEncheres = null;
 		listEncheres = EncheresManager.getInstance().searchAllEncheres();
-
-		//List<ArticleVendu> listArticles = null;
 		if (request.getParameter("q") != null) {
 			listEncheres = EncheresManager.getInstance().searchEnchere(request.getParameter("q"));
 		} else {
 			listEncheres = EncheresManager.getInstance().searchAllEncheres();
 		}
-		//request.setAttribute("articles", listArticles);
+		
 		request.setAttribute("encheres", listEncheres);
 		request.setAttribute("annee", LocalDate.now().getYear());
 
