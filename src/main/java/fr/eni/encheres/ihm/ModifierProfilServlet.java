@@ -3,6 +3,7 @@ package fr.eni.encheres.ihm;
 import java.io.IOException;
 
 import fr.eni.encheres.bll.UtilisateursManager;
+import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.Utilisateur;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,14 +17,10 @@ public class ModifierProfilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			int noUtilisateur = Integer.parseInt(request.getParameter("noUtilisateur"));
-			Utilisateur utilisateur = UtilisateursManager.getInstance().recupUtilisateur(noUtilisateur);
-			request.setAttribute("utilisateur", utilisateur);
-			request.getRequestDispatcher("/WEB-INF/pages/modifier-mon-profil.jsp").forward(request, response);
-		} catch (Exception e) {
-			response.sendError(404);
-		}
+
+			request.getRequestDispatcher("/WEB-INF/pages/modifier-mon-profil.jsp")
+				.forward(request, response);
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,17 +30,26 @@ public class ModifierProfilServlet extends HttpServlet {
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
-			String motDePasse = request.getParameter("motDePasse");
 			String email = request.getParameter("email");
 			String telephone = request.getParameter("telephone");
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
-			Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, motDePasse, email, telephone,
-					rue, codePostal, ville);
+			String motDePasse = "";
+			 if ((request.getParameter("mdpa") != request.getParameter("nmdp")) && request.getParameter("cmdp") != "") {
+                 if (request.getParameter("nmdp") == request.getParameter("cmdp")) {
+                     motDePasse = request.getParameter("nmdp");
+                 } else {
+                	 throw new BLLException("le mot de passe est incorrect");
+                 }
+             }
+			Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone,
+					rue, codePostal, ville, motDePasse);
 			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
-			response.sendRedirect(request.getContextPath() + "/monprofil");
+			response.sendRedirect(request.getContextPath() + "/modifier-mon-profil");
 		} catch (Exception e) {
+			request.setAttribute("error", e.getMessage());
+			doGet(request, response);
 			e.printStackTrace();
 		}
 	}
