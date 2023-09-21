@@ -103,7 +103,7 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 			ResultSet rs = stmt.executeQuery(SELECT_ALL_ENCHERES);
 			while (rs.next()) {
 				enchere.getUtilisateur();
-				enchere.getArticleVendu().getNoArticle();
+				enchere.getArticleVendu();
 				enchere.getDateEnchere();
 				enchere.getMontant_enchere();
 				listEncheres.add(enchere);
