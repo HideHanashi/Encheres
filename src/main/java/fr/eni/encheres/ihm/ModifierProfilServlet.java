@@ -33,13 +33,14 @@ public class ModifierProfilServlet extends HttpServlet {
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
+			String motDePasse = request.getParameter("motDePasse");
 			String email = request.getParameter("email");
 			String telephone = request.getParameter("telephone");
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
-			Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue,
-					codePostal, ville);
+			Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, motDePasse, email, telephone,
+					rue, codePostal, ville);
 			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
 			response.sendRedirect(request.getContextPath() + "/monprofil");
 		} catch (Exception e) {
