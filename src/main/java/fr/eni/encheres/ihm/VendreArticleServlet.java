@@ -18,14 +18,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/nouvelle-vente")
+@WebServlet("/nouvellevente")
 public class VendreArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			if ("user" != null) {
 				HttpSession session = request.getSession();
 				Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user") ;
 				int id = utilisateurSession.getNoUtilisateur();
@@ -39,14 +38,11 @@ public class VendreArticleServlet extends HttpServlet {
 				request.setAttribute("categorie", listCategories);
 				// forward
 				request.getRequestDispatcher("/WEB-INF/pages/nouvelle-vente.jsp").forward(request, response);
-			} else {
-				request.getRequestDispatcher("/WEB-INF/pages/connexion.jsp").forward(request, response);
-			}
 		} catch (Exception e) {
  
 			System.out.println(e.getMessage());
 			e.printStackTrace();
-			request.getRequestDispatcher("/WEB-INF/pages/connexion.jsp").forward(request, response);
+			request.getRequestDispatcher("404");
 		}
 	}
 
