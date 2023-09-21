@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,5 +109,11 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 		enchere.setDateEnchere(rs.getDate("date_encheres").toLocalDate());
 		enchere.setMontant_enchere(rs.getInt("montant_encheres"));
 		return enchere;
+	}
+
+	@Override
+	public List<Enchere> findByName(String query) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
