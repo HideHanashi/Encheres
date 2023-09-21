@@ -29,7 +29,7 @@ public class Utilisateur {
 	}
 
 	// CONSTRUCTEUR DE BASE
-	public Utilisateur(String string, String pseudo, String nom, String prenom, String email, String telephone,
+	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville) {
 
 		this.pseudo = pseudo;
