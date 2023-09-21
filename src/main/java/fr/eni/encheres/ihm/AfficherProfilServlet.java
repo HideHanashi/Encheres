@@ -3,6 +3,7 @@ package fr.eni.encheres.ihm;
 import java.io.IOException;
 
 import fr.eni.encheres.bll.UtilisateursManager;
+import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.Utilisateur;
 
 import jakarta.servlet.ServletException;
@@ -29,6 +30,8 @@ public class AfficherProfilServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/pages/mon-profil.jsp").forward(request, response);
 		} catch (Exception e) {
 
+			System.out.println(e.getMessage());
+			e.printStackTrace();
 			response.sendError(404);
 		}
 	}
@@ -62,7 +65,7 @@ public class AfficherProfilServlet extends HttpServlet {
 			// redirect
 			response.sendRedirect(request.getContextPath() + "");
 		} catch (Exception e) {
-			response.sendError(404);
+			response.sendError(500);
 		}
 
 	}

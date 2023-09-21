@@ -34,6 +34,7 @@ public class UtilisateursManager {
 	// BLL UTILISATEUR
 
 	private UtilisateurDao utilisateurDao = DaoFactory.getUtilisateurDao();
+	
 	public Utilisateur recupUtilisateur(int noUtilisateur) {
 		return utilisateurDao.findOne(noUtilisateur);
 	}
