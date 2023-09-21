@@ -30,7 +30,7 @@ public class Utilisateur {
 
 	// CONSTRUCTEUR DE BASE
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
+			String rue, String codePostal, String ville) {
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -40,14 +40,10 @@ public class Utilisateur {
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
-		this.motDePasse = motDePasse;
-		this.credit = credit;
-		this.administrateur = administrateur;
 	}
 
-	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse) {
-		this.noUtilisateur = noUtilisateur;
+	public Utilisateur(int i, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasse, int j, boolean b) {
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -60,7 +56,7 @@ public class Utilisateur {
 
 	}
 
-	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone, String rue,
+	public Utilisateur(int noUtilisateur2, String pseudo, String nom, String prenom, String email, String telephone, String rue,
 			String codePostal, String ville, String motDePasse) {
 
 		this.pseudo = pseudo;
@@ -74,6 +70,7 @@ public class Utilisateur {
 		this.motDePasse = motDePasse;
 
 	}
+
 
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville) {
@@ -216,6 +213,11 @@ public class Utilisateur {
 	public int getNoUtilisateur() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public static Utilisateur choisirUtilisateur(int noUtilisateur2) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
