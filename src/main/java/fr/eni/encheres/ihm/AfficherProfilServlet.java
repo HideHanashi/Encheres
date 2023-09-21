@@ -10,8 +10,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = { "/monprofil", "/supprimerprofil" })
+@WebServlet("/monprofil")
 public class AfficherProfilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -19,11 +20,11 @@ public class AfficherProfilServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
+			HttpSession session = request.getSession();
+			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
+			int id = utilisateurSession.getNoUtilisateur();
 			// récupérer le param dans url
-			Utilisateur utilisateur = new Utilisateur();
-
-			utilisateur = UtilisateursManager.getInstance()
-					.recupUtilisateur(Integer.parseInt((String) request.getSession().getAttribute("noUtilisateur")));
+			Utilisateur utilisateur = UtilisateursManager.getInstance().recupUtilisateur(id);
 
 			// transmettre l'objet vers la jsp
 			request.setAttribute("user", utilisateur);
