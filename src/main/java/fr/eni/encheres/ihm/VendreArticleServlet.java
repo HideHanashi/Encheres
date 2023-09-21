@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import fr.eni.encheres.bll.ArticlesManager;
+import fr.eni.encheres.bll.ReatraitManager;
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Retrait;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,8 +39,10 @@ public class VendreArticleServlet extends HttpServlet {
 			ArticleVendu articleVendu = new ArticleVendu(
 			nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, categorie, rue, codePostal, ville
 			);
+			Retrait retrait = new Retrait(rue, codePostal, ville);
 			
 			ArticlesManager.getInstance().addArticle(articleVendu);
+			ReatraitManager.getInstance().addRetrait(retrait);
 			response.sendRedirect( request.getContextPath() +"/liste-encheres");
 		}catch (Exception e) {
 			e.printStackTrace();
