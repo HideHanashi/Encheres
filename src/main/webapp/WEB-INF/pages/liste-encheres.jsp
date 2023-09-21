@@ -3,7 +3,6 @@
 <%@ include file="/WEB-INF/fragments/header.jspf" %>
 
 <main>
-	<h1>LOSNA</h1>
 	<div class="row mt-5">
 		<div class="col-8 offset-2">
 			<table class="table table-dark">

@@ -1,6 +1,8 @@
 package fr.eni.encheres.dal;
 
 import java.util.List;
+
+import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 
 public interface EnchereDao {
@@ -12,6 +14,8 @@ public interface EnchereDao {
 	void modify(Enchere enchere);
 
 	void remove(int id);
+	
+	List<Enchere> findByName(String query);
 
 //	void encherir(Enchere enchere);
 
