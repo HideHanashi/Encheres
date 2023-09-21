@@ -24,13 +24,13 @@ public class AccueilServlet extends HttpServlet {
 		List<Enchere> listEncheres = null;
 		listEncheres = EncheresManager.getInstance().searchAllEncheres();
 
-		List<ArticleVendu> listArticles = null;
+		//List<ArticleVendu> listArticles = null;
 		if (request.getParameter("q") != null) {
-			listArticles = ArticlesManager.getInstance().searchArticle(request.getParameter("q"));
+			listEncheres = EncheresManager.getInstance().searchEnchere(request.getParameter("q"));
 		} else {
-			listArticles = ArticlesManager.getInstance().searchAllArticle();
+			listEncheres = EncheresManager.getInstance().searchAllEncheres();
 		}
-		request.setAttribute("articles", listArticles);
+		//request.setAttribute("articles", listArticles);
 		request.setAttribute("encheres", listEncheres);
 		request.setAttribute("annee", LocalDate.now().getYear());
 
