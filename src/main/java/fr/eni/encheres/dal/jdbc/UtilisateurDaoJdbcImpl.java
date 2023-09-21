@@ -211,9 +211,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			while(rs.next()) {
 				utilisateur.add(
 						
-						new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
-										rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
-										rs.getString("code_postal"), rs.getString("ville"))
+						new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"))
 						);				
 			}
 			return utilisateur;
