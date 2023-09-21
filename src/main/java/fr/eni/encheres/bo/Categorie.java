@@ -17,8 +17,12 @@ public class Categorie {
 		this.libelle = libelle;
 	}
 	
-	
-	
+	public Categorie(int noCategorie) {
+		this.noCategorie = noCategorie;
+	}
+
+
+
 	public List<ArticleVendu> getCategorieArticle() {
 		return categorieArticle;
 	}
@@ -26,6 +30,9 @@ public class Categorie {
 		this.categorieArticle = categorieArticle;
 	}
 
+	public int getNoCategorie(int categorie) {
+		return noCategorie;
+	}
 	public int getNoCategorie() {
 		return noCategorie;
 	}

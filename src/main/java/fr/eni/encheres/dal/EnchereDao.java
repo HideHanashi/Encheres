@@ -17,6 +17,8 @@ public interface EnchereDao {
 
 //	List<Enchere> findByName(String query);
 
+//	List<Enchere> findByName(String query);
+
 //	void encherir(Enchere enchere);
 
 }

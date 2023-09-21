@@ -2,7 +2,6 @@ package fr.eni.encheres.bll;
 
 import java.util.List;
 
-import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DaoFactory;
 import fr.eni.encheres.dal.EnchereDao;
@@ -11,7 +10,7 @@ public class EncheresManager {
 
 	private static EncheresManager instance;
 
-	private EncheresManager() {
+	public EncheresManager() {
 	}
 
 	public static EncheresManager getInstance() {

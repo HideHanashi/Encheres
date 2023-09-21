@@ -26,10 +26,12 @@
 							type="password" class="form-control" name="password"
 							id="password">
 					</div>
-					<button class="btn btn-primary" role="button" type="submit">Connexion</button>
-					<div class="mb-5 mt-1 mdpforget">
-						<a href="${ pageContext.request.contextPath }/oubliepassword">Mot
-							de passe oublié ?</a>
+					<div class="mt-4 mdpforget">
+						<button class="btn btn-primary" role="button" type="submit">Connexion</button>
+						<a class="btn btn-secondary" href="${ pageContext.request.contextPath }/inscription">Créer un compte</a>
+					</div>
+					<div class="mb-5 mt-2 mdpforget">
+						<a href="${ pageContext.request.contextPath }/oubliepassword">Mot de passe oublié ?</a>
 					</div>
 				</form>
 			</div>

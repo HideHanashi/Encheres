@@ -16,21 +16,27 @@ public class VendreArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 		request.getRequestDispatcher("/WEB-INF/pages/nouvelle-vente.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			int noArticle =   Integer.parseInt(request.getParameter("noArticle"));
-			String nomArticle =   request.getParameter("nomArticle");
-			String description =   request.getParameter("description");
-			LocalDate dateDebutEncheres =  LocalDate.parse(request.getParameter("dateDebutEncheres"));
-			LocalDate dateFinEncheres =  LocalDate.parse(request.getParameter("dateFinEncheres"));
-			int miseAPrix =   Integer.parseInt(request.getParameter("miseAPrix"));
-			int prixVente =   Integer.parseInt(request.getParameter("prixVente"));
-			String etatVente =   request.getParameter("etatVente");			
-			ArticleVendu articleVendu = new ArticleVendu(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, prixVente, etatVente);
+			String nomArticle = request.getParameter("nomArticle");
+			String description = request.getParameter("description");
+			LocalDate dateDebutEncheres = LocalDate.parse(request.getParameter("dateDebutEncheres"));
+			LocalDate dateFinEncheres = LocalDate.parse(request.getParameter("dateFinEncheres"));
+			int miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
+			int categorie = Integer.parseInt(request.getParameter("categorie"));
+			String rue = request.getParameter("rue");
+			String codePostal = request.getParameter("codePostal");
+			String ville = request.getParameter("ville");
+			ArticleVendu articleVendu = new ArticleVendu(
+			nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, categorie, rue, codePostal, ville
+			);
 			
 			ArticlesManager.getInstance().addArticle(articleVendu);
 			response.sendRedirect( request.getContextPath() +"/liste-encheres");
