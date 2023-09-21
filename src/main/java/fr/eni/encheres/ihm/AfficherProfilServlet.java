@@ -22,9 +22,8 @@ public class AfficherProfilServlet extends HttpServlet {
 			// récupérer le param dans url
 			Utilisateur utilisateur = new Utilisateur();
 
-			int id = Integer.parseInt((String) request.getSession().getAttribute("noUtilisateur"));
-
-			utilisateur = UtilisateursManager.getInstance().recupUtilisateur(id);
+			utilisateur = UtilisateursManager.getInstance()
+					.recupUtilisateur(Integer.parseInt((String) request.getSession().getAttribute("noUtilisateur")));
 
 			// transmettre l'objet vers la jsp
 			request.setAttribute("user", utilisateur);
