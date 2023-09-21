@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/changepassword")
 public class NewPasswordServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	public static final String REGLE_UTILISATEUR_NOUVEAUMOTDEPASSE_ERREUR = null;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
