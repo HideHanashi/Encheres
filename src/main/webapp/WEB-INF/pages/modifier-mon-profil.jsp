@@ -2,10 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf"%>
 <main class="row">
-	<div class="container shadow p-4">
+
+	<div>
 		<h1 class="row d-flex justify-content-center mb-5 p-2">Mon Profil</h1>
 		<div class="p-3">
-			<form action="" method="post">
+			<form action="PageMonProfil" method="post">
 				<div class="row mb-3">
 					<div class="col">
 						<div class="row">
@@ -28,7 +29,7 @@
 							<div class="col-8">
 								<div class="input-group input-group-sm mb-3">
 									<input class="w-100" type="text" name="nom" id="nom"
-										value="${user.nom}" required pattern="[A-Za-z]{1,30}">
+										value="${user.nom}">
 								</div>
 							</div>
 						</div>
@@ -44,7 +45,7 @@
 							<div class="col-8">
 								<div class="input-group input-group-sm mb-3">
 									<input class="w-100" type="text" name="prenom" id="prenom"
-										value="${user.prenom}" required pattern="[A-Za-z]{1,30}">
+										value="${user.prenom}">
 								</div>
 							</div>
 						</div>
@@ -55,7 +56,6 @@
 								<label>Email: </label>
 							</div>
 							<div class="col-8">
-								<div></div>
 								<div class="input-group input-group-md mb-3">
 									<input class="w-100" type="email" name="email" id="email"
 										value="${user.email}" required>
@@ -201,15 +201,13 @@
 			</div>
 			<div class="col">
 				<div class="col d-flex justify-content-center">
-					<a class="btn btn-info"
-						href="${ pageContext.request.contextPath }/supprimermonprofil">Supprimer
-						mon compte</a>
+					<button type="submit" name="button" class="btn btn-dark"
+						value="supprimer">Supprimer mon compte</button>
 				</div>
 			</div>
 			</form>
 		</div>
-
 	</div>
-
 </main>
+
 <%@ include file="/WEB-INF/fragments/footer.jspf"%>

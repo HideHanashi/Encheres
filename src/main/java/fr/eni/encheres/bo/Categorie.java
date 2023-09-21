@@ -16,16 +16,18 @@ public class Categorie {
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 	}
-	
-	public Categorie(int noCategorie) {
-		this.noCategorie = noCategorie;
-	}
 
 
 
 	public Categorie(String libelle) {
 		this.libelle = libelle;
 	}
+
+	public Categorie(int noCategorie) {
+		this.noCategorie = noCategorie;
+	}
+
+
 
 	public List<ArticleVendu> getCategorieArticle() {
 		return categorieArticle;

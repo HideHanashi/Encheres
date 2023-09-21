@@ -31,6 +31,7 @@ public class VendreArticleServlet extends HttpServlet {
 				int id = utilisateurSession.getNoUtilisateur();
 				// récupérer le param dans url
 				Utilisateur users = UtilisateursManager.getInstance().recupUtilisateur(id);
+				
 				List<Categorie> listCategories = ArticlesManager.getInstance().searchByCategories();
 	 
 				// transmettre l'objet vers la jsp
@@ -38,8 +39,7 @@ public class VendreArticleServlet extends HttpServlet {
 				request.setAttribute("categorie", listCategories);
 				// forward
 				request.getRequestDispatcher("/WEB-INF/pages/nouvelle-vente.jsp").forward(request, response);
-			} 
-			if ("user" == null){
+			} else {
 				request.getRequestDispatcher("/WEB-INF/pages/connexion.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
