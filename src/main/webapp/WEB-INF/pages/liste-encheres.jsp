@@ -29,7 +29,7 @@
 				<tbody>
 					<c:forEach var="enchere" items="${ encheres }">
 						<tr>
-							<a href="${ pageContext.request.contextPath }/detailvente"><td>${ enchere.articleVendu.nomArticle }</td></a>
+							<td>${ enchere.articleVendu.nomArticle }</td>
 							<td>${ enchere.montantEnchere }</td>
 							<td>${ enchere.articleVendu.dateFinEncheres }</td>
 							<td>${ enchere.utilisateur.pseudo }</td>
