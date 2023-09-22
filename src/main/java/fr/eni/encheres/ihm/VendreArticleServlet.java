@@ -74,15 +74,14 @@ public class VendreArticleServlet extends HttpServlet {
 					nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, user, categorie
 					);
 			
-			int articleSession = articleVendu.getNoArticle();
-			ArticleVendu articleVendu_id = ArticlesManager.getInstance().recupArticle(articleSession);
-			
-			Retrait retrait = new Retrait(articleVendu_id, rue, codePostal, ville);
 			categorie.addArticle(articleVendu);
 
 			ArticlesManager.getInstance().addArticle(articleVendu);
+			
+			Retrait retrait = new Retrait(articleVendu, rue, codePostal, ville);
+			
 			ReatraitManager.getInstance().addRetrait(retrait);
-			response.sendRedirect(request.getContextPath() + "/liste-encheres");
+			response.sendRedirect(request.getContextPath() + "");
 		} catch (BLLException e) {
 
 			request.setAttribute("error", e.getMessage());
