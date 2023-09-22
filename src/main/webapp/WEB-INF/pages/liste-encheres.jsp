@@ -15,7 +15,7 @@
 						<th>Actions</th>
 					</tr>
 				</thead>
-				<tbody>
+<%-- 				<tbody>
 					<c:forEach var="enchere" items="${ encheres }">
 						<tr>
 							<td>${ enchere.utilisateur.noUtilisateur }</td>
@@ -28,7 +28,7 @@
 							</a></td>
 						</tr>
 					</c:forEach>
-				</tbody
+				</tbody> --%>
 			</table>
 		</div>
 	</div>
