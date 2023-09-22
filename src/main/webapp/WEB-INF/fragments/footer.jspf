@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <div class="mt-5 pt-5 footerblock">
-		<footer class="row text-center text-white bg-primary fixed-bottom">		
+		<footer class="row text-center text-white bg-primary">		
 			<p class="my-4" >LOSNA &copy; 2023</p>
 		</footer>
 	</div>
