@@ -1,20 +1,12 @@
 package fr.eni.encheres.ihm;
 
+import java.io.IOException;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
-import java.io.IOException;
-import java.util.List;
-
-import fr.eni.encheres.bll.CategoriesManager;
-import fr.eni.encheres.bll.EncheresManager;
-import fr.eni.encheres.bo.Categorie;
-import fr.eni.encheres.bo.Enchere;
-import fr.eni.encheres.bo.Utilisateur;
 
 @WebServlet("")
 public class AccueilServlet extends HttpServlet {
@@ -52,7 +44,5 @@ public class AccueilServlet extends HttpServlet {
 			e.printStackTrace();
 			request.getRequestDispatcher("404");
 		}
-
 	}
-
-}
+}	
