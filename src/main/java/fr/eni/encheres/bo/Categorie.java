@@ -40,9 +40,6 @@ public class Categorie {
 		this.categorieArticle = categorieArticle;
 	}
 
-	public int getNoCategorie(int categorie) {
-		return noCategorie;
-	}
 	public int getNoCategorie() {
 		return noCategorie;
 	}

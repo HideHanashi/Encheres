@@ -1,9 +1,6 @@
-<%@page import="fr.eni.encheres.bo.Categorie"%>
-<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf" %>
-<% List<Categorie> categorie = (List<Categorie>) request.getAttribute("categorie");  %> 
 <main>
 	<div class="col position-absolute top-50 start-50 translate-middle">
 		<div class="row text-center">
@@ -31,12 +28,9 @@
 							<label for="categorie" class="form-label">Catégorie : </label>
 							<select class="form-select" aria-label="Default select example" id="categorie" name="categorie">
 								<option selected value="0">Choisir une catégorie</option>
-								<% for (Categorie categories: categorie){ %>
-									<option value="<%=categories.getNoCategorie() %>"><%=categories.getLibelle() %></option>
-								<% } %>
-<%--							<c:forEach var="categorie" items="${ listCategories }" >
-									<option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
-								</c:forEach> --%>
+								<c:forEach var="categories" items="${ categorie }" >
+									<option value="${ categories.noCategorie }">${ categories.libelle }</option>
+								</c:forEach>
 							</select>
 						</div>
 						<div class="p-3">
@@ -66,7 +60,7 @@
 							<div class="card-body">
 								<h5 class="card-title">Lieu de Retrait</h5>
 								<p class="fst-italic fw-lighter" style="font-size: 14px; color : rgb(140, 140, 140);">
-								L'adresse de retrait est défini sur votre adresse acutel par défaut.
+								L'adresse de retrait est défini sur votre adresse de profil par défaut.
 								</p>
 								<div class="p-3">
 									<label for="rue" class="form-label">Rue : </label>
