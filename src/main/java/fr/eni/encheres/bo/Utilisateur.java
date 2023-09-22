@@ -117,6 +117,13 @@ public class Utilisateur {
 	public void setVendu(List<ArticleVendu> vendu) {
 		this.vendu = vendu;
 	}
+	
+	public int getNoUtilisateur() {
+		return noUtilisateur;
+	}
+	public void setNoUtilisateur(int noUtilisateur) { 
+		this.noUtilisateur = noUtilisateur;
+	}
 
 	public String getPseudo() {
 		return pseudo;
@@ -213,16 +220,6 @@ public class Utilisateur {
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + ", encherit=" + encherit + ", achete=" + achete + ", vendu="
 				+ vendu + "]";
-	}
-
-	public int getNoUtilisateur() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public static Utilisateur choisirUtilisateur(int noUtilisateur2) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

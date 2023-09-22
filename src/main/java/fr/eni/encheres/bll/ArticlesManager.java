@@ -2,6 +2,7 @@ package fr.eni.encheres.bll;
 
 import java.util.List;
 
+import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.dal.ArticlesDao;
 import fr.eni.encheres.dal.DaoFactory;
@@ -38,7 +39,8 @@ public class ArticlesManager {
 		return articleDao.findAll();
 	}
 
-	public void addArticle(ArticleVendu article) {
+	public void addArticle(ArticleVendu article) throws BLLException {
+		isValid(article);
 		articleDao.save(article);
 	}
 
@@ -67,4 +69,15 @@ public class ArticlesManager {
 	// public List<ArticleVendu> listAchat() {
 	// return ArticleDao.findAllAchat();
 	// }
+	
+	private void isValid(ArticleVendu article) throws BLLException {
+		if(article == null) throw new BLLException("L'article est vide. ");
+		if(article.getNomArticle() == null || article.getNomArticle().isBlank()) throw new BLLException("Le nom de l'article est obligatoire.");
+		if(article.getDescription() == null || article.getDescription().isBlank()) throw new BLLException("La description de l'article est obligatoire.");
+		if(article.getDateDebutEncheres() == null) throw new BLLException("La date de début de l'enchère est obligatoire.");
+		if(article.getDateFinEncheres() == null) throw new BLLException("La date de fin de l'enchère est obligatoire.");
+		if(article.getCategorie() == null) throw new BLLException("Une catégorie pour l'article est obligatoire.");
+		if(article.getMiseAPrix() < 0) throw new BLLException("Le prix pour l'article doit être supérieur à 0.");
+	}
+	
 }
