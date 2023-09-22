@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/modifiermonprofil")
 public class ModifierProfilServlet extends HttpServlet {
@@ -18,6 +19,15 @@ public class ModifierProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		HttpSession session = request.getSession();
+		Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
+		int id = utilisateurSession.getNoUtilisateur();
+		// récupérer le param dans url
+		Utilisateur utilisateur = UtilisateursManager.getInstance().recupUtilisateur(id);
+
+		// transmettre l'objet vers la jsp
+		request.setAttribute("user", utilisateur);
+
 		request.getRequestDispatcher("/WEB-INF/pages/modifier-mon-profil.jsp").forward(request, response);
 
 	}
@@ -25,6 +35,9 @@ public class ModifierProfilServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
+			HttpSession session = request.getSession();
+			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
+			System.out.println(utilisateurSession);
 			int noUtilisateur = Integer.parseInt(request.getParameter("noUtilisateur"));
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
@@ -34,18 +47,18 @@ public class ModifierProfilServlet extends HttpServlet {
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
-			String motDePasse = "";
+			String motDePasse = request.getParameter("motDePasseActuel");
 			if ((request.getParameter("motDePasseActuel") != request.getParameter("nouveauMotDePasse"))
-					&& request.getParameter("confirmation") != "") {
+					&& !request.getParameter("confirmation").isBlank()) {
 				if (request.getParameter("nouveauMotDePasse") == request.getParameter("confirmation")) {
 					motDePasse = request.getParameter("nouveauMotDePasse");
 				} else {
 					throw new BLLException("le mot de passe est incorrect");
 				}
 			}
-			Utilisateur utilisateur = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue,
-					codePostal, ville, motDePasse);
-			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
+			utilisateurSession = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal,
+					ville, motDePasse);
+			UtilisateursManager.getInstance().modifyUtilisateur(utilisateurSession);
 			response.sendRedirect(request.getContextPath() + "/monprofil");
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());

@@ -3,7 +3,19 @@
 <%@ include file="/WEB-INF/fragments/header.jspf"%>
 
 <main>
+	<div class="p-3">
+		<label for="categorie" class="form-label">Catégorie : </label> <select
+			class="form-select" aria-label="Default select example"
+			id="categorie" name="categorie">
+			<option selected value="0">Toutes</option>
+
+			<c:forEach var="categories" items="${ categorie }">
+				<option value="${ categories.noCategorie }">${ categories.libelle }</option>
+			</c:forEach>
+		</select>
+	</div>
 	<div class="row mt-5">
+
 		<div class="col-8 offset-2">
 			<table class="table table-dark">
 				<thead>
@@ -17,7 +29,7 @@
 				<tbody>
 					<c:forEach var="enchere" items="${ encheres }">
 						<tr>
-							<td>${ enchere.articleVendu.nomArticle }</td>
+							<a href="${ pageContext.request.contextPath }/detailvente"><td>${ enchere.articleVendu.nomArticle }</td></a>
 							<td>${ enchere.montantEnchere }</td>
 							<td>${ enchere.articleVendu.dateFinEncheres }</td>
 							<td>${ enchere.utilisateur.pseudo }</td>

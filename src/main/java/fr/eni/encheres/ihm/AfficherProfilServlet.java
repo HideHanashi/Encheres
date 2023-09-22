@@ -23,6 +23,7 @@ public class AfficherProfilServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
 			int id = utilisateurSession.getNoUtilisateur();
+
 			// récupérer le param dans url
 			Utilisateur utilisateur = UtilisateursManager.getInstance().recupUtilisateur(id);
 

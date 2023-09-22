@@ -30,8 +30,8 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String SELECT_ONE = "SELECT * FROM UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEUR";
 
-	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
-			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?) WHERE no_utilisateur = ?";
+	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe)"
+			+ " VALUES (?,?,?,?,?,?,?,?,?) WHERE no_utilisateur = ?";
 
 	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,code_postal,ville)"
 			+ " VALUES (?,?,?) WHERE no_utilisateur = ?";

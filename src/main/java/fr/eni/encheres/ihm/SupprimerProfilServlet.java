@@ -26,7 +26,7 @@ public class SupprimerProfilServlet extends HttpServlet {
 			// récupérer le param dans url
 			UtilisateursManager.getInstance().removeUtilisateur(id);
 
-			response.sendRedirect(request.getContextPath() + "");
+			response.sendRedirect(request.getContextPath() + "/deconnexion");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
