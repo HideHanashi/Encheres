@@ -1,4 +1,4 @@
-package fr.eni.encheres.ihm;
+ package fr.eni.encheres.ihm;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
