@@ -6,7 +6,7 @@ public class Enchere {
 
 	private LocalDate dateEnchere;
 	private int montantEnchere;
-	
+
 	private ArticleVendu articleVendu;
 	private Utilisateur utilisateur;
 
@@ -46,11 +46,11 @@ public class Enchere {
 		this.dateEnchere = dateEnchere;
 	}
 
-	public int getMontant_enchere() {
+	public int getMontantEnchere() {
 		return montantEnchere;
 	}
 
-	public void setMontant_enchere(int montantEnchere) {
+	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
 	}
 

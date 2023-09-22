@@ -8,27 +8,22 @@
 			<table class="table table-dark">
 				<thead>
 					<tr>
-						<th>Date</th>
-						<th>Montant</th>
 						<th>Nom de l'Article</th>
-						<th>Utilisateur</th>
-						<th>Actions</th>
+						<th>Mise à prix</th>
+						<th>Fin de l'enchère</th>
+						<th>Vendeur</th>
 					</tr>
 				</thead>
-<%-- 				<tbody>
+				<tbody>
 					<c:forEach var="enchere" items="${ encheres }">
 						<tr>
-							<td>${ enchere.utilisateur.noUtilisateur }</td>
-							<td>${ enchere.articleVendu.noArticle }</td>
-							<td>${ enchere.dateEnchere }</td>
+							<td>${ enchere.articleVendu.nomArticle }</td>
 							<td>${ enchere.montantEnchere }</td>
-							<td><a class="btn btn-dark"
-								href="${ pageContext.request.contextPath }/details?id=${ enchere.articleVendu.noArticle }">
-									<i class="fa-solid fa-eye"></i>
-							</a></td>
+							<td>${ enchere.articleVendu.dateFinEncheres }</td>
+							<td>${ enchere.utilisateur.pseudo }</td>
 						</tr>
 					</c:forEach>
-				</tbody> --%>
+				</tbody>
 			</table>
 		</div>
 	</div>

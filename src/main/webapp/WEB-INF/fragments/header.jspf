@@ -67,7 +67,7 @@
 								<ul class="dropdown-menu">
 									<c:if test="${ user != null }">
 										<li><a class="dropdown-item"
-											href="${ pageContext.request.contextPath }/monprofil?id=${ user.noUtilisateur }">Mon
+											href="${ pageContext.request.contextPath }/monprofil">Mon
 												Profil</a></li>
 
 										<li><a class="dropdown-item"
@@ -131,7 +131,7 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
-					<form class="d-flex ms-2" role="search">
+					<form method="get" class="d-flex ms-2" role="search">
 						<input class="form-control me-3 navbarsearch" type="search"
 							name="q" placeholder="Rechercher . . ." aria-label="Search">
 					</form>

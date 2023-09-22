@@ -40,6 +40,7 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 	private static final String DELETE_ENCHERE = "DELETE ENCHERES WHERE no_article = ?";
 
 	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES";
+	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU a INNER JOIN ENCHERES e ON a.no_article = e.no_article WHERE nom_article LIKE ?";
 
 	@Override
 	public void save(Enchere enchere) {
@@ -48,7 +49,7 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 			pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
 			pstmt.setInt(2, enchere.getArticleVendu().getNoArticle());
 			pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
-			pstmt.setInt(4, enchere.getMontant_enchere());
+			pstmt.setInt(4, enchere.getMontantEnchere());
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -63,7 +64,7 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 			pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
 			pstmt.setInt(2, enchere.getArticleVendu().getNoArticle());
 			pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
-			pstmt.setInt(4, enchere.getMontant_enchere());
+			pstmt.setInt(4, enchere.getMontantEnchere());
 
 			pstmt.executeUpdate();
 			pstmt.setInt(4, enchere.getArticleVendu().getNoArticle());
@@ -107,8 +108,25 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 		enchere.setUtilisateur(user);
 		enchere.setArticleVendu(article);
 		enchere.setDateEnchere(rs.getDate("date_encheres").toLocalDate());
-		enchere.setMontant_enchere(rs.getInt("montant_encheres"));
+		enchere.setMontantEnchere(rs.getInt("montant_encheres"));
 		return enchere;
+	}
+
+	@Override
+	public List<Enchere> findByName(String query) {
+		try (Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(FIND_BY_NAME)) {
+			pstmt.setString(1, "%" + query + "%");
+			List<Enchere> listEncheres = new ArrayList<>();
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				listEncheres.add(EnchereFromRs(rs));
+			}
+			return listEncheres;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
