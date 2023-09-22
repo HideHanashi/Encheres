@@ -18,7 +18,7 @@ public class AfficherProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("WEB-INF/mon-profil.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/mon-profil.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
