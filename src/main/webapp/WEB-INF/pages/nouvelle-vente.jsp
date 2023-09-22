@@ -1,6 +1,9 @@
+<%@page import="fr.eni.encheres.bo.Categorie"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf" %>
+<% List<Categorie> categorie = (List<Categorie>) request.getAttribute("categorie");  %> 
 <main>
 	<div class="col position-absolute top-50 start-50 translate-middle">
 		<div class="row text-center">
@@ -28,9 +31,12 @@
 							<label for="categorie" class="form-label">Catégorie : </label>
 							<select class="form-select" aria-label="Default select example" id="categorie" name="categorie">
 								<option selected value="0">Choisir une catégorie</option>
-								<c:forEach var="categorie" items="${ listCategories }" >
+								<% for (Categorie categories: categorie){ %>
+									<option value="<%=categories.getNoCategorie() %>"><%=categories.getLibelle() %></option>
+								<% } %>
+<%--							<c:forEach var="categorie" items="${ listCategories }" >
 									<option value="${ categorie.noCategorie }">${ categorie.libelle }</option>
-								</c:forEach>
+								</c:forEach> --%>
 							</select>
 						</div>
 						<div class="p-3">

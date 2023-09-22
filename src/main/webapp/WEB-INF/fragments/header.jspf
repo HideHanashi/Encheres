@@ -67,7 +67,7 @@
 								<ul class="dropdown-menu">
 									<c:if test="${ user != null }">
 										<li><a class="dropdown-item"
-											href="${ pageContext.request.contextPath }/monprofil?id=${ user.noUtilisateur }">Mon
+											href="${ pageContext.request.contextPath }/monprofil">Mon
 												Profil</a></li>
 
 										<li><a class="dropdown-item"
