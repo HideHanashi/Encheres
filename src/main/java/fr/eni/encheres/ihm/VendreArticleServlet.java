@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import fr.eni.encheres.bll.ArticlesManager;
+import fr.eni.encheres.bll.CategoriesManager;
 import fr.eni.encheres.bll.ReatraitManager;
 import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bo.ArticleVendu;
@@ -31,8 +32,8 @@ public class VendreArticleServlet extends HttpServlet {
 				// récupérer le param dans url
 				Utilisateur users = UtilisateursManager.getInstance().recupUtilisateur(id);
 				
-				List<Categorie> listCategories = ArticlesManager.getInstance().searchByCategories();
-	 
+				List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
+				System.out.println(listCategories);
 				// transmettre l'objet vers la jsp
 				request.setAttribute("user", users);
 				request.setAttribute("categorie", listCategories);
@@ -58,9 +59,14 @@ public class VendreArticleServlet extends HttpServlet {
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
+			
 			ArticleVendu articleVendu = new ArticleVendu(
 			nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, categorie, rue, codePostal, ville
 			);
+			
+			Categorie categories = CategoriesManager.getInstance().getCategorieById(categorie);
+			categories.addArticle(articleVendu);
+			
 			Retrait retrait = new Retrait(rue, codePostal, ville);
 			
 			ArticlesManager.getInstance().addArticle(articleVendu);

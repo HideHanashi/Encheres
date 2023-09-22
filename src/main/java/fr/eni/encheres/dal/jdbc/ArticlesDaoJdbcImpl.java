@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bo.ArticleVendu;
-import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.dal.ArticlesDao;
 
 public class ArticlesDaoJdbcImpl implements ArticlesDao {
@@ -21,7 +20,6 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 	private static final String DELETE = "DELETE ARTICLE_VENDU WHERE no_article = ?";
 	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";
 	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nom_article LIKE ? ";
-	private static final String FIND_ALL_CATEGORIE = "SELECT * FROM CATEGORIE";
 
 	@Override
 	public void save(ArticleVendu articleVendu) {
@@ -143,26 +141,6 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 		}
 		return null;
 
-	}
-
-	@Override
-	public List<Categorie> findByCategorie() {
-		try (
-				Connection connection = ConnectionProvider.getConnection();
-				Statement stmt = connection.createStatement();
-			){
-			List<Categorie> categories = new ArrayList<Categorie>();
-			ResultSet rs = stmt.executeQuery(FIND_ALL_CATEGORIE);
-			while (rs.next()) {
-				categories.add( 
-							new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"))
-							);
-			}
-			return categories;
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 }

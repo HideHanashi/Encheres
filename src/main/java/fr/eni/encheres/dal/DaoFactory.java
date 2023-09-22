@@ -1,6 +1,7 @@
 package fr.eni.encheres.dal;
 
 import fr.eni.encheres.dal.jdbc.ArticlesDaoJdbcImpl;
+import fr.eni.encheres.dal.jdbc.CategorieDaoJdbcImpl;
 import fr.eni.encheres.dal.jdbc.EnchereDaoJdbcImpl;
 import fr.eni.encheres.dal.jdbc.RetraitDaoJdbcImpl;
 import fr.eni.encheres.dal.jdbc.ForgetPasswordDaoJdbcImpl;
@@ -10,6 +11,11 @@ public class DaoFactory {
 	private DaoFactory() {
 	}
 
+	public static CategorieDao getCategorieDao() {
+
+		return new CategorieDaoJdbcImpl();
+	}
+	
 	public static UtilisateurDao getUtilisateurDao() {
 
 		return new UtilisateurDaoJdbcImpl();
