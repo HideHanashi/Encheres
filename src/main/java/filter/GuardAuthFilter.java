@@ -19,6 +19,8 @@ import java.io.IOException;
 		"/supprimermonprofil", "/monprofil", "/nouvelle-vente" })
 public class GuardAuthFilter extends HttpFilter implements Filter {
 
+	private static final long serialVersionUID = 1L;
+
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 

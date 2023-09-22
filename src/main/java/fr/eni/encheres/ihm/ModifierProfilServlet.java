@@ -47,7 +47,7 @@ public class ModifierProfilServlet extends HttpServlet {
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
-			String motDePasse = request.getParameter("nouveauMotDePasse");
+			String motDePasse = request.getParameter("motDePasse");
 
 			Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
 					motDePasse);
