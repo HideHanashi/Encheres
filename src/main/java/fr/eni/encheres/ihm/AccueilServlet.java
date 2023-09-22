@@ -1,7 +1,12 @@
 package fr.eni.encheres.ihm;
 
 import java.io.IOException;
+import java.util.List;
 
+import fr.eni.encheres.bll.CategoriesManager;
+import fr.eni.encheres.bll.EncheresManager;
+import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Enchere;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -45,4 +50,4 @@ public class AccueilServlet extends HttpServlet {
 			request.getRequestDispatcher("404");
 		}
 	}
-}	
+}
