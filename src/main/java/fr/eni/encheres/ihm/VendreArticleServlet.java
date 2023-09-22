@@ -8,6 +8,7 @@ import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.CategoriesManager;
 import fr.eni.encheres.bll.ReatraitManager;
 import fr.eni.encheres.bll.UtilisateursManager;
+import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Retrait;
@@ -57,24 +58,35 @@ public class VendreArticleServlet extends HttpServlet {
 			LocalDate dateDebutEncheres = LocalDate.parse(request.getParameter("dateDebutEncheres"));
 			LocalDate dateFinEncheres = LocalDate.parse(request.getParameter("dateFinEncheres"));
 			int miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
-			int categorie = Integer.parseInt(request.getParameter("categorie"));
+			int categorie_id = Integer.parseInt(request.getParameter("categorie"));
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
-			System.out.println(categorie);
-			ArticleVendu articleVendu = new ArticleVendu(
-			nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, categorie, rue, codePostal, ville
-			);
-			
-			Categorie categories = CategoriesManager.getInstance().getCategorieById(categorie);
-			categories.addArticle(articleVendu);
 
-			Retrait retrait = new Retrait(rue, codePostal, ville);
+			HttpSession session = request.getSession();
+			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
+			int id = utilisateurSession.getNoUtilisateur();
+			
+			Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(id);
+			Categorie categorie = CategoriesManager.getInstance().getCategorieById(categorie_id);
+			
+			ArticleVendu articleVendu = new ArticleVendu(
+					nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, user, categorie
+					);
+			
+			int articleSession = articleVendu.getNoArticle();
+			ArticleVendu articleVendu_id = ArticlesManager.getInstance().recupArticle(articleSession);
+			
+			Retrait retrait = new Retrait(articleVendu_id, rue, codePostal, ville);
+			categorie.addArticle(articleVendu);
 
 			ArticlesManager.getInstance().addArticle(articleVendu);
 			ReatraitManager.getInstance().addRetrait(retrait);
 			response.sendRedirect(request.getContextPath() + "/liste-encheres");
-		} catch (Exception e) {
+		} catch (BLLException e) {
+
+			request.setAttribute("error", e.getMessage());
+			doGet(request, response);
 			e.printStackTrace();
 		}
 	}

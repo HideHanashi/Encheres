@@ -24,9 +24,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String UNIQUE_USERNAME_CONSTRAINT = "uq_pseudo_user";
 	private static final String UNIQUE_TELEPHONE_CONSTRAINT = "uq_phone_user";
 	private static final String UNIQUE_EMAIL_CONSTRAINT = "uq_email_user";
+	
 	private static final String DELETE = "DELETE UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email = ?";
-
 	private static final String SELECT_ONE = "SELECT * FROM UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEUR";
 

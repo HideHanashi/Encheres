@@ -25,18 +25,16 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int miseAPrix, int categorie, String rue,
-			String codePostal, String ville) {
+			LocalDate dateFinEncheres, int miseAPrix, Utilisateur user, Categorie categorie) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
 		this.prixVente = miseAPrix;
-		this.etatVente = "En cours";
-		this.categorie = new Categorie(getCategorie().getNoCategorie(categorie));
-		this.lieuRetrait = new Retrait(getRetrait().getRue(rue), 
-							getRetrait().getCodePostal(codePostal), getRetrait().getVille(ville));
+		this.etatVente = "En Attente";
+		this.utilisateur = user;
+		this.categorie = categorie;
 	}	
 	
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,

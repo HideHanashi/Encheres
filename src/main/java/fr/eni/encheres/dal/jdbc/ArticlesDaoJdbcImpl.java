@@ -20,7 +20,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 	private static final String DELETE = "DELETE ARTICLE_VENDU WHERE no_article = ?";
 	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";
 	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nom_article LIKE ? ";
-
+	
 	@Override
 	public void save(ArticleVendu articleVendu) {
 		try (Connection connection = ConnectionProvider.getConnection();
