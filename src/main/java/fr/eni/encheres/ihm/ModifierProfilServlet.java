@@ -3,7 +3,7 @@ package fr.eni.encheres.ihm;
 import java.io.IOException;
 
 import fr.eni.encheres.bll.UtilisateursManager;
-import fr.eni.encheres.bll.exception.BLLException;
+
 import fr.eni.encheres.bo.Utilisateur;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -37,8 +37,8 @@ public class ModifierProfilServlet extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
-			System.out.println(utilisateurSession);
-			int noUtilisateur = Integer.parseInt(request.getParameter("noUtilisateur"));
+			int id = utilisateurSession.getNoUtilisateur();
+			System.out.println(id);
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
@@ -47,19 +47,12 @@ public class ModifierProfilServlet extends HttpServlet {
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
-			String motDePasse = request.getParameter("motDePasseActuel");
-			if ((request.getParameter("motDePasseActuel") != request.getParameter("nouveauMotDePasse"))
-					&& !request.getParameter("confirmation").isBlank()) {
-				if (request.getParameter("nouveauMotDePasse") == request.getParameter("confirmation")) {
-					motDePasse = request.getParameter("nouveauMotDePasse");
-				} else {
-					throw new BLLException("le mot de passe est incorrect");
-				}
-			}
-			utilisateurSession = new Utilisateur(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal,
-					ville, motDePasse);
-			UtilisateursManager.getInstance().modifyUtilisateur(utilisateurSession);
-			response.sendRedirect(request.getContextPath() + "/monprofil");
+			String motDePasse = request.getParameter("nouveauMotDePasse");
+
+			Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+					motDePasse);
+			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
+			response.sendRedirect(request.getContextPath() + "");
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
 			doGet(request, response);

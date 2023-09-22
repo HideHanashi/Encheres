@@ -24,14 +24,13 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String UNIQUE_USERNAME_CONSTRAINT = "uq_pseudo_user";
 	private static final String UNIQUE_TELEPHONE_CONSTRAINT = "uq_phone_user";
 	private static final String UNIQUE_EMAIL_CONSTRAINT = "uq_email_user";
-	
+
 	private static final String DELETE = "DELETE UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email = ?";
 	private static final String SELECT_ONE = "SELECT * FROM UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEUR";
-
-	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe)"
-			+ " VALUES (?,?,?,?,?,?,?,?,?) WHERE no_utilisateur = ?";
+//	UPDATE games SET name=?,company=?,category=?,price=?,releaseDate=?,age=?,format=?,version=? WHERE id = ?
+	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=? WHERE no_utilisateur = ?";
 
 	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,code_postal,ville)"
 			+ " VALUES (?,?,?) WHERE no_utilisateur = ?";
@@ -134,8 +133,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			pstmt.setString(7, user.getCodePostal());
 			pstmt.setString(8, user.getVille());
 			pstmt.setString(9, user.getMotDePasse());
-
+			pstmt.setInt(10, user.getNoUtilisateur());
 			pstmt.executeUpdate();
+
 		} catch (SQLException e) {
 			if (e.getMessage().contains(UNIQUE_USERNAME_CONSTRAINT)) {
 				throw new BLLException("L'username est déjà utilisé !");

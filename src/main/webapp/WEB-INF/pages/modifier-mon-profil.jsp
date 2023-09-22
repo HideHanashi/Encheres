@@ -104,8 +104,8 @@
 							</div>
 							<div class="col-8">
 								<div class="input-group">
-									<input class="case" type="text" name="CP" id="codePostal"
-										name="codePostal" value="${user.codePostal}" required>
+									<input class="case" type="text" name="codePostal"
+										id="codePostal" value="${user.codePostal}" required>
 								</div>
 							</div>
 						</div>
@@ -129,33 +129,7 @@
 					<div class="col">
 						<div class="row">
 							<div class="col-4">
-								<label>Mot de passe actuel:</label>
-							</div>
-							<div class="col-8">
-								<div class="input-group">
-									<input class="case" type="password" id="motDePasseActuel"
-										name="motDePasseActuel" value="${user.motDePasse}">
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="row">
-							<div class="col-4">
-								<label></label>
-							</div>
-							<div class="col-8">
-								<label></label>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="row mb-3">
-					<div class="col">
-						<div class="row">
-							<div class="col-4">
-								<label>Nouveau mot de passe:</label>
+								<label>Nouveau Mot de passe :</label>
 							</div>
 							<div class="col-8">
 								<div class="input-group">
@@ -168,18 +142,14 @@
 					<div class="col">
 						<div class="row">
 							<div class="col-4">
-								<label>Confirmation:</label>
+								<label></label>
 							</div>
 							<div class="col-8">
-								<div class="input-group">
-									<input class="case" type="password" id="confirmation"
-										name="confirmation">
-								</div>
+								<label></label>
 							</div>
 						</div>
 					</div>
 				</div>
-
 				<div class="row mb-3">
 					<div class="col">
 						<div class="row">

@@ -2,7 +2,6 @@ package fr.eni.encheres.ihm;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -44,7 +43,7 @@ public class ConnexionServlet extends HttpServlet {
 		} else {
 
 			HttpSession session = request.getSession();
-			user.setMotDePasse("");
+//			user.setMotDePasse("");
 
 			session.setAttribute("user", user);
 			response.sendRedirect(request.getContextPath() + "");
