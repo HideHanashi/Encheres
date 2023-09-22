@@ -61,7 +61,7 @@ public class VendreArticleServlet extends HttpServlet {
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
-			
+			System.out.println(categorie);
 			ArticleVendu articleVendu = new ArticleVendu(
 			nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, categorie, rue, codePostal, ville
 			);
