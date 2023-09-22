@@ -10,8 +10,8 @@ public class Retrait {
 	
 	
 	
-	public Retrait(ArticleVendu articleVendu, String rue, String codePostal, String ville) {
-		this.articleVendu = articleVendu;
+	public Retrait(ArticleVendu articleId, String rue, String codePostal, String ville) {
+		this.articleVendu = articleId;
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;

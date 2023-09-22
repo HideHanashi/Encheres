@@ -22,9 +22,9 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nom_article LIKE ? ";
 	
 	@Override
-	public void save(ArticleVendu articleVendu) {
+	public void save(ArticleVendu articleVendu) {// passage par référence
 		try (Connection connection = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(SAVE);) {
+				PreparedStatement pstmt = connection.prepareStatement(SAVE, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			// valoriser les params de la requete
 			pstmt.setString(1, articleVendu.getNomArticle());
 			pstmt.setString(2, articleVendu.getDescription());
@@ -38,6 +38,11 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 
 			// executer la requete
 			pstmt.executeUpdate();
+			
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if(rs.next()) {
+				articleVendu.setNoArticle( rs.getInt(1) );
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
