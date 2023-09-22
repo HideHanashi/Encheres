@@ -14,12 +14,11 @@ public class Enchere {
 
 	}
 
-	public Enchere(LocalDate dateEnchere, int montantEnchere, ArticleVendu articleVendu, Utilisateur utilisateur) {
-		super();
+	public Enchere(Utilisateur utilisateur, ArticleVendu articleVendu, LocalDate dateEnchere, int montantEnchere) {
+		this.utilisateur = utilisateur;
+		this.articleVendu = articleVendu;
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
-		this.articleVendu = articleVendu;
-		this.utilisateur = utilisateur;
 	}
 
 	public Utilisateur getUtilisateur() {
