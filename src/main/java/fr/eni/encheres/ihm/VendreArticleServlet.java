@@ -33,7 +33,7 @@ public class VendreArticleServlet extends HttpServlet {
 			// récupérer le param dans url
 			Utilisateur users = UtilisateursManager.getInstance().recupUtilisateur(id);
 
-			List<Categorie> listCategories = ArticlesManager.getInstance().searchByCategories();
+			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
 
 			// transmettre l'objet vers la jsp
 			request.setAttribute("user", users);

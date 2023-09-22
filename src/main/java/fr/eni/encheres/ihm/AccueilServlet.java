@@ -8,13 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
-import fr.eni.encheres.bll.ArticlesManager;
+import fr.eni.encheres.bll.CategoriesManager;
 import fr.eni.encheres.bll.EncheresManager;
-import fr.eni.encheres.bll.UtilisateursManager;
-import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
@@ -27,14 +24,14 @@ public class AccueilServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 
-			HttpSession session = request.getSession();
-			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
+//			HttpSession session = request.getSession();
+//			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
 
 //			int id = utilisateurSession.getNoUtilisateur();
 
 			// récupérer le param dans url
 			// Utilisateur users = UtilisateursManager.getInstance().recupUtilisateur(id);
-			List<Categorie> listCategories = ArticlesManager.getInstance().searchByCategories();
+			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
 			List<Enchere> listEncheres = null;
 
 			if (request.getParameter("q") != null) {
