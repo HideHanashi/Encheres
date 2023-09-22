@@ -6,7 +6,8 @@
 	<div>
 		<h1 class="row d-flex justify-content-center mb-5 p-2">Mon Profil</h1>
 		<div class="p-3">
-			<form action="PageMonProfil" method="post">
+
+			<form method="post">
 				<div class="row mb-3">
 					<div class="col">
 						<div class="row">
@@ -204,10 +205,13 @@
 					<a class="btn btn-info"
 						href="${ pageContext.request.contextPath }/modifiermonprofil">Supprimer
 						mon compte</a>
+
 				</div>
+
 			</div>
-			</form>
-		</div>
+		</form>
+	</div>
+
 	</div>
 
 </main>

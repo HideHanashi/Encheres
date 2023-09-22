@@ -15,9 +15,7 @@ public interface EnchereDao {
 
 	void remove(int id);
 
-//	List<Enchere> findByName(String query);
-
-//	List<Enchere> findByName(String query);
+	List<Enchere> findByName(String query);
 
 //	void encherir(Enchere enchere);
 

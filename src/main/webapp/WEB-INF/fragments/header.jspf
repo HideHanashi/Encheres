@@ -131,7 +131,7 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 
-					<form class="d-flex ms-2" role="search">
+					<form method="get" class="d-flex ms-2" role="search">
 						<input class="form-control me-3 navbarsearch" type="search"
 							name="q" placeholder="Rechercher . . ." aria-label="Search">
 					</form>

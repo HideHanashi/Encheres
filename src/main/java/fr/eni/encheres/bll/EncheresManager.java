@@ -30,9 +30,9 @@ public class EncheresManager {
 	public void addEnchere(Enchere enchere) {
 		enchereDao.save(enchere);
 	}
-	
+
 	public List<Enchere> searchEnchere(String query) {
-		return null;
+		return enchereDao.findByName(query);
 	}
 
 	public void modifyEnchere(Enchere enchere) {
