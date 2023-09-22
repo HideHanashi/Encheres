@@ -36,9 +36,12 @@ public class AccueilServlet extends HttpServlet {
 			} else {
 				listEncheres = EncheresManager.getInstance().searchAllEncheres();
 			}
+			
+			String imageArticle = null;
 
 			// transmettre l'objet vers la jsp
 			// request.setAttribute("user", users);
+			request.setAttribute("image", imageArticle);
 			request.setAttribute("categorie", listCategories);
 			request.setAttribute("encheres", listEncheres);
 			// forward
