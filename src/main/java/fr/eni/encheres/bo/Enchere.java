@@ -20,6 +20,11 @@ public class Enchere {
 		this.montantEnchere = montantEnchere;
 	}
 
+	public Enchere(LocalDate dateEnchere, int montantEnchere) {
+		this.dateEnchere = dateEnchere;
+		this.montantEnchere = montantEnchere;
+	}
+
 	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}

@@ -30,12 +30,14 @@ public class DetailVenteServlet extends HttpServlet {
 		
 		try {
 			HttpSession session = request.getSession();
-			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("Utilisateur");
+			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
 			int idUser = utilisateurSession.getNoUtilisateur();
 			Utilisateur utilisateur = UtilisateursManager.getInstance().recupUtilisateur(idUser);
 			
 			int idEnchere = Integer.parseInt(request.getParameter("auction"));
+			System.out.println(idEnchere);
 			Enchere enchere = EncheresManager.getInstance().findOne(idEnchere);
+			System.out.println(enchere);
 			
 			request.setAttribute("enchere", enchere);
 			request.setAttribute("user", utilisateur);
