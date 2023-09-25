@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/WEB-INF/fragments/header.jspf" %>
+<%@ include file="/WEB-INF/fragments/header.jspf"%>
 <main>
 	<div class="col position-absolute top-50 start-50 translate-middle">
 		<div class="row text-center">
@@ -87,4 +87,4 @@
 		</div>
 	</div>
 </main>
-<%@ include file="/WEB-INF/fragments/footer.jspf" %>
+<%@ include file="/WEB-INF/fragments/footer.jspf"%>
