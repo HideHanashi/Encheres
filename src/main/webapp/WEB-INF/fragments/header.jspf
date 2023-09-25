@@ -56,105 +56,6 @@
 							</li>
 
 							<li class="nav-item"><a class="nav-link"
-								href="${ pageContext.request.contextPath }/nouvelle-vente">Enchère</a>
-							</li>
-
-							<li class="nav-item dropdown"><a
-								class="nav-link dropdown-toggle" href="#" role="button"
-								data-bs-toggle="dropdown" aria-expanded="false"><i
-									class="fa-solid fa-user fa-sm mr-4"></i> Profil</a>
-
-								<ul class="dropdown-menu">
-									<c:if test="${ user != null }">
-
-										<li><a class="dropdown-item"
-											href="${ pageContext.request.contextPath }/modifierarticles">Mes
-												Articles</a></li>
-
-
-										<li><a class="dropdown-item" href="#">${ user.pseudo }</a></li>
-										<li><hr class="dropdown-divider"></li>
-
-
-										<li><a class="dropdown-item"
-											href="${ pageContext.request.contextPath }/monprofil">Mon
-												Profil</a></li>
-
-										<li><a class="dropdown-item"
-											href="${ pageContext.request.contextPath }/deconnexion">Déconnexion</a></li>
-									</c:if>
-
-									<c:if test="${ user == null }">
-										<li><a class="dropdown-item"
-											href="${ pageContext.request.contextPath }/connexion">Connexion</a></li>
-
-										<li><a class="dropdown-item"
-											href="${ pageContext.request.contextPath }/inscription">Inscription</a></li>
-									</c:if>
-
-								</ul></li>
-						</ul>
-					</div>
-				</div>
-			</nav>
-		</header>
-	</div>
-</body>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap"
-	rel="stylesheet">
-
-<script src="https://kit.fontawesome.com/fd442b89da.js"
-	crossorigin="anonymous"></script>
-
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-	integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="${ pageContext.request.contextPath }/assets/css/style.css" />
-<title>LOSNA</title>
-</head>
-<body>
-	<div class="container mb-5 pb-5 headerblock">
-		<header class="row navbarbackground fixed-top">
-			<nav class="navbar navbar-expand-lg bg-body-tertiary bg-tertiary">
-				<div class="container-fluid">
-					<a class="navbar-brand titlenavbar mx-3"
-						href="${ pageContext.request.contextPath }"><i
-						class="fa-solid fa-gavel"></i> LOSNA</a>
-
-					<button class="navbar-toggler" type="button"
-						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-						aria-controls="navbarSupportedContent" aria-expanded="false"
-						aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-
-					<form method="get" class="d-flex ms-2" role="search">
-						<input class="form-control me-3 navbarsearch" type="search"
-							name="q" placeholder="Rechercher . . ." aria-label="Search">
-					</form>
-
-					<div class="collapse navbar-collapse col-1 offset-8"
-						id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="${ pageContext.request.contextPath }">Accueil</a>
-							</li>
-
-							<li class="nav-item"><a class="nav-link"
 								href="${ pageContext.request.contextPath }/nouvelle-vente">Publier</a>
 							</li>
 
@@ -165,6 +66,13 @@
 
 								<ul class="dropdown-menu">
 									<c:if test="${ user != null }">
+
+										<li><a class="dropdown-item" href="#">${ user.pseudo }</a></li>
+										<li><hr class="dropdown-divider"></li>
+
+										<li><a class="dropdown-item"
+											href="${ pageContext.request.contextPath }/modifierarticles">Mes
+												Articles</a></li>
 										<li><a class="dropdown-item"
 											href="${ pageContext.request.contextPath }/monprofil">Mon
 												Profil</a></li>
@@ -188,4 +96,3 @@
 			</nav>
 		</header>
 	</div>
-</body>

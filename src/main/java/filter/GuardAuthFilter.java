@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter(dispatcherTypes = { DispatcherType.REQUEST }, urlPatterns = { "/deconnexion", "/modifiermonprofil",
-		"/supprimermonprofil", "/monprofil", "/nouvelle-vente" })
+		"/supprimermonprofil", "/monprofil", "/nouvelle-vente", "/modifierarticles", "/modifiermesarticles" })
 public class GuardAuthFilter extends HttpFilter implements Filter {
 
 	private static final long serialVersionUID = 1L;
