@@ -1,18 +1,12 @@
 package fr.eni.encheres.ihm;
 
 import java.io.IOException;
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
 
 import fr.eni.encheres.bll.ArticlesManager;
-import fr.eni.encheres.bll.EncheresManager;
+import fr.eni.encheres.bll.RetraitManager;
 import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bo.ArticleVendu;
-import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.bo.Utilisateur;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -34,13 +28,14 @@ public class DetailVenteServlet extends HttpServlet {
 			int idUser = utilisateurSession.getNoUtilisateur();
 			Utilisateur utilisateur = UtilisateursManager.getInstance().recupUtilisateur(idUser);
 			
-			int idEnchere = Integer.parseInt(request.getParameter("auction"));
-			System.out.println(idEnchere);
-			Enchere enchere = EncheresManager.getInstance().findOne(idEnchere);
-			System.out.println(enchere);
+			int idArticle = Integer.parseInt(request.getParameter("auction"));
+			Retrait retrait = RetraitManager.getInstance().recupRetrait(idArticle);
+			ArticleVendu article = ArticlesManager.getInstance().recupArticle(idArticle);
+			System.out.println(retrait);
 			
-			request.setAttribute("enchere", enchere);
-			request.setAttribute("user", utilisateur);
+			request.setAttribute("article", article);
+			request.setAttribute("retrait", retrait);
+			request.setAttribute("utilisateur", utilisateur);
 			request.getRequestDispatcher("/WEB-INF/pages/details-vente.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();

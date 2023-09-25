@@ -9,7 +9,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.encheres.bll.ArticlesManager;
+import fr.eni.encheres.bll.CategoriesManager;
+import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ArticlesDao;
 
 public class ArticlesDaoJdbcImpl implements ArticlesDao {
@@ -21,7 +27,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";
 	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nom_article LIKE ? ";
 	private static final String FIND_BY_ID = "SELECT * FROM ARTICLE_VENDU WHERE id_article LIKE ? ";
-	
+
 	@Override
 	public void save(ArticleVendu articleVendu) {// passage par référence
 		try (Connection connection = ConnectionProvider.getConnection();
@@ -39,10 +45,10 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 
 			// executer la requete
 			pstmt.executeUpdate();
-			
+
 			ResultSet rs = pstmt.getGeneratedKeys();
-			if(rs.next()) {
-				articleVendu.setNoArticle( rs.getInt(1) );
+			if (rs.next()) {
+				articleVendu.setNoArticle(rs.getInt(1));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -59,7 +65,9 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 				return new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
 						rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
 						rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), rs.getString("etat_vente"));
+						rs.getInt("prix_vente"), rs.getString("etat_vente"),
+						UtilisateursManager.getInstance().recupUtilisateur(rs.getInt("no_utilisateur")),
+						CategoriesManager.getInstance().getCategorieById(rs.getInt("no_categorie")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -134,12 +142,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				articles.add(
-
-						new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
-								rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
-								rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
-								rs.getInt("prix_vente"), rs.getString("etat_vente")));
+				articles.add(ArticleFromRs(rs));
 			}
 			return articles;
 		} catch (SQLException e) {
@@ -147,6 +150,23 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 		}
 		return null;
 
+	}
+
+	private ArticleVendu ArticleFromRs(ResultSet rs) throws SQLException {
+		ArticleVendu articles = new ArticleVendu();
+		articles.setNoArticle(rs.getInt("no_article"));
+		articles.setNomArticle(rs.getString("nom_article"));
+		articles.setDescription(rs.getString("description"));
+		articles.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+		articles.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+		articles.setMiseAPrix(rs.getInt("prix_initial"));
+		articles.setPrixVente(rs.getInt("prix_vente"));
+		articles.setEtatVente(rs.getString("etat_vente"));
+		Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(rs.getInt("no_utilisateur"));
+		Categorie categorie = CategoriesManager.getInstance().getCategorieById(rs.getInt("no_categorie"));
+		articles.setUtilisateur(user);
+		articles.setCategorie(categorie);
+		return articles;
 	}
 
 	@Override

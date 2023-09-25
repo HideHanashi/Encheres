@@ -5,23 +5,27 @@ import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.DaoFactory;
 import fr.eni.encheres.dal.RetraitDao;
 
-public class ReatraitManager {
+public class RetraitManager {
 	// DÉBUT SINGLETON
 
-	private static ReatraitManager instance;
+	private static RetraitManager instance;
 
-	private ReatraitManager() {
+	private RetraitManager() {
 	}
 
-	public static ReatraitManager getInstance() {
+	public static RetraitManager getInstance() {
 		if (instance == null)
-			instance = new ReatraitManager();
+			instance = new RetraitManager();
 		return instance;
 	}
 
 	// FIN SINGLETON
 	
 	private RetraitDao retraitDao = DaoFactory.getRetraitDao();
+	
+	public Retrait recupRetrait(int id) {
+		return retraitDao.findOne(id);
+	}
 	
 	public void addRetrait(Retrait retrait) throws BLLException {
 		isValid(retrait);

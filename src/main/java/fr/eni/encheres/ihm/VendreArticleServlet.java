@@ -7,7 +7,7 @@ import java.util.List;
 import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.CategoriesManager;
 import fr.eni.encheres.bll.EncheresManager;
-import fr.eni.encheres.bll.ReatraitManager;
+import fr.eni.encheres.bll.RetraitManager;
 import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.ArticleVendu;
@@ -70,32 +70,28 @@ public class VendreArticleServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
 			int id = utilisateurSession.getNoUtilisateur();
-			
+
 			// INTÉGRATION DES IDs DANS LES VARIABLES
 			Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(id);
 			Categorie categorie = CategoriesManager.getInstance().getCategorieById(categorie_id);
-			
+
 			// CRÉATION D'UN ARTICLE VIA LES VARIABLES DE L'UTILISATEUR
-			ArticleVendu articleVendu = new ArticleVendu(
-					nomArticle, description, dateDebutEncheres, dateFinEncheres, miseAPrix, user, categorie
-					);
-			
+			ArticleVendu articleVendu = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres,
+					miseAPrix, user, categorie);
+
 			// AJOUT DE L'ARTICLE DANS LA CATÉGORIE SELECTIONNÉ PAR L'UTILISATEUR
 			categorie.addArticle(articleVendu);
 
 			// CRÉATION DE L'ARTICLE DANS LA BDD
 			ArticlesManager.getInstance().addArticle(articleVendu);
-			
+
 			// CRÉATION DU LIEU DE RETRAIT POUR L'ARTICLE CRÉÉ
 			Retrait retrait = new Retrait(articleVendu, rue, codePostal, ville);
-			
+
 			// CRÉATION DU LIEU DE RETRAIT DANS LA BDD
-			ReatraitManager.getInstance().addRetrait(retrait);
-			
-			// INTÉGRATION DE L'ARTICLE EN ENCHÈRE
-			Enchere enchere = new Enchere(user, articleVendu, dateDebutEncheres, miseAPrix);
-			EncheresManager.getInstance().addEnchere(enchere);
-			
+
+			RetraitManager.getInstance().addRetrait(retrait);
+
 			// RENVOIE L'UTILISATEUR SUR LA PAGE D'ACCUEIL
 			response.sendRedirect(request.getContextPath() + "");
 		} catch (BLLException e) {
