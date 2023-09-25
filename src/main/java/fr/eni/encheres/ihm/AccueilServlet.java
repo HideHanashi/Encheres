@@ -3,8 +3,10 @@ package fr.eni.encheres.ihm;
 import java.io.IOException;
 import java.util.List;
 
+import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.CategoriesManager;
 import fr.eni.encheres.bll.EncheresManager;
+import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
 import jakarta.servlet.ServletException;
@@ -30,17 +32,18 @@ public class AccueilServlet extends HttpServlet {
 			// Utilisateur users = UtilisateursManager.getInstance().recupUtilisateur(id);
 			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
 			List<Enchere> listEncheres = null;
+			List<ArticleVendu> listArticles = null;
 
 			if (request.getParameter("q") != null) {
-				listEncheres = EncheresManager.getInstance().searchEnchere(request.getParameter("q"));
+				listArticles = ArticlesManager.getInstance().searchArticle(request.getParameter("q"));
 			} else {
-				listEncheres = EncheresManager.getInstance().searchAllEncheres();
+				listArticles = ArticlesManager.getInstance().searchAllArticle();
 			}
 
 			if (request.getParameter("c") != null) {
 				listEncheres = EncheresManager.getInstance().searchCategorie(request.getParameter("c"));
 			} else {
-				listEncheres = EncheresManager.getInstance().searchAllEncheres();
+				listArticles = ArticlesManager.getInstance().searchAllArticle();
 			}
 
 			String imageArticle = null;
@@ -49,7 +52,7 @@ public class AccueilServlet extends HttpServlet {
 			// request.setAttribute("user", users);
 			request.setAttribute("image", imageArticle);
 			request.setAttribute("categorie", listCategories);
-			request.setAttribute("encheres", listEncheres);
+			request.setAttribute("articles", listArticles);
 			// forward
 			request.getRequestDispatcher("/WEB-INF/pages/liste-encheres.jsp").forward(request, response);
 		} catch (Exception e) {

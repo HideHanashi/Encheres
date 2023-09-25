@@ -21,6 +21,10 @@ public class ArticleVendu {
 	private Retrait lieuRetrait;
 	private Categorie categorie;
 
+	public ArticleVendu() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
 			int miseAPrix, Utilisateur user, Categorie categorie) {
 		this.nomArticle = nomArticle;
@@ -45,6 +49,21 @@ public class ArticleVendu {
 
 	}
 
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente, Utilisateur user,
+			Categorie categorie) {
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.prixVente = prixVente;
+		this.etatVente = etatVente;
+		this.utilisateur = user;
+		this.categorie = categorie;
+	}
+
 	public Categorie getCategorie() {
 		return categorie;
 	}
@@ -65,7 +84,7 @@ public class ArticleVendu {
 		return utilisateur;
 	}
 
-	public void setVente(Utilisateur utilisateur) {
+	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
 
