@@ -1,5 +1,6 @@
 package fr.eni.encheres.bo;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,12 @@ public class ArticleVendu {
 	private String gagnant;
 	private Object enchere;
 
-	public ArticleVendu() {
+	public ArticleVendu(String nomArticle2, String description2, Timestamp dateDebutEncheres2, LocalDate dateFinEncheres2, int miseAPrix2, Utilisateur user, Categorie categorie2) {
 
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int miseAPrix, Utilisateur user, Categorie categorie) {
+			LocalDate dateFinEncheres, int miseAPrix, Utilisateur user, Categorie categorie, String gagnant) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
@@ -50,6 +51,11 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 
+	}
+
+	public ArticleVendu(String nomArticle2, String description2, LocalDate dateDebutEncheres2,
+			LocalDate dateFinEncheres2, int miseAPrix2, Utilisateur user, Categorie categorie2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	public Categorie getCategorie() {
