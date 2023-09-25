@@ -1,15 +1,15 @@
 
 CREATE TABLE UTILISATEUR (
     no_utilisateur   INTEGER IDENTITY(1,1) NOT NULL,
-    pseudo           VARCHAR(30) NOT NULL unique,
+    pseudo           VARCHAR(30) NOT NULL constraint uq_pseudo_user unique,
     nom              VARCHAR(30) NOT NULL,
     prenom           VARCHAR(30) NOT NULL,
-    email            VARCHAR(50) NOT NULL unique,
-    telephone        VARCHAR(15) NOT NULL unique,
+    email            VARCHAR(300) NOT NULL constraint uq_email_user unique,
+    telephone        VARCHAR(30) NOT NULL constraint uq_phone_user unique,
     rue              VARCHAR(50) NOT NULL,
     code_postal      CHAR(5) NOT NULL,
     ville            VARCHAR(50) NOT NULL,
-    mot_de_passe     VARCHAR(30) NOT NULL,
+    mot_de_passe     VARCHAR(300) NOT NULL,
     credit           INTEGER NOT NULL,
     administrateur   bit NOT NULL
 );
@@ -77,7 +77,7 @@ ON DELETE NO ACTION
 
 ALTER TABLE RETRAIT
     ADD CONSTRAINT retrait_article_vendu_fk FOREIGN KEY ( no_article )
-        REFERENCES ARTICLES_VENDU ( no_article )
+        REFERENCES ARTICLE_VENDU ( no_article )
 ON DELETE NO ACTION 
     ON UPDATE no action 
 
@@ -94,3 +94,18 @@ ON DELETE NO ACTION
     ON UPDATE no action 
 
 
+CREATE TABLE FORGET_PASSWORD(
+	id bigint IDENTITY(1,1) NOT NULL,
+	code varchar(10) NOT NULL,
+	no_utilisateur integer NOT NULL,
+	date_created datetime NULL,
+)
+ALTER TABLE FORGET_PASSWORD add CONSTRAINT pk_forget_password PRIMARY KEY (id, no_utilisateur)
+
+ALTER TABLE FORGET_PASSWORD ADD CONSTRAINT fk_forget_password FOREIGN KEY(no_utilisateur)
+REFERENCES UTILISATEUR (no_utilisateur)
+
+ALTER TABLE FORGET_PASSWORD
+ADD CONSTRAINT df_date 
+DEFAULT GETDATE()
+FOR date_created
