@@ -11,18 +11,16 @@
 				</c:if>
 				<form method="post">
 					<div class="mb-3">
-						<label for="email" class="form-label">Adresse mail : </label> <input
-							type="email" class="form-control" name="email" id="email"
-							placeholder="ex. your@email.com">
+						<label for="email" class="form-label">Adresse mail: </label> 
+						<input type="email" class="form-control" name="email" id="email"placeholder="ex. your@email.com">
 					</div>
 					<div class="mb-3">
-						<label for="code" class="form-label">Code : </label> <input
-							type="text" class="form-control" name="code" id="code">
+						<label for="code" class="form-label">Code: </label> 
+						<input type="text" class="form-control" name="code" id="code">
 					</div>
 					<div class="mb-3">
-						<label for="password" class="form-label">Nouveau mot de passe : </label> <input
-							type="password" class="form-control" name="password"
-							id="password">
+						<label for="password" class="form-label">Nouveau mot de passe: </label> 
+						<input type="password" class="form-control" name="password" id="password">
 					</div>
 					<button class="btn btn-primary" role="button" type="submit">Valider</button>
 				</form>
