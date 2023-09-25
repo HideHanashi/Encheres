@@ -5,6 +5,7 @@ import java.io.IOException;
 import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.Utilisateur;
+import fr.eni.encheres.helper.PasswordEncoder;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -50,16 +51,12 @@ public class ModifierProfilServlet extends HttpServlet {
 			String motDePasse = request.getParameter("motDePasse");
 			String newMotDePasse = request.getParameter("newMotDePasse");
 			String confirm = request.getParameter("confirm");
-			if (motDePasse.isBlank() || newMotDePasse.isBlank() || confirm.isBlank()) {
-				Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal,
-						ville, utilisateurSession.getMotDePasse());
-				UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
-			}
-			if (newMotDePasse == confirm && newMotDePasse != motDePasse) {
-				Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal,
-						ville, newMotDePasse);
-				UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
-			}
+
+			Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+					newMotDePasse);
+			utilisateur.setMotDePasse(PasswordEncoder.hashPassword(utilisateur.getMotDePasse()));
+			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
+
 			response.sendRedirect(request.getContextPath() + "");
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());

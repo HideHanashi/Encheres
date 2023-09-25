@@ -8,7 +8,6 @@
 				Profil</h1>
 			<div class="p-3">
 
-
 				<div class="row mb-3">
 					<div class="col">
 						<div class="row">

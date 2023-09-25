@@ -2,6 +2,7 @@ package fr.eni.encheres.bll;
 
 import java.util.List;
 
+import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.DaoFactory;
 import fr.eni.encheres.dal.EnchereDao;
@@ -33,6 +34,10 @@ public class EncheresManager {
 
 	public List<Enchere> searchEnchere(String query) {
 		return enchereDao.findByName(query);
+	}
+	
+	public List<Enchere> searchCategorie(String categorie) {
+		return enchereDao.findArticleByCategorie(categorie);
 	}
 
 	public void modifyEnchere(Enchere enchere) {

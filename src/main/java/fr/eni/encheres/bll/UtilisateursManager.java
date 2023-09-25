@@ -54,7 +54,6 @@ public class UtilisateursManager {
 	}
 
 	public void modifyUtilisateur(Utilisateur utilisateur) throws BLLException {
-		checkFields(utilisateur);
 		utilisateurDao.modify(utilisateur);
 	}
 
