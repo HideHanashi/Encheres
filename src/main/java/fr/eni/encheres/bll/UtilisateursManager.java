@@ -1,4 +1,4 @@
-package fr.eni.encheres.bll;
+ package fr.eni.encheres.bll;
 
 import java.util.List;
 import java.util.Random;
