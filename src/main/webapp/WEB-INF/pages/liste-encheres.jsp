@@ -34,6 +34,27 @@
 					</c:forEach>
 				</tbody>
 			</table>
+		<div class="container text-center containerarticles">
+			<c:forEach var="enchere" items="${ encheres }">
+				<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+					<div class="col">
+						<div class="card p-3" style="width: 18rem;">
+							<c:if test = "${ image != null }">
+								<img src="..." class="card-img-top imagearticle" href="#" alt="...">
+							</c:if>
+							<c:if test = "${ enchere.articleVendu.dateDebutEncheres != LocalDate.now() }">
+							<div class="card-body">
+								<h5 class="card-title">${ enchere.articleVendu.nomArticle }</h5>
+								<p class="card-text">${ enchere.montantEnchere } <i class="fa-solid fa-coins"></i></p>
+								<p class="card-text">Fini le : ${ enchere.articleVendu.dateFinEncheres }</p>
+								<p class="card-text">Par : ${ enchere.utilisateur.pseudo }</p>
+								<a href="#">Voir plus</a>
+							</div>
+							</c:if>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 </main>

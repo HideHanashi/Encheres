@@ -34,15 +34,15 @@ public class UtilisateursManager {
 	// BLL UTILISATEUR
 
 	private UtilisateurDao utilisateurDao = DaoFactory.getUtilisateurDao();
-	
+
 	public Utilisateur recupUtilisateur(int noUtilisateur) {
 		return utilisateurDao.findOne(noUtilisateur);
 	}
-	
+
 	public List<Utilisateur> recupTousLesUtilisateurs() {
 		return utilisateurDao.findAll();
 	}
-	
+
 	private Random rd = new Random();
 
 //	public List<Utilisateur> searchAllUtilisateur() {
@@ -53,8 +53,9 @@ public class UtilisateursManager {
 		utilisateurDao.save(user);
 	}
 
-	public void modifyUtilisateur(Utilisateur user) throws BLLException {
-		utilisateurDao.modify(user);
+	public void modifyUtilisateur(Utilisateur utilisateur) throws BLLException {
+		checkFields(utilisateur);
+		utilisateurDao.modify(utilisateur);
 	}
 
 	public void removeUtilisateur(int noUtilisateur) {
@@ -88,8 +89,8 @@ public class UtilisateursManager {
 		if (utilisateur.getMotDePasse().isBlank())
 			throw new BLLException("Le mot de passe est obligatoire !");
 		if (utilisateur.getMotDePasse().length() < 8 || utilisateur.getMotDePasse().length() > 35)
-			throw new BLLException("La taille du mot de passe doit etre entre 8 et 35 carachtères !");
-		// if(!user.getPassword().equals(user.getConfirmpassword))
+			throw new BLLException("La taille du mot de passe doit etre entre 8 et 35 caractères !");
+
 	}
 
 	public Utilisateur login(String email, String password) {
@@ -100,7 +101,7 @@ public class UtilisateursManager {
 		}
 		return null;
 	}
-	
+
 	public Utilisateur profil(int noUtilisateur) {
 		Utilisateur utilisateur = utilisateurDao.findOne(noUtilisateur);
 		if (utilisateur != null && utilisateur.getNoUtilisateur() == (noUtilisateur)) {
