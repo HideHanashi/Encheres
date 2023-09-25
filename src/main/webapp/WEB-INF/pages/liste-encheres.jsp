@@ -45,7 +45,7 @@
 
 									</form>
 									<a class="btn btn-primary" role="button" id ="auction"
-										href="${ pageContext.request.contextPath }/autreprofil?auction=${ enchere.articleVendu.noArticle }">
+										href="${ pageContext.request.contextPath }/detailvente?auction=${ enchere.articleVendu.noArticle }">
 										Voir plus</a>
 								</div>
 							</div>

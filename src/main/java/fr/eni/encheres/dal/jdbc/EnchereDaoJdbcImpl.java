@@ -89,17 +89,12 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 				Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SEARCH_ENCHERE);
 			){
-			pstmt.setInt(2, id);
+			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				Enchere enchere = new Enchere();
-				Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(rs.getInt("no_utilisateur"));
-				ArticleVendu article = ArticlesManager.getInstance().recupArticle(rs.getInt("no_article"));
-				enchere.setUtilisateur(user);
-				enchere.setArticleVendu(article);
-				enchere.setDateEnchere(rs.getDate("date_encheres").toLocalDate());
-				enchere.setMontantEnchere(rs.getInt("montant_encheres"));
-				return enchere;
+				return new Enchere(UtilisateursManager.getInstance().recupUtilisateur(rs.getInt("no_utilisateur")),
+						ArticlesManager.getInstance().recupArticle(rs.getInt("no_article")),
+						rs.getDate("date_encheres").toLocalDate(), rs.getInt("montant_encheres"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
