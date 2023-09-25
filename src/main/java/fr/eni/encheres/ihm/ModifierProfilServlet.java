@@ -48,14 +48,18 @@ public class ModifierProfilServlet extends HttpServlet {
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
-			String motDePasse = request.getParameter("motDePasse");
 			String newMotDePasse = request.getParameter("newMotDePasse");
-			String confirm = request.getParameter("confirm");
+			if (newMotDePasse.isBlank()) {
+				Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal,
+						ville);
 
-			Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
-					newMotDePasse);
-			utilisateur.setMotDePasse(PasswordEncoder.hashPassword(utilisateur.getMotDePasse()));
-			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
+				UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
+			} else {
+				Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal,
+						ville, newMotDePasse);
+				utilisateur.setMotDePasse(PasswordEncoder.hashPassword(utilisateur.getMotDePasse()));
+				UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
+			}
 
 			response.sendRedirect(request.getContextPath() + "");
 		} catch (Exception e) {

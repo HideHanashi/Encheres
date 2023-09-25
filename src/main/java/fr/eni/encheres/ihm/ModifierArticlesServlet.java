@@ -6,6 +6,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
+
+import fr.eni.encheres.bll.CategoriesManager;
+import fr.eni.encheres.bll.EncheresManager;
+import fr.eni.encheres.bo.Categorie;
+import fr.eni.encheres.bo.Enchere;
 
 @WebServlet("/modifiermesarticles")
 public class ModifierArticlesServlet extends HttpServlet {
@@ -13,8 +19,37 @@ public class ModifierArticlesServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		try {
+			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
+			List<Enchere> listEncheres = null;
 
-		request.getRequestDispatcher("/WEB-INF/pages/modifier-vente.jsp").forward(request, response);
+			if (request.getParameter("q") != null) {
+				listEncheres = EncheresManager.getInstance().searchEnchere(request.getParameter("q"));
+			} else {
+				listEncheres = EncheresManager.getInstance().searchAllEncheres();
+			}
+
+			if (request.getParameter("c") != null) {
+				listEncheres = EncheresManager.getInstance().searchCategorie(request.getParameter("c"));
+			} else {
+				listEncheres = EncheresManager.getInstance().searchAllEncheres();
+			}
+
+			String imageArticle = null;
+
+			// transmettre l'objet vers la jsp
+			// request.setAttribute("user", users);
+			request.setAttribute("image", imageArticle);
+			request.setAttribute("categorie", listCategories);
+			request.setAttribute("encheres", listEncheres);
+			// forward
+			request.getRequestDispatcher("/WEB-INF/pages/modifier-vente.jsp").forward(request, response);
+		} catch (Exception e) {
+
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+			request.getRequestDispatcher("404");
+		}
 
 	}
 
