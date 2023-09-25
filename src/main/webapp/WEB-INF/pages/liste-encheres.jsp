@@ -20,11 +20,10 @@
 	</div>
 	<div class="row mt-5">
 		<div class="container text-center containerarticles">
-			<c:forEach var="enchere" items="${ encheres }">
-				<c:if
-					test="${ enchere.articleVendu.dateDebutEncheres <= LocalDate.now() }">
-					<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-						<div class="col">
+			<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+				<div class="col">
+					<c:forEach var="enchere" items="${ encheres }">
+						<c:if test="${ enchere.articleVendu.dateDebutEncheres <= LocalDate.now() }">
 							<div class="card p-3" style="width: 18rem;">
 								<c:if test="${ image != null }">
 									<img src="..." class="card-img-top imagearticle" href="#"
@@ -48,10 +47,10 @@
 									<a class="btn btn-primary" role="button" href="#">Voir plus</a>
 								</div>
 							</div>
-						</div>
-					</div>
-				</c:if>
-			</c:forEach>
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 </main>
