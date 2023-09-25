@@ -66,9 +66,16 @@
 
 								<ul class="dropdown-menu">
 									<c:if test="${ user != null }">
-           								<li><a class="dropdown-item" href="#">${ user.pseudo }</a></li>
-           								<li><hr class="dropdown-divider"></li>
-           								
+
+										<li><a class="dropdown-item"
+											href="${ pageContext.request.contextPath }/modifierarticles">Mes
+												Articles</a></li>
+
+
+										<li><a class="dropdown-item" href="#">${ user.pseudo }</a></li>
+										<li><hr class="dropdown-divider"></li>
+
+
 										<li><a class="dropdown-item"
 											href="${ pageContext.request.contextPath }/monprofil">Mon
 												Profil</a></li>

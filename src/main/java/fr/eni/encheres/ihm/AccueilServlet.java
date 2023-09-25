@@ -36,13 +36,13 @@ public class AccueilServlet extends HttpServlet {
 			} else {
 				listEncheres = EncheresManager.getInstance().searchAllEncheres();
 			}
-			
+
 			if (request.getParameter("c") != null) {
 				listEncheres = EncheresManager.getInstance().searchCategorie(request.getParameter("c"));
 			} else {
 				listEncheres = EncheresManager.getInstance().searchAllEncheres();
 			}
-			
+
 			String imageArticle = null;
 
 			// transmettre l'objet vers la jsp

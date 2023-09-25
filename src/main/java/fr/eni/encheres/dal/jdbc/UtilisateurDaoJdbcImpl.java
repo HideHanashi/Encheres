@@ -30,7 +30,8 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String SELECT_ONE = "SELECT * FROM UTILISATEUR WHERE no_utilisateur = ?";
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEUR";
 //	UPDATE games SET name=?,company=?,category=?,price=?,releaseDate=?,age=?,format=?,version=? WHERE id = ?
-	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=?,mot_de_passe=? WHERE no_utilisateur = ?";
+	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=? WHERE no_utilisateur = ?";
+	private static final String UPDATE_USER_PASSWORD = "UPDATE UTILISATEUR SET mot_de_passe = ? WHERE no_utilisateur = ?";
 
 	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,code_postal,ville)"
 			+ " VALUES (?,?,?) WHERE no_utilisateur = ?";
@@ -122,24 +123,30 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
 	@Override
 	public void modify(Utilisateur user) throws BLLException {
-		try (Connection connection = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(UPDATE_USER_USER);) {
-			pstmt.setString(1, user.getPseudo());
-			pstmt.setString(2, user.getNom());
-			pstmt.setString(3, user.getPrenom());
-			pstmt.setString(4, user.getEmail());
-			pstmt.setString(5, user.getTelephone());
-			pstmt.setString(6, user.getRue());
-			pstmt.setString(7, user.getCodePostal());
-			pstmt.setString(8, user.getVille());
-			if (user.getMotDePasse().isBlank()) {
-				pstmt.setString(9, user.getMotDePasse());
-			} else {
-				pstmt.setString(9, "");
-			}
-			pstmt.setInt(10, user.getNoUtilisateur());
-			pstmt.executeUpdate();
+		try (Connection connection = ConnectionProvider.getConnection();) {
 
+			PreparedStatement pstmt;
+			if (user.getMotDePasse() == null || user.getMotDePasse().isBlank()) {
+				pstmt = connection.prepareStatement(UPDATE_USER_USER);
+				pstmt.setString(1, user.getPseudo());
+				pstmt.setString(2, user.getNom());
+				pstmt.setString(3, user.getPrenom());
+				pstmt.setString(4, user.getEmail());
+				pstmt.setString(5, user.getTelephone());
+				pstmt.setString(6, user.getRue());
+				pstmt.setString(7, user.getCodePostal());
+				pstmt.setString(8, user.getVille());
+				pstmt.setInt(9, user.getNoUtilisateur());
+		
+
+			} else {
+				pstmt = connection.prepareStatement(UPDATE_USER_PASSWORD);
+				pstmt.setString(1, user.getMotDePasse());
+				pstmt.setInt(2, user.getNoUtilisateur());
+
+			}
+
+			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			if (e.getMessage().contains(UNIQUE_USERNAME_CONSTRAINT)) {
 				throw new BLLException("L'username est déjà utilisé !");
