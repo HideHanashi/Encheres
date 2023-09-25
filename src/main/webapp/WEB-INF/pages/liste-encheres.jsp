@@ -40,7 +40,7 @@
 
 										<p class="card-text">
 											Par : <a id="otherid" type="submit"
-												href="${ pageContext.request.contextPath }/monprofil?id=${ enchere.utilisateur.noUtilisateur }">
+												href="${ pageContext.request.contextPath }/autreprofil?id=${ enchere.utilisateur.noUtilisateur }">
 												${ enchere.utilisateur.pseudo }</a>
 										</p>
 

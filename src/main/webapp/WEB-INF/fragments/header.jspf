@@ -71,11 +71,10 @@
 										<li><hr class="dropdown-divider"></li>
 
 										<li><a class="dropdown-item"
-											href="${ pageContext.request.contextPath }/modifierarticles">Mes
-												Articles</a></li>
-										<li><a class="dropdown-item"
-											href="${ pageContext.request.contextPath }/monprofil">Mon
-												Profil</a></li>
+											href="${ pageContext.request.contextPath }/modifierarticles">Mes Articles</a></li>
+												
+										<li><a class="dropdown-item" type="submit"
+											href="${ pageContext.request.contextPath }/monprofil">Mon Profil</a></li>
 
 										<li><a class="dropdown-item"
 											href="${ pageContext.request.contextPath }/deconnexion">Déconnexion</a></li>

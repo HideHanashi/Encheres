@@ -17,15 +17,8 @@ public class AfficherProfilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		try {
-			int otherId = Integer.parseInt(request.getParameter("id")); 
-			Utilisateur otherUtilisateur = UtilisateursManager.getInstance().recupUtilisateur(otherId);
-			
-			request.setAttribute("otheruser", otherUtilisateur);
-			request.getRequestDispatcher("/WEB-INF/pages/autre-profil.jsp").forward(request, response);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		request.getRequestDispatcher("/WEB-INF/pages/mon-profil.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
