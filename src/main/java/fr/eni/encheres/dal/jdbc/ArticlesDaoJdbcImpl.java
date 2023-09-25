@@ -27,6 +27,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";
 	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nom_article LIKE ? ";
 	private static final String FIND_BY_ID = "SELECT * FROM ARTICLE_VENDU WHERE id_article LIKE ? ";
+	private static final String FIND_ARTICLE_BY_CATEGORIE = "SELECT * FROM ARTICLE_VENDU a INNER JOIN ENCHERES e ON a.no_article = e.no_article WHERE no_categorie LIKE ?";
 
 	@Override
 	public void save(ArticleVendu articleVendu) {// passage par référence
@@ -208,6 +209,23 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 				);
 			}
 			return articles;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<ArticleVendu> findArticleByCategorie(String categorie) {
+		try (Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(FIND_ARTICLE_BY_CATEGORIE)) {
+			pstmt.setString(1, "%" + categorie + "%");
+			List<ArticleVendu> listArticle = new ArrayList<>();
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				listArticle.add(ArticleFromRs(rs));
+			}
+			return listArticle;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

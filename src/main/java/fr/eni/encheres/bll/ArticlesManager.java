@@ -5,6 +5,7 @@ import java.util.List;
 
 import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.dal.ArticlesDao;
 import fr.eni.encheres.dal.DaoFactory;
 
@@ -61,6 +62,10 @@ public class ArticlesManager {
 		return articleDao.findOne(id);
 	}
 
+	public List<ArticleVendu> searchCategorie(String categorie) {
+		return articleDao.findArticleByCategorie(categorie);
+	}
+
 	// BLL VENTE & ACHAT
 
 	// public List<ArticleVendu> listVente() {
@@ -70,24 +75,31 @@ public class ArticlesManager {
 	// public List<ArticleVendu> listAchat() {
 	// return ArticleDao.findAllAchat();
 	// }
-	
+
 	private void isValid(ArticleVendu article) throws BLLException {
-		if(article == null) throw new BLLException("L'article est vide. ");
-		if(article.getNomArticle() == null || article.getNomArticle().isBlank()) throw new BLLException("Le nom de l'article est obligatoire.");
-		if(article.getDescription() == null || article.getDescription().isBlank()) throw new BLLException("La description de l'article est obligatoire.");
-		if(article.getDateDebutEncheres() == null) throw new BLLException("La date de début de l'enchère est obligatoire.");
-		if(article.getDateFinEncheres() == null) throw new BLLException("La date de fin de l'enchère est obligatoire.");
-		if(article.getCategorie() == null) throw new BLLException("Une catégorie pour l'article est obligatoire.");
-		if(article.getMiseAPrix() < 0) throw new BLLException("Le prix pour l'article doit être supérieur à 0.");
+		if (article == null)
+			throw new BLLException("L'article est vide. ");
+		if (article.getNomArticle() == null || article.getNomArticle().isBlank())
+			throw new BLLException("Le nom de l'article est obligatoire.");
+		if (article.getDescription() == null || article.getDescription().isBlank())
+			throw new BLLException("La description de l'article est obligatoire.");
+		if (article.getDateDebutEncheres() == null)
+			throw new BLLException("La date de début de l'enchère est obligatoire.");
+		if (article.getDateFinEncheres() == null)
+			throw new BLLException("La date de fin de l'enchère est obligatoire.");
+		if (article.getCategorie() == null)
+			throw new BLLException("Une catégorie pour l'article est obligatoire.");
+		if (article.getMiseAPrix() < 0)
+			throw new BLLException("Le prix pour l'article doit être supérieur à 0.");
 	}
 
 	public List<ArticleVendu> chooseArticle(Integer noArticle, int noUtilisateur) {
 		return articleDao.findByID(noArticle);
 	}
-	
+
 	public List<ArticleVendu> affichageArticles(String categorie, String motCle) throws BLLException {
-        List<ArticleVendu> listeArticles = new ArrayList<>();
-        listeArticles = articleDao.selectAll();
-        return listeArticles;
-    }
+		List<ArticleVendu> listeArticles = new ArrayList<>();
+		listeArticles = articleDao.selectAll();
+		return listeArticles;
+	}
 }

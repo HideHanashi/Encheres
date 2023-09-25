@@ -31,7 +31,6 @@ public class AccueilServlet extends HttpServlet {
 			// récupérer le param dans url
 			// Utilisateur users = UtilisateursManager.getInstance().recupUtilisateur(id);
 			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
-			List<Enchere> listEncheres = null;
 			List<ArticleVendu> listArticles = null;
 
 			if (request.getParameter("q") != null) {
@@ -41,7 +40,7 @@ public class AccueilServlet extends HttpServlet {
 			}
 
 			if (request.getParameter("c") != null) {
-				listEncheres = EncheresManager.getInstance().searchCategorie(request.getParameter("c"));
+				listArticles = ArticlesManager.getInstance().searchCategorie(request.getParameter("c"));
 			} else {
 				listArticles = ArticlesManager.getInstance().searchAllArticle();
 			}

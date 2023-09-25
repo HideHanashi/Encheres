@@ -35,10 +35,6 @@ public class EncheresManager {
 	public List<Enchere> searchEnchere(String query) {
 		return enchereDao.findByName(query);
 	}
-	
-	public List<Enchere> searchCategorie(String categorie) {
-		return enchereDao.findArticleByCategorie(categorie);
-	}
 
 	public void modifyEnchere(Enchere enchere) {
 		enchereDao.modify(enchere);
@@ -47,7 +43,7 @@ public class EncheresManager {
 	public Enchere findOne(int id) {
 		return enchereDao.findOne(id);
 	}
-	
+
 	public void deleteEnchere(int id) {
 		enchereDao.remove(id);
 	}

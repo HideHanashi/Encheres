@@ -18,38 +18,38 @@
 	</div>
 	<div class="row mt-5">
 		<div class="container text-center containerarticles">
-			<c:forEach var="enchere" items="${ encheres }">
-				<c:if
-					test="${ enchere.articleVendu.dateDebutEncheres <= LocalDate.now() }">
-					<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-						<div class="col">
+			<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+				<div class="col">
+					<c:forEach var="article" items="${ articles }">
+						<c:if test="${ article.dateDebutEncheres <= LocalDate.now() }">
 							<div class="card p-3" style="width: 18rem;">
 								<c:if test="${ image != null }">
 									<img src="..." class="card-img-top imagearticle" href="#"
 										alt="...">
 								</c:if>
 								<div class="card-body">
-									<h5 class="card-title">${ enchere.articleVendu.nomArticle }</h5>
-									<p class="card-text">${ enchere.montantEnchere }
+									<h5 class="card-title">${ article.nomArticle }</h5>
+									<p class="card-text">${ article.utilisateur.enchere.montantEnchere }
 										<i class="fa-solid fa-coins"></i>
 									</p>
-									<p class="card-text">Fini le : ${ enchere.articleVendu.dateFinEncheres }</p>
+									<p class="card-text">Fini le : ${ article.dateFinEncheres }</p>
 									<form method="get" class="mb-4">
+
 										<p class="card-text">
-											Par : <a id="${ enchere.utilisateur.noUtilisateur }"
-												type="submit"
-												href="${ pageContext.request.contextPath }/monprofil">
-												${ enchere.utilisateur.pseudo }</a>
+											Par : <a id="user" type="submit"
+												href="${ pageContext.request.contextPath }/autreprofil?user=${ article.utilisateur.noUtilisateur }">
+												${ article.utilisateur.pseudo }</a>
 										</p>
+
 									</form>
 									<a class="btn btn-primary" role="button"
 										href="${ pageContext.request.contextPath }/modifiermesarticles">Modifier</a>
 								</div>
 							</div>
-						</div>
-					</div>
-				</c:if>
-			</c:forEach>
+						</c:if>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 </main>
