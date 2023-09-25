@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.EncheresManager;
+import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
@@ -27,27 +28,21 @@ public class DetailVenteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		HttpSession session = request.getSession();
-		util = (Utilisateur) session.getAttribute("utilisateur");
-		Integer id = Integer.valueOf(request.getParameter("noArticle"));
-
-			ArticleVendu article = ArticlesManager.getInstance().recupArticle(id);
-					request.setAttribute("nomArticle", article.getNomArticle());
-					request.setAttribute("credit", article.getUtilisateur().getCredit());
-					request.setAttribute("description", article.getDescription());
-					request.setAttribute("categorie", article.getCategorie().getLibelle());
-                    int offre = ((ArticleVendu) article.getEnchere()).getPrixVente();
-                    request.setAttribute("offre", ((ArticleVendu) article.getEnchere()).getPrixVente());
-                    request.setAttribute("gagnant", ((ArticleVendu) article.getEnchere()).getGagnant());
-                    request.setAttribute("prixInitial", article.getMiseAPrix());
-                    String dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.FRANCE).format(article.getDateFinEncheres());
-                    request.setAttribute("dateFinEnchere", dateFormatter);
-                    request.setAttribute("rue", article.getRetrait().getRue());
-                    request.setAttribute("CP", article.getRetrait().getCodePostal());
-                    request.setAttribute("ville", article.getRetrait().getVille());
-                    request.setAttribute("vendeur", article.getUtilisateur().getPseudo());
-                    request.setAttribute("Proposition", offre);
-                    request.getRequestDispatcher("WEB-INF/html/details-vente.jsp").forward(request, response);
+		try {
+			HttpSession session = request.getSession();
+			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("Utilisateur");
+			int idUser = utilisateurSession.getNoUtilisateur();
+			Utilisateur utilisateur = UtilisateursManager.getInstance().recupUtilisateur(idUser);
+			
+			int idEnchere = Integer.parseInt(request.getParameter("auction"));
+			Enchere enchere = EncheresManager.getInstance().findOne(idEnchere);
+			
+			request.setAttribute("enchere", enchere);
+			request.setAttribute("user", utilisateur);
+			request.getRequestDispatcher("/WEB-INF/pages/details-vente.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 //	protected void doPost(HttpServletRequest request, HttpServletResponse response)

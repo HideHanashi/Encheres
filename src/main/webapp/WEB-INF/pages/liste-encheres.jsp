@@ -38,13 +38,15 @@
 									<form method="get" class="mb-4">
 
 										<p class="card-text">
-											Par : <a id="otherid" type="submit"
-												href="${ pageContext.request.contextPath }/autreprofil?id=${ enchere.utilisateur.noUtilisateur }">
+											Par : <a id="user" type="submit"
+												href="${ pageContext.request.contextPath }/autreprofil?user=${ enchere.utilisateur.noUtilisateur }">
 												${ enchere.utilisateur.pseudo }</a>
 										</p>
 
 									</form>
-									<a class="btn btn-primary" role="button" href="#">Voir plus</a>
+									<a class="btn btn-primary" role="button" id ="auction"
+										href="${ pageContext.request.contextPath }/autreprofil?auction=${ enchere.articleVendu.noArticle }">
+										Voir plus</a>
 								</div>
 							</div>
 						</c:if>

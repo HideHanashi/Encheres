@@ -35,6 +35,8 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 
 	private static final String DELETE_ENCHERE = "DELETE ENCHERES WHERE no_article = ?";
 
+	private static final String SEARCH_ENCHERE = "SELECT * FROM ENCHERES WHERE no_article = ?";
+	
 	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES";
 	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU a INNER JOIN ENCHERES e ON a.no_article = e.no_article WHERE nom_article LIKE ?";
 	private static final String FIND_ARTICLE_BY_CATEGORIE = "SELECT * FROM ARTICLE_VENDU a INNER JOIN ENCHERES e ON a.no_article = e.no_article WHERE no_categorie LIKE ?";
@@ -79,6 +81,31 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public Enchere findOne(int id) {
+		try (
+				Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SEARCH_ENCHERE);
+			){
+			pstmt.setInt(2, id);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next()) {
+				Enchere enchere = new Enchere();
+				Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(rs.getInt("no_utilisateur"));
+				ArticleVendu article = ArticlesManager.getInstance().recupArticle(rs.getInt("no_article"));
+				enchere.setUtilisateur(user);
+				enchere.setArticleVendu(article);
+				enchere.setDateEnchere(rs.getDate("date_encheres").toLocalDate());
+				enchere.setMontantEnchere(rs.getInt("montant_encheres"));
+				return enchere;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
 	}
 
 	@Override

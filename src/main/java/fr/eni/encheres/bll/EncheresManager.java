@@ -44,6 +44,10 @@ public class EncheresManager {
 		enchereDao.modify(enchere);
 	}
 
+	public Enchere findOne(int id) {
+		return enchereDao.findOne(id);
+	}
+	
 	public void deleteEnchere(int id) {
 		enchereDao.remove(id);
 	}
