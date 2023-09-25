@@ -26,10 +26,6 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 	// c.no_categorie"
 	// "SELECT * FROM RETRAIT r INNER JOIN ARTICLE_VENDU a ON a.no_article =
 	// r.no_article"
-	private static final String JOINTURE = "SELECT * FROM ARTICLE_VENDU a INNER JOIN ENCHERES e ON a.no_article = e.no_article"
-			+ "SELECT * FROM ARTICLE_VENDU a INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur"
-			+ "SELECT * FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
-			+ "SELECT * FROM RETRAIT r INNER JOIN ARTICLE_VENDU a ON a.no_article = r.no_article";
 
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur,no_article,date_encheres,montant_encheres)"
 			+ " VALUES (?,?,?,?)";
@@ -41,6 +37,7 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 
 	private static final String SELECT_ALL_ENCHERES = "SELECT * FROM ENCHERES";
 	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU a INNER JOIN ENCHERES e ON a.no_article = e.no_article WHERE nom_article LIKE ?";
+	private static final String FIND_ARTICLE_BY_CATEGORIE = "SELECT * FROM ARTICLE_VENDU a INNER JOIN ENCHERES e ON a.no_article = e.no_article WHERE no_categorie LIKE ?";
 
 	@Override
 	public void save(Enchere enchere) {
@@ -114,9 +111,30 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 
 	@Override
 	public List<Enchere> findByName(String query) {
-		try (Connection connection = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(FIND_BY_NAME)) {
+		try (
+				Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(FIND_BY_NAME)
+			){
 			pstmt.setString(1, "%" + query + "%");
+			List<Enchere> listEncheres = new ArrayList<>();
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				listEncheres.add(EnchereFromRs(rs));
+			}
+			return listEncheres;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@Override
+	public List<Enchere> findArticleByCategorie(String categorie) {
+		try (
+				Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(FIND_ARTICLE_BY_CATEGORIE)
+			){
+			pstmt.setString(1, "%" + categorie + "%");
 			List<Enchere> listEncheres = new ArrayList<>();
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
