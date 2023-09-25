@@ -10,26 +10,24 @@ public class CategoriesManager {
 
 	// DÉBUT SINGLETON
 
-		private static CategoriesManager instance;
+	private static CategoriesManager instance;
 
-		public CategoriesManager() {
-			categorieDao = DaoFactory.getCategorieDao();
-		}
+	public CategoriesManager() {
+		categorieDao = DaoFactory.getCategorieDao();
+	}
 
-		public static CategoriesManager getInstance() {
-			if (instance == null)
-				instance = new CategoriesManager();
-			return instance;
-		}
+	public static CategoriesManager getInstance() {
+		if (instance == null)
+			instance = new CategoriesManager();
+		return instance;
+	}
 
 		// FIN SINGLETON
 		
-		private CategorieDao categorieDao = DaoFactory.getCategorieDao();
+	private CategorieDao categorieDao = DaoFactory.getCategorieDao();
 	
 	public List<Categorie> searchByCategories() {
-
 		return categorieDao.findByCategorie();
-
 	}
 	
 	public Categorie getCategorieById(int id) {

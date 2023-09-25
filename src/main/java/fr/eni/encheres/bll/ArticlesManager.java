@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.dal.ArticlesDao;
 import fr.eni.encheres.dal.DaoFactory;
 

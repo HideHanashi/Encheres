@@ -17,8 +17,15 @@ public class AfficherProfilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		request.getRequestDispatcher("/WEB-INF/pages/mon-profil.jsp").forward(request, response);
+		try {
+			int otherId = Integer.parseInt(request.getParameter("otherid")); 
+			Utilisateur otherUtilisateur = UtilisateursManager.getInstance().recupUtilisateur(otherId);
+			
+			request.setAttribute("Utilisateur", otherUtilisateur);
+			request.getRequestDispatcher("/WEB-INF/pages/autre-profil.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -26,10 +33,10 @@ public class AfficherProfilServlet extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("Utilisateur");
-			int id = utilisateurSession.getNoUtilisateur();
-
-			Utilisateur utilisateur = UtilisateursManager.getInstance().recupUtilisateur(id);
-			request.setAttribute("Utilisateur", utilisateur);
+			int myId = utilisateurSession.getNoUtilisateur();
+			Utilisateur myUtilisateur = UtilisateursManager.getInstance().recupUtilisateur(myId);
+			
+			request.setAttribute("Utilisateur", myUtilisateur);
 			request.getRequestDispatcher("/WEB-INF/pages/mon-profil.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
