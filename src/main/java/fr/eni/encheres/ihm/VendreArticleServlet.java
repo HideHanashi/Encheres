@@ -7,7 +7,7 @@ import java.util.List;
 import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.CategoriesManager;
 import fr.eni.encheres.bll.EncheresManager;
-import fr.eni.encheres.bll.ReatraitManager;
+import fr.eni.encheres.bll.RetraitManager;
 import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.ArticleVendu;
@@ -90,7 +90,7 @@ public class VendreArticleServlet extends HttpServlet {
 			Retrait retrait = new Retrait(articleVendu, rue, codePostal, ville);
 			
 			// CRÉATION DU LIEU DE RETRAIT DANS LA BDD
-			ReatraitManager.getInstance().addRetrait(retrait);
+			RetraitManager.getInstance().addRetrait(retrait);
 			
 			// INTÉGRATION DE L'ARTICLE EN ENCHÈRE
 			Enchere enchere = new Enchere(user, articleVendu, dateDebutEncheres, miseAPrix);

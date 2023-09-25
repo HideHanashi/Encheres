@@ -6,4 +6,6 @@ public interface RetraitDao {
 
 	void save(Retrait retrait);
 	
+	Retrait findOne(int id);
+	
 }
