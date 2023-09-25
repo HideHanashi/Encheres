@@ -18,16 +18,22 @@
 	</div>
 	<div class="row mt-5">
 		<div class="container text-center containerarticles">
+
 			<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 				<div class="col">
 					<c:forEach var="article" items="${ articles }">
 						<c:if test="${ article.dateDebutEncheres <= LocalDate.now() }">
+
+
+
+
 							<div class="card p-3" style="width: 18rem;">
 								<c:if test="${ image != null }">
 									<img src="..." class="card-img-top imagearticle" href="#"
 										alt="...">
 								</c:if>
 								<div class="card-body">
+
 									<h5 class="card-title">${ article.nomArticle }</h5>
 									<p class="card-text">${ article.utilisateur.enchere.montantEnchere }
 										<i class="fa-solid fa-coins"></i>
