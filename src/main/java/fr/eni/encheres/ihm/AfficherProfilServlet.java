@@ -18,10 +18,10 @@ public class AfficherProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			int otherId = Integer.parseInt(request.getParameter("otherid")); 
+			int otherId = Integer.parseInt(request.getParameter("id")); 
 			Utilisateur otherUtilisateur = UtilisateursManager.getInstance().recupUtilisateur(otherId);
 			
-			request.setAttribute("Utilisateur", otherUtilisateur);
+			request.setAttribute("otheruser", otherUtilisateur);
 			request.getRequestDispatcher("/WEB-INF/pages/autre-profil.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
