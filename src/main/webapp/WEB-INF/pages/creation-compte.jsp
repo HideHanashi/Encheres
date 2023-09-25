@@ -3,14 +3,10 @@
 <%@ include file="/WEB-INF/fragments/header.jspf" %>
 <main class="row">
 	<div class="col position-absolute top-50 start-50 translate-middle">
-		<div class="row text-center mt-4">
-			<h1> Inscription </h1>
-		</div>
+		<div class="row text-center mt-4"><h1> Inscription </h1></div>
 		<div class="container overflow-hidden text-center">
 			<c:if test="${ ! empty error }">
-				<div class="alert alert-danger">
-					${ error }
-				</div>
+				<div class="alert alert-danger">${ error }</div>
 			</c:if>
 			<form method="post" >
 				<div class="row gx-5">

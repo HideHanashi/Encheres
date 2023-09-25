@@ -4,7 +4,7 @@
 <main class="row">
 	<div class="col">
 	<div class="row text-center mt-4"><h1> *quelqu'un* a remporté l'enchère </h1></div>
-	<img src=""/>
+		<img src=""/>
 		<div class="mb-3"><label for="enchere" class="form-label">"objet vente" </label><input type="text" class="form-control" readonly="readonly" value="${ game.enchere }" id="enchere" ></div>
 		<div class="mb-3"><label for="description" class="form-label">Description: </label><input type="text" class="form-control" readonly="readonly" value="${ game.description }" id="description" ></div>
 		<div class="mb-3"><label for="meilleureOffre" class="form-label">Meilleure offre: </label><input type="text" class="form-control" readonly="readonly" value="${ game.meilleureOffre }" id="meilleureOffre" ></div>
