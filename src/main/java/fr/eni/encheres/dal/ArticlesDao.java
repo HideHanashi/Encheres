@@ -17,6 +17,8 @@ public interface ArticlesDao {
 	void remove(int id);
 
 	List<ArticleVendu> findByName(String query);
-	
-	//public List<ArticleVendu> findArticleByCategorie(String categorie);
+
+	List<ArticleVendu> findByID(Integer idArticle);
+
+	List<ArticleVendu> selectAll();
 }

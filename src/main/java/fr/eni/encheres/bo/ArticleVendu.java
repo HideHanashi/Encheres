@@ -19,6 +19,8 @@ public class ArticleVendu {
 	private Utilisateur utilisateur;
 	private Retrait lieuRetrait;
 	private Categorie categorie;
+	private String gagnant;
+	private Object enchere;
 
 	public ArticleVendu() {
 
@@ -33,7 +35,7 @@ public class ArticleVendu {
 		this.miseAPrix = miseAPrix;
 		this.prixVente = miseAPrix;
 		this.etatVente = "En Attente";
-		this.utilisateur = user;
+		this.gagnant = gagnant;
 		this.categorie = categorie;
 	}	
 	
@@ -151,8 +153,15 @@ public class ArticleVendu {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", concerne=" + concerne
-				+ ", utilisateur=" + utilisateur + ", lieuRetrait=" + lieuRetrait + ", categorie="
+				+ ", gagnant=" + gagnant + ", lieuRetrait=" + lieuRetrait + ", categorie="
 				+ categorie + "]";
 	}
 
+	public Object getEnchere() {
+		return enchere;
+	}
+	
+	public Object getGagnant() {
+		return gagnant;
+	}
 }
