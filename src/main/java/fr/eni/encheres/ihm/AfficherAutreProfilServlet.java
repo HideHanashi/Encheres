@@ -17,7 +17,7 @@ public class AfficherAutreProfilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			int otherId = Integer.parseInt(request.getParameter("id")); 
+			int otherId = Integer.parseInt(request.getParameter("user")); 
 			Utilisateur otherUtilisateur = UtilisateursManager.getInstance().recupUtilisateur(otherId);
 			
 			request.setAttribute("otheruser", otherUtilisateur);

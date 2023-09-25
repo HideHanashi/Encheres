@@ -19,6 +19,8 @@ public interface EnchereDao {
 	
 	List<Enchere> findArticleByCategorie(String categorie);
 
+	Enchere findOne(int id);
+
 //	void encherir(Enchere enchere);
 
 }
