@@ -1,5 +1,6 @@
 package fr.eni.encheres.bll;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.encheres.bll.exception.BLLException;
@@ -80,5 +81,14 @@ public class ArticlesManager {
 		if(article.getCategorie() == null) throw new BLLException("Une catégorie pour l'article est obligatoire.");
 		if(article.getMiseAPrix() < 0) throw new BLLException("Le prix pour l'article doit être supérieur à 0.");
 	}
+
+	public List<ArticleVendu> chooseArticle(Integer noArticle, int noUtilisateur) {
+		return articleDao.findByID(noArticle);
+	}
 	
+	public List<ArticleVendu> affichageArticles(String categorie, String motCle) throws BLLException {
+        List<ArticleVendu> listeArticles = new ArrayList<>();
+        listeArticles = articleDao.selectAll();
+        return listeArticles;
+    }
 }
