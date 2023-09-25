@@ -1,6 +1,9 @@
- package fr.eni.encheres.ihm;
+package fr.eni.encheres.ihm;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
@@ -8,6 +11,7 @@ import java.util.Locale;
 import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.EncheresManager;
 import fr.eni.encheres.bo.ArticleVendu;
+import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -18,8 +22,6 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/detailvente")
 public class DetailVenteServlet extends HttpServlet {
-	private ArticlesManager am = new ArticlesManager();
-    private EncheresManager em = new EncheresManager();
 	Utilisateur util = null;
 	private static final long serialVersionUID = 1L;
 
@@ -28,16 +30,8 @@ public class DetailVenteServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		util = (Utilisateur) session.getAttribute("utilisateur");
 		Integer id = Integer.valueOf(request.getParameter("noArticle"));
-		session.setAttribute("idArticle", request.getParameter("nomArticle"));
-		List<ArticleVendu> listeArticles = null;
-		
-		if (request.getParameter("nomArticle") != null) {
-			int nomArticle = Integer.parseInt(request.getParameter("nomArticle"));
-		}
-			if (session.getAttribute("utilisateur") !=null) {
-				listeArticles = am.chooseArticle(id, util.getNoUtilisateur());
-			}
-				for (ArticleVendu article : listeArticles) {
+
+			ArticleVendu article = ArticlesManager.getInstance().recupArticle(id);
 					request.setAttribute("nomArticle", article.getNomArticle());
 					request.setAttribute("credit", article.getUtilisateur().getCredit());
 					request.setAttribute("description", article.getDescription());
@@ -48,25 +42,21 @@ public class DetailVenteServlet extends HttpServlet {
                     request.setAttribute("prixInitial", article.getMiseAPrix());
                     String dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.FRANCE).format(article.getDateFinEncheres());
                     request.setAttribute("dateFinEnchere", dateFormatter);
-                
-                    if (article.getRetrait().getRue() != null) {
-                    	request.setAttribute("rue", article.getRetrait().getRue());
-                    	request.setAttribute("CP", article.getRetrait().getCodePostal());
-                    	request.setAttribute("ville", article.getRetrait().getVille());
-                    } else {
-                    	request.setAttribute("rue", article.getUtilisateur().getRue());
-                    	request.setAttribute("CP", article.getUtilisateur().getCodePostal());
-                    	request.setAttribute("ville", article.getUtilisateur().getVille());
-                    }
+                    request.setAttribute("rue", article.getRetrait().getRue());
+                    request.setAttribute("CP", article.getRetrait().getCodePostal());
+                    request.setAttribute("ville", article.getRetrait().getVille());
                     request.setAttribute("vendeur", article.getUtilisateur().getPseudo());
-                    request.setAttribute("Proposition", offre + 1);
-				}
-				
-				 request.getRequestDispatcher("WEB-INF/html/details-vente.jsp").forward(request, response);
-			
-			}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+                    request.setAttribute("Proposition", offre);
+                    request.getRequestDispatcher("WEB-INF/html/details-vente.jsp").forward(request, response);
 	}
+
+//	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//		Enchere enchere = new Enchere();
+//		LocalDate ts = LocalDate.from(Instant.now());
+//		enchere.setDateEnchere(ts);
+//		enchere.setUtilisateur(util.getNoUtilisateur());
+//		enchere.setNoArticle(Integer.parseInt((String) session.getAttribute("idArticle")));
+//		enchere.setMontantEnchere(Integer.parseInt(request.getParameter("maProposition")));
+//	}
 }
