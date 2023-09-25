@@ -20,6 +20,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 	private static final String DELETE = "DELETE ARTICLE_VENDU WHERE no_article = ?";
 	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";
 	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nom_article LIKE ? ";
+	private static final String FIND_BY_ID = "SELECT * FROM ARTICLE_VENDU WHERE id_article LIKE ? ";
 	
 	@Override
 	public void save(ArticleVendu articleVendu) {// passage par référence
@@ -148,4 +149,48 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 
 	}
 
+	@Override
+	public List<ArticleVendu> findByID(Integer idArticle) {
+		try (Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(FIND_BY_ID)) {
+			pstmt.setInt(1, idArticle);
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				articles.add(
+
+						new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+								rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
+								rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
+								rs.getInt("prix_vente"), rs.getString("etat_vente")));
+			}
+			return articles;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<ArticleVendu> selectAll() {
+		try (Connection connection = ConnectionProvider.getConnection();
+				Statement stmt = connection.createStatement();) {
+			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
+			ResultSet rs = stmt.executeQuery(SELECT_ALL);
+			while (rs.next()) {
+				articles.add(
+
+						new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
+								rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
+								rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
+								rs.getInt("prix_vente"), rs.getString("etat_vente"))
+
+				);
+			}
+			return articles;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
