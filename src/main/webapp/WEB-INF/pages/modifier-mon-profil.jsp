@@ -133,8 +133,8 @@
 							</div>
 							<div class="col-8">
 								<div class="input-group">
-									<input class="case" type="password" id="nouveauMotDePasse"
-										name="nouveauMotDePasse" required>
+									<input class="case" type="password" id="motDePasse"
+										name="motDePasse">
 								</div>
 							</div>
 						</div>
@@ -146,6 +146,33 @@
 							</div>
 							<div class="col-8">
 								<label></label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col">
+						<div class="row">
+							<div class="col-4">
+								<label>Nouveau Mot de passe :</label>
+							</div>
+							<div class="col-8">
+								<div class="input-group">
+									<input class="case" type="password" id="newMotDePasse"
+										name="newMotDePasse">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="row">
+							<div class="col-4">
+								<label>Confirmation :</label>
+							</div>
+							<div class="col-8">
+								<div class="input-group">
+									<input class="case" type="password" id="confirm" name="confirm">
+								</div>
 							</div>
 						</div>
 					</div>

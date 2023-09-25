@@ -132,7 +132,11 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			pstmt.setString(6, user.getRue());
 			pstmt.setString(7, user.getCodePostal());
 			pstmt.setString(8, user.getVille());
-			pstmt.setString(9, user.getMotDePasse());
+			if (user.getMotDePasse().isBlank()) {
+				pstmt.setString(9, user.getMotDePasse());
+			} else {
+				pstmt.setString(9, "");
+			}
 			pstmt.setInt(10, user.getNoUtilisateur());
 			pstmt.executeUpdate();
 

@@ -3,7 +3,7 @@ package fr.eni.encheres.ihm;
 import java.io.IOException;
 
 import fr.eni.encheres.bll.UtilisateursManager;
-
+import fr.eni.encheres.bll.exception.BLLException;
 import fr.eni.encheres.bo.Utilisateur;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -38,7 +38,7 @@ public class ModifierProfilServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
 			int id = utilisateurSession.getNoUtilisateur();
-			System.out.println(id);
+
 			String pseudo = request.getParameter("pseudo");
 			String nom = request.getParameter("nom");
 			String prenom = request.getParameter("prenom");
@@ -48,10 +48,18 @@ public class ModifierProfilServlet extends HttpServlet {
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
 			String motDePasse = request.getParameter("motDePasse");
-
-			Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
-					motDePasse);
-			UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
+			String newMotDePasse = request.getParameter("newMotDePasse");
+			String confirm = request.getParameter("confirm");
+			if (motDePasse.isBlank() || newMotDePasse.isBlank() || confirm.isBlank()) {
+				Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal,
+						ville, utilisateurSession.getMotDePasse());
+				UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
+			}
+			if (newMotDePasse == confirm && newMotDePasse != motDePasse) {
+				Utilisateur utilisateur = new Utilisateur(id, pseudo, nom, prenom, email, telephone, rue, codePostal,
+						ville, newMotDePasse);
+				UtilisateursManager.getInstance().modifyUtilisateur(utilisateur);
+			}
 			response.sendRedirect(request.getContextPath() + "");
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
