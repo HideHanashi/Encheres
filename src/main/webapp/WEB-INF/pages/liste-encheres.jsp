@@ -32,7 +32,8 @@
 									<p class="card-text">Fini le : ${ enchere.articleVendu.dateFinEncheres }</p>
 									<form method="get" class="mb-4">
 										<p class="card-text">Par :
-											<a id="otherid" name="otherid" type="submit" href="${ pageContext.request.contextPath }/monprofil?user="> 
+											<a id="${ enchere.utilisateur.noUtilisateur }" type="submit" 
+											href="${ pageContext.request.contextPath }/monprofil"> 
 											${ enchere.utilisateur.pseudo }</a></p>
 									</form>
 									<a class="btn btn-primary" role="button" href="#">Voir plus</a>
