@@ -13,7 +13,7 @@ import fr.eni.encheres.bll.EncheresManager;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
 
-@WebServlet("/modifierarticles")
+@WebServlet("/voirarticles")
 public class MesArticleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

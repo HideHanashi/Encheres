@@ -20,26 +20,18 @@ public class ArticleVendu {
 	private Utilisateur utilisateur;
 	private Retrait lieuRetrait;
 	private Categorie categorie;
-	private String gagnant;
-	private Object enchere;
 
-	public ArticleVendu(String nomArticle2, String description2, Timestamp dateDebutEncheres2, LocalDate dateFinEncheres2, int miseAPrix2, Utilisateur user, Categorie categorie2) {
-
-	}
-
-	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int miseAPrix, Utilisateur user, Categorie categorie, String gagnant) {
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
+			int miseAPrix, Utilisateur user, Categorie categorie) {
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.miseAPrix = miseAPrix;
-		this.prixVente = miseAPrix;
-		this.etatVente = "En Attente";
-		this.gagnant = gagnant;
+		this.utilisateur = user;
 		this.categorie = categorie;
-	}	
-	
+	}
+
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
 			LocalDate dateFinEncheres, int miseAPrix, int prixVente, String etatVente) {
 		this.noArticle = noArticle;
@@ -51,11 +43,6 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 		this.etatVente = etatVente;
 
-	}
-
-	public ArticleVendu(String nomArticle2, String description2, LocalDate dateDebutEncheres2,
-			LocalDate dateFinEncheres2, int miseAPrix2, Utilisateur user, Categorie categorie2) {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Categorie getCategorie() {
@@ -159,15 +146,7 @@ public class ArticleVendu {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", concerne=" + concerne
-				+ ", gagnant=" + gagnant + ", lieuRetrait=" + lieuRetrait + ", categorie="
-				+ categorie + "]";
+				+ ", lieuRetrait=" + lieuRetrait + ", categorie=" + categorie + "]";
 	}
 
-	public Object getEnchere() {
-		return enchere;
-	}
-	
-	public Object getGagnant() {
-		return gagnant;
-	}
 }
