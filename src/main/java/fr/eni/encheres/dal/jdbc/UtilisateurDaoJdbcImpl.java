@@ -31,6 +31,7 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEUR";
 //	UPDATE games SET name=?,company=?,category=?,price=?,releaseDate=?,age=?,format=?,version=? WHERE id = ?
 	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=? WHERE no_utilisateur = ?";
+	private static final String UPDATE_USER_CREDIT = "UPDATE UTILISATEUR SET credit=? WHERE no_utilisateur = ?";
 	private static final String UPDATE_USER_PASSWORD = "UPDATE UTILISATEUR SET mot_de_passe = ? WHERE no_utilisateur = ?";
 
 	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,code_postal,ville)"
@@ -121,6 +122,21 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 		}
 	}
 
+	@Override
+	public void modifyCredit(Utilisateur user) {
+		try (Connection connection = ConnectionProvider.getConnection();) {
+
+			PreparedStatement pstmt;
+				pstmt = connection.prepareStatement(UPDATE_USER_CREDIT);
+				pstmt.setInt(1, user.getCredit());
+				pstmt.setInt(2, user.getNoUtilisateur());
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@Override
 	public void modify(Utilisateur user) throws BLLException {
 		try (Connection connection = ConnectionProvider.getConnection();) {

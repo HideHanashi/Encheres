@@ -9,12 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.encheres.bll.ArticlesManager;
-import fr.eni.encheres.bll.CategoriesManager;
-import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
-import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ArticlesDao;
 
@@ -25,7 +21,11 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
 			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
 			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur";
-	private static final String SELECT = "SELECT * FROM ARTICLE_VENDU WHERE no_article = ?";
+	private static final String SELECT = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
+			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
+			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
+			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
+			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur WHERE no_article = ?";
 	private static final String SAVE = "INSERT ARTICLE_VENDU (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE = "DELETE ARTICLE_VENDU WHERE no_article = ?";
 	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";

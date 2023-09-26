@@ -21,11 +21,18 @@ public class Utilisateur {
 	private List<Enchere> encherit = new ArrayList<Enchere>();
 	private List<ArticleVendu> achete = new ArrayList<ArticleVendu>();
 	private List<ArticleVendu> vendu = new ArrayList<ArticleVendu>();
+	private ArticleVendu article = new ArticleVendu();
 
 	// RESET PASSWORD
 	public Utilisateur(int noUtilisateur, String motDePasse) {
 		this.noUtilisateur = noUtilisateur;
 		this.motDePasse = motDePasse;
+	}
+	
+	// AJOUT CREDIT
+	public Utilisateur(int noUtilisateur, int credit) {
+		this.noUtilisateur = noUtilisateur;
+		this.credit = credit;
 	}
 
 	// CONSTRUCTEUR DE BASE
@@ -220,6 +227,14 @@ public class Utilisateur {
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + ", encherit=" + encherit + ", achete=" + achete + ", vendu="
 				+ vendu + "]";
+	}
+
+	public ArticleVendu getArticle() {
+		return article;
+	}
+
+	public void setArticle(ArticleVendu article) {
+		this.article = article;
 	}
 
 }
