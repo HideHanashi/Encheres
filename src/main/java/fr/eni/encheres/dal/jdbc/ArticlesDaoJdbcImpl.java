@@ -33,15 +33,13 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
 			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
 			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
-			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur"
-			+ " WHERE nom_article LIKE ?";
+			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur" + " WHERE nom_article LIKE ?";
 	private static final String FIND_BY_ID = "SELECT * FROM ARTICLE_VENDU WHERE id_article LIKE ? ";
 	private static final String FIND_ARTICLE_BY_CATEGORIE = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
 			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
 			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, a.no_categorie"
 			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
-			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur"
-			+ " WHERE c.no_categorie = ?";
+			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur" + " WHERE c.no_categorie = ?";
 
 	@Override
 	public void save(ArticleVendu articleVendu) {// passage par référence
@@ -109,14 +107,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
 			ResultSet rs = stmt.executeQuery(SELECT_ALL);
 			while (rs.next()) {
-				articles.add(
-
-						new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
-								rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
-								rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
-								rs.getInt("prix_vente"), rs.getString("etat_vente"))
-
-				);
+				articles.add(ArticleFromRs(rs));
 			}
 			return articles;
 		} catch (SQLException e) {
@@ -239,7 +230,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 	public List<ArticleVendu> findArticleByCategorie(String categorie) {
 		try (Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(FIND_ARTICLE_BY_CATEGORIE)) {
-			pstmt.setInt(1,Integer.parseInt(categorie)  );
+			pstmt.setInt(1, Integer.parseInt(categorie));
 			List<ArticleVendu> listArticle = new ArrayList<>();
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
