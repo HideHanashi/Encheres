@@ -5,15 +5,19 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.util.List;
 
 import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.CategoriesManager;
 import fr.eni.encheres.bll.EncheresManager;
+import fr.eni.encheres.bll.UtilisateursManager;
 import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Utilisateur;
 
 @WebServlet("/voirarticles")
 public class MesArticleServlet extends HttpServlet {
@@ -23,15 +27,20 @@ public class MesArticleServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
+			HttpSession session = request.getSession();
+
 			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
 			List<ArticleVendu> listArticles = null;
 
-			if (request.getParameter("q") != null) {
-				listArticles = ArticlesManager.getInstance().searchArticle(request.getParameter("q"));
-			} else if (request.getParameter("q") == null) {
-				listArticles = ArticlesManager.getInstance().searchAllArticle();
-			} else if (request.getParameter("c") != null) {
-				listArticles = ArticlesManager.getInstance().searchCategorie(request.getParameter("c"));
+			String recherche = request.getParameter("q");
+			String categorie = request.getParameter("c");
+
+			if (recherche != null && !recherche.isBlank()) {
+				listArticles = ArticlesManager.getInstance().searchArticle(recherche);
+
+			} else if (categorie != null && !categorie.isBlank()) {
+				listArticles = ArticlesManager.getInstance().searchCategorie(categorie);
+
 			} else {
 				listArticles = ArticlesManager.getInstance().searchAllArticle();
 			}

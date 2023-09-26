@@ -169,7 +169,6 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 		return null;
 	}
 
-
 	private ArticleVendu ArticleFromRs(ResultSet rs) throws SQLException {
 		ArticleVendu articles = new ArticleVendu();
 		articles.setNoArticle(rs.getInt("no_article"));

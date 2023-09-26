@@ -25,12 +25,15 @@ public class ModifierArticlesServlet extends HttpServlet {
 			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
 			List<ArticleVendu> listArticles = null;
 
-			if (request.getParameter("q") != null) {
-				listArticles = ArticlesManager.getInstance().searchArticle(request.getParameter("q"));
-			} else if (request.getParameter("q") == null) {
-				listArticles = ArticlesManager.getInstance().searchAllArticle();
-			} else if (request.getParameter("c") != null) {
-				listArticles = ArticlesManager.getInstance().searchCategorie(request.getParameter("c"));
+			String recherche = request.getParameter("q");
+			String categorie = request.getParameter("c");
+
+			if (recherche != null && !recherche.isBlank()) {
+				listArticles = ArticlesManager.getInstance().searchArticle(recherche);
+
+			} else if (categorie != null && !categorie.isBlank()) {
+				listArticles = ArticlesManager.getInstance().searchCategorie(categorie);
+
 			} else {
 				listArticles = ArticlesManager.getInstance().searchAllArticle();
 			}
