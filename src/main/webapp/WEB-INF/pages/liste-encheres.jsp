@@ -31,7 +31,7 @@
 								</c:if>
 								<div class="card-body">
 									<h5 class="card-title">${ article.nomArticle }</h5>
-									<p class="card-text">${ article.utilisateur.enchere.montantEnchere }
+									<p class="card-text">${ article.prixVente }
 										<i class="fa-solid fa-coins"></i>
 									</p>
 									<p class="card-text">Fini le : ${ article.dateFinEncheres }</p>
