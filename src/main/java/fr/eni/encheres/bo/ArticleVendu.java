@@ -16,6 +16,7 @@ public class ArticleVendu {
 	private String etatVente;
 
 	private List<Enchere> concerne = new ArrayList<Enchere>();
+	private Enchere enchere;
 	private Utilisateur utilisateur;
 	private Retrait lieuRetrait;
 	private Categorie categorie;
@@ -61,6 +62,10 @@ public class ArticleVendu {
 		this.etatVente = etatVente;
 		this.utilisateur = user;
 		this.categorie = categorie;
+	}
+
+	public ArticleVendu(int credit) {
+		this.prixVente = credit;
 	}
 
 	public Categorie getCategorie() {
@@ -165,6 +170,14 @@ public class ArticleVendu {
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", concerne=" + concerne
 				+ ", lieuRetrait=" + lieuRetrait + ", categorie=" + categorie + "]";
+	}
+
+	public Enchere getEnchere() {
+		return enchere;
+	}
+
+	public void setEnchere(Enchere enchere) {
+		this.enchere = enchere;
 	}
 
 }
