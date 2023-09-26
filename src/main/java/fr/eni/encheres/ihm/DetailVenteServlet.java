@@ -38,7 +38,9 @@ public class DetailVenteServlet extends HttpServlet {
 			int idArticle = Integer.parseInt(request.getParameter("auction"));
 			Retrait retrait = RetraitManager.getInstance().recupRetrait(idArticle);
 			ArticleVendu article = ArticlesManager.getInstance().recupArticle(idArticle);
+			Enchere prixArticle = EncheresManager.getInstance().selectPrixArticle(idArticle);
 			
+			request.setAttribute("enchere", prixArticle);
 			request.setAttribute("article", article);
 			request.setAttribute("retrait", retrait);
 			request.getRequestDispatcher("/WEB-INF/pages/details-vente.jsp").forward(request, response);
@@ -74,22 +76,23 @@ public class DetailVenteServlet extends HttpServlet {
 				System.out.println("Coucou toi");
 				if (enchereCredit.getUtilisateur().getNoUtilisateur() != idUser &&
 						enchereCredit.getArticleVendu().getNoArticle() != idArticleInt) {
+					System.out.println("Création enchère");
 					EncheresManager.getInstance().addEnchere(enchereCredit);
 				} else {
+					System.out.println("Update enchère");
 					EncheresManager.getInstance().modifyEnchere(enchereCredit);
 				}
 				
 				// UPDATE DES CRÉDITS DE L'UTILISATEUR
 				Utilisateur utilisateurCredit = new Utilisateur(idUser, credit);
-				UtilisateursManager.getInstance().modifyCredit(utilisateurCredit);
-				
-				// UPDATE DU PRIX DE L'ARTICLE
-				ArticleVendu articleCredit = new ArticleVendu(credit);
-				ArticlesManager.getInstance().modifyCredit(articleCredit);
+				UtilisateursManager.getInstance().modifyCredit(utilisateurCredit); 
 				
 				
 			} else {
-				throw new BLLException("Vous devez mettre une valeur supérieur à la meilleur offre actuel !");
+				BLLException e = new BLLException("Vous devez mettre une valeur supérieur à la meilleur offre actuel !");
+				request.setAttribute("error", e.getMessage());
+				doGet(request, response);
+				e.printStackTrace();
 			}
 		} catch (Exception e) {
 			request.setAttribute("error", e.getMessage());
