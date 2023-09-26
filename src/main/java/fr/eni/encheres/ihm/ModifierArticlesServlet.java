@@ -27,11 +27,9 @@ public class ModifierArticlesServlet extends HttpServlet {
 
 			if (request.getParameter("q") != null) {
 				listArticles = ArticlesManager.getInstance().searchArticle(request.getParameter("q"));
-			} else {
+			} else if (request.getParameter("q") == null) {
 				listArticles = ArticlesManager.getInstance().searchAllArticle();
-			}
-
-			if (request.getParameter("c") != null) {
+			} else if (request.getParameter("c") != null) {
 				listArticles = ArticlesManager.getInstance().searchCategorie(request.getParameter("c"));
 			} else {
 				listArticles = ArticlesManager.getInstance().searchAllArticle();

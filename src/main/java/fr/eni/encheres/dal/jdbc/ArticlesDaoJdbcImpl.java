@@ -33,7 +33,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
 			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
 			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
-			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur" + " WHERE nom_article LIKE ?";
+			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur" + " WHERE a.nom_article LIKE ?";
 	private static final String FIND_BY_ID = "SELECT * FROM ARTICLE_VENDU WHERE id_article LIKE ? ";
 	private static final String FIND_ARTICLE_BY_CATEGORIE = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
 			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
@@ -161,12 +161,14 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			while (rs.next()) {
 				articles.add(ArticleFromRs(rs));
 			}
+			System.out.println(articles);
 			return articles;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
+
 
 	private ArticleVendu ArticleFromRs(ResultSet rs) throws SQLException {
 		ArticleVendu articles = new ArticleVendu();
