@@ -19,6 +19,8 @@ public interface EnchereDao {
 
 	Enchere findOne(int id);
 
+	Enchere selectPrixArticle(int id);
+
 //	void encherir(Enchere enchere);
 
 }

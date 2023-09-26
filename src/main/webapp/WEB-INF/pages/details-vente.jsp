@@ -6,6 +6,9 @@
 		<div class="row text-center mt-4">
 			<h1> Détail vente </h1>
 		</div>
+		<c:if test="${ ! empty error }">
+			<div class="alert alert-danger">${ error }</div>
+		</c:if>
 		<form method="post">
 			<div class="row gx-5">
 				<div class="col">
@@ -17,10 +20,12 @@
 						<label for="description" class="form-label">Description :</label>
 						<input type="text" class="form-control" readonly="readonly" value="${ article.description }">
 					</div>
-					<c:if test="${ article.enchere.montantEnchere != null }">
+					<c:if test="${ enchere.montantEnchere != null }">
 						<div class="p-3">
-							<label for="meilleureOffre" class="form-label">Meilleure offre :</label>
-							<input type="text" class="form-control" readonly="readonly" value="${ article.enchere.montantEnchere }" id="prixactuel" name="prixactuel">
+							<label for="meilleureOffre" class="form-label">Meilleure offre par <a id="user" type="submit"
+												href="${ pageContext.request.contextPath }/autreprofil?user=${ article.utilisateur.noUtilisateur }">
+												${ enchere.utilisateur.pseudo }</a> :</label>
+							<input type="text" class="form-control" readonly="readonly" value="${ enchere.montantEnchere }" id="prixactuel" name="prixactuel">
 						</div>
 					</c:if>
 					<c:if test="${ article.prixVente == null }">
