@@ -23,6 +23,10 @@ public class EncheresManager {
 	// FIN SINGLETON
 
 	private EnchereDao enchereDao = DaoFactory.getEnchereDao();
+	
+	public Enchere selectPrixArticle(int id) {
+		return enchereDao.selectPrixArticle(id);
+	}
 
 	public List<Enchere> searchAllEncheres() {
 		return enchereDao.findAll();
