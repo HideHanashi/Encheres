@@ -26,4 +26,6 @@ public interface UtilisateurDao {
 
 	List<Utilisateur> findAll();
 
+	void modifyCredit(Utilisateur user);
+
 }
