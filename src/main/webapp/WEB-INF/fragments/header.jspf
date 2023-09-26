@@ -50,48 +50,53 @@
 					<div class="collapse navbar-collapse col-1 offset-8"
 						id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
+	
 							<li class="nav-item"><a class="nav-link active"
 								aria-current="page" href="${ pageContext.request.contextPath }">Accueil</a>
 							</li>
-
+	
 							<li class="nav-item"><a class="nav-link"
 								href="${ pageContext.request.contextPath }/nouvelle-vente">Publier</a>
 							</li>
-
+	
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle" href="#" role="button"
 								data-bs-toggle="dropdown" aria-expanded="false"><i
-									class="fa-solid fa-user fa-sm mr-4"></i> Profil</a>
-
+										class="fa-solid fa-user fa-sm mr-4"></i> Profil</a>
+	
 								<ul class="dropdown-menu">
 									<c:if test="${ user != null }">
-
+	
 										<li><a class="dropdown-item" href="#">${ user.pseudo }</a></li>
+										
+										<li>
+										<a class="dropdown-item" href="">${ user.credit } <i class="fa-solid fa-coins"></i></a>
+										</li>
 										<li><hr class="dropdown-divider"></li>
-
+	
 										<li><a class="dropdown-item"
 											href="${ pageContext.request.contextPath }/voirarticles">Mes
 												Articles</a></li>
-
+	
 										<li><a class="dropdown-item" type="submit"
 											href="${ pageContext.request.contextPath }/monprofil">Mon
 												Profil</a></li>
-
+	
 										<li><a class="dropdown-item"
 											href="${ pageContext.request.contextPath }/deconnexion">Déconnexion</a></li>
 									</c:if>
-
+	
 									<c:if test="${ user == null }">
 										<li><a class="dropdown-item"
 											href="${ pageContext.request.contextPath }/connexion">Connexion</a></li>
-
+	
 										<li><a class="dropdown-item"
 											href="${ pageContext.request.contextPath }/inscription">Inscription</a></li>
 									</c:if>
-
+	
 								</ul></li>
-						</ul>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</nav>

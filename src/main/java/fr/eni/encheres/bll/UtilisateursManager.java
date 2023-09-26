@@ -65,6 +65,10 @@ public class UtilisateursManager {
 	public Utilisateur searchUtilisateur(String query) {
 		return utilisateurDao.findByUsername(query);
 	}
+	
+	public void modifyCredit(Utilisateur user) {
+		utilisateurDao.modifyCredit(user);
+	}
 
 	// BLL AUTRES
 
