@@ -102,4 +102,8 @@ public class ArticlesManager {
 		listeArticles = articleDao.selectAll();
 		return listeArticles;
 	}
+
+	public void modifyCredit(ArticleVendu credit) {
+		articleDao.modifyCredit(credit);
+	}
 }

@@ -30,8 +30,7 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur,no_article,date_encheres,montant_encheres)"
 			+ " VALUES (?,?,?,?)";
 
-	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET (no_utilisateur,no_article,date_encheres,montant_encheres)"
-			+ " VALUES (?,?,?,?) WHERE no_article = ?";
+	private static final String UPDATE_ENCHERE = "UPDATE ENCHERES SET no_utilisateur=?,no_article=?,date_encheres=?,montant_encheres=? WHERE no_article = ?";
 
 	private static final String DELETE_ENCHERE = "DELETE ENCHERES WHERE no_article = ?";
 
@@ -57,15 +56,17 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 
 	@Override
 	public void modify(Enchere enchere) {
-		try (Connection connection = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(UPDATE_ENCHERE);) {
+		try (
+				Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(UPDATE_ENCHERE);
+			){
 			pstmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
 			pstmt.setInt(2, enchere.getArticleVendu().getNoArticle());
 			pstmt.setDate(3, Date.valueOf(enchere.getDateEnchere()));
 			pstmt.setInt(4, enchere.getMontantEnchere());
 
+			pstmt.setInt(5, enchere.getArticleVendu().getNoArticle());
 			pstmt.executeUpdate();
-			pstmt.setInt(4, enchere.getArticleVendu().getNoArticle());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
