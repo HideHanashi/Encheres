@@ -20,37 +20,39 @@
 		<div class="container text-center containerarticles">
 			<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
 				<div class="col">
-					<c:if
-						test="${ articles.utilisateur.noUtilisateur == user.noUtilisateur }">
-						<c:forEach var="article" items="${ articles }">
-							<c:if test="${ article.dateDebutEncheres <= LocalDate.now() }">
-								<div class="card p-3" style="width: 18rem;">
-									<c:if test="${ image != null }">
-										<img src="..." class="card-img-top imagearticle" href="#"
-											alt="...">
-									</c:if>
-									<div class="card-body">
-										<h5 class="card-title">${ article.nomArticle }</h5>
-										<p class="card-text">${ article.prixVente }
-											<i class="fa-solid fa-coins"></i>
+
+					<c:forEach var="article" items="${ articles }">
+						<c:if
+							test="${ article.utilisateur.noUtilisateur == user.noUtilisateur }">
+
+							<div class="card p-3" style="width: 18rem;">
+								<c:if test="${ image != null }">
+									<img src="..." class="card-img-top imagearticle" href="#"
+										alt="...">
+								</c:if>
+								<div class="card-body">
+									<h5 class="card-title">${ article.nomArticle }</h5>
+									<p class="card-text">${ article.prixVente }
+										<i class="fa-solid fa-coins"></i>
+									</p>
+									<p class="card-text">Fini le : ${ article.dateFinEncheres }</p>
+									<form method="get" class="mb-4">
+
+										<p class="card-text">
+											Par : <a id="user" type="submit"
+												href="${ pageContext.request.contextPath }/autreprofil?user=${ article.utilisateur.noUtilisateur }">
+												${ article.utilisateur.pseudo }</a>
 										</p>
-										<p class="card-text">Fini le : ${ article.dateFinEncheres }</p>
-										<form method="get" class="mb-4">
 
-											<p class="card-text">
-												Par : <a id="user" type="submit"
-													href="${ pageContext.request.contextPath }/autreprofil?user=${ article.utilisateur.noUtilisateur }">
-													${ article.utilisateur.pseudo }</a>
-											</p>
-
-										</form>
-										<a class="btn btn-primary" role="button"
-											href="${ pageContext.request.contextPath }/modifiermesarticles">Modifier</a>
-									</div>
+									</form>
+									<a class="btn btn-primary" role="button"
+										href="${ pageContext.request.contextPath }/modifiermesarticles">Modifier</a>
 								</div>
-							</c:if>
-						</c:forEach>
-					</c:if>
+							</div>
+						</c:if>
+
+					</c:forEach>
+
 				</div>
 			</div>
 		</div>

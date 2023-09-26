@@ -27,7 +27,6 @@ public class MesArticleServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			HttpSession session = request.getSession();
 
 			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
 			List<ArticleVendu> listArticles = null;
