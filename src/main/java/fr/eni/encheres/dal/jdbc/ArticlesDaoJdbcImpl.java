@@ -20,14 +20,28 @@ import fr.eni.encheres.dal.ArticlesDao;
 
 public class ArticlesDaoJdbcImpl implements ArticlesDao {
 
-	private static final String SELECT_ALL = "SELECT * FROM ARTICLE_VENDU";
+	private static final String SELECT_ALL = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
+			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
+			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
+			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
+			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur";
 	private static final String SELECT = "SELECT * FROM ARTICLE_VENDU WHERE no_article = ?";
 	private static final String SAVE = "INSERT ARTICLE_VENDU (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE = "DELETE ARTICLE_VENDU WHERE no_article = ?";
 	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";
-	private static final String FIND_BY_NAME = "SELECT * FROM ARTICLE_VENDU WHERE nom_article LIKE ? ";
+	private static final String FIND_BY_NAME = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
+			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
+			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
+			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
+			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur"
+			+ " WHERE nom_article LIKE ?";
 	private static final String FIND_BY_ID = "SELECT * FROM ARTICLE_VENDU WHERE id_article LIKE ? ";
-	private static final String FIND_ARTICLE_BY_CATEGORIE = "SELECT * FROM CATEGORIE a INNER JOIN ARTICLE_VENDU e ON a.no_article = e.no_article WHERE no_categorie LIKE ?";
+	private static final String FIND_ARTICLE_BY_CATEGORIE = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
+			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
+			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, a.no_categorie"
+			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
+			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur"
+			+ " WHERE c.no_categorie = ?";
 
 	@Override
 	public void save(ArticleVendu articleVendu) {// passage par référence
@@ -63,12 +77,23 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next()) {
-				return new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
-						rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
-						rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
-						rs.getInt("prix_vente"), rs.getString("etat_vente"),
-						UtilisateursManager.getInstance().recupUtilisateur(rs.getInt("no_utilisateur")),
-						CategoriesManager.getInstance().getCategorieById(rs.getInt("no_categorie")));
+				ArticleVendu articles = new ArticleVendu();
+				articles.setNoArticle(rs.getInt("no_article"));
+				articles.setNomArticle(rs.getString("nom_article"));
+				articles.setDescription(rs.getString("description"));
+				articles.setDateDebutEncheres(rs.getDate("date_debut_encheres").toLocalDate());
+				articles.setDateFinEncheres(rs.getDate("date_fin_encheres").toLocalDate());
+				articles.setMiseAPrix(rs.getInt("prix_initial"));
+				articles.setPrixVente(rs.getInt("prix_vente"));
+				articles.setEtatVente(rs.getString("etat_vente"));
+				Utilisateur userTemp = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"),
+						rs.getString("nom"), rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),
+						rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville"),
+						rs.getString("mot_de_passe"), rs.getInt("credit"), rs.getBoolean("administrateur"));
+				Categorie categorieTemp = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
+				articles.setUtilisateur(userTemp);
+				articles.setCategorie(categorieTemp);
+				return articles;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -150,7 +175,6 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			e.printStackTrace();
 		}
 		return null;
-
 	}
 
 	private ArticleVendu ArticleFromRs(ResultSet rs) throws SQLException {
@@ -163,10 +187,13 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 		articles.setMiseAPrix(rs.getInt("prix_initial"));
 		articles.setPrixVente(rs.getInt("prix_vente"));
 		articles.setEtatVente(rs.getString("etat_vente"));
-		Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(rs.getInt("no_utilisateur"));
-		Categorie categorie = CategoriesManager.getInstance().getCategorieById(rs.getInt("no_categorie"));
-		articles.setUtilisateur(user);
-		articles.setCategorie(categorie);
+		Utilisateur userTemp = new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
+				rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"), rs.getString("rue"),
+				rs.getString("code_postal"), rs.getString("ville"), rs.getString("mot_de_passe"), rs.getInt("credit"),
+				rs.getBoolean("administrateur"));
+		Categorie categorieTemp = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
+		articles.setUtilisateur(userTemp);
+		articles.setCategorie(categorieTemp);
 		return articles;
 	}
 
@@ -199,14 +226,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			List<ArticleVendu> articles = new ArrayList<ArticleVendu>();
 			ResultSet rs = stmt.executeQuery(SELECT_ALL);
 			while (rs.next()) {
-				articles.add(
-
-						new ArticleVendu(rs.getInt("no_article"), rs.getString("nom_article"),
-								rs.getString("description"), rs.getDate("date_debut_encheres").toLocalDate(),
-								rs.getDate("date_fin_encheres").toLocalDate(), rs.getInt("prix_initial"),
-								rs.getInt("prix_vente"), rs.getString("etat_vente"))
-
-				);
+				articles.add(ArticleFromRs(rs));
 			}
 			return articles;
 		} catch (SQLException e) {
@@ -219,7 +239,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 	public List<ArticleVendu> findArticleByCategorie(String categorie) {
 		try (Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(FIND_ARTICLE_BY_CATEGORIE)) {
-			pstmt.setString(1, "%" + categorie + "%");
+			pstmt.setInt(1,Integer.parseInt(categorie)  );
 			List<ArticleVendu> listArticle = new ArrayList<>();
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
