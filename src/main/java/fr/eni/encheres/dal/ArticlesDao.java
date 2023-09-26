@@ -24,4 +24,6 @@ public interface ArticlesDao {
 	List<ArticleVendu> findByID(Integer idArticle);
 
 	List<ArticleVendu> selectAll();
+
+	void modifyCredit(ArticleVendu credit);
 }

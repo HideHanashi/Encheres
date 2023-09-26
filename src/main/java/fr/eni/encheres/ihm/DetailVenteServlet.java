@@ -1,9 +1,7 @@
 package fr.eni.encheres.ihm;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.EncheresManager;
@@ -40,7 +38,6 @@ public class DetailVenteServlet extends HttpServlet {
 			int idArticle = Integer.parseInt(request.getParameter("auction"));
 			Retrait retrait = RetraitManager.getInstance().recupRetrait(idArticle);
 			ArticleVendu article = ArticlesManager.getInstance().recupArticle(idArticle);
-			System.out.println(retrait);
 			
 			request.setAttribute("article", article);
 			request.setAttribute("retrait", retrait);
@@ -54,6 +51,8 @@ public class DetailVenteServlet extends HttpServlet {
 			throws ServletException, IOException {
 		try {
 			// INTÉGRATION DES VARIABLES DE L'UTILISATEUR DANS LES VARIABLES BACK
+			ArticleVendu idArticle = ArticlesManager.getInstance().recupArticle(Integer.parseInt(request.getParameter("auction")));
+			int idArticleInt = idArticle.getNoArticle();
 			int prixArticle = Integer.parseInt(request.getParameter("prixactuel"));
 			int creditEncherir = Integer.parseInt(request.getParameter("encherir"));
 			
@@ -63,21 +62,30 @@ public class DetailVenteServlet extends HttpServlet {
 				Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
 				int idUser = utilisateurSession.getNoUtilisateur();
 				
-				ArticleVendu idArticle = ArticlesManager.getInstance().recupArticle(idUser);
+				// RÉCUPÉRATION DE LA DATE
 				LocalDate localDate = LocalDate.now();
 				
+				// RÉCUPÉRATION ET TRANSFORMATION DES CRÉDITS
 				int creditUser = utilisateurSession.getCredit();
 				int credit = creditUser - creditEncherir;
 				
+				// CRÉATION / UPDATE D'UNE ENCHÈRE
 				Enchere enchereCredit = new Enchere(utilisateurSession, idArticle, localDate, creditEncherir);
-				if (utilisateurSession.getEncherit().isEmpty() == true) {
+				System.out.println("Coucou toi");
+				if (enchereCredit.getUtilisateur().getNoUtilisateur() != idUser &&
+						enchereCredit.getArticleVendu().getNoArticle() != idArticleInt) {
 					EncheresManager.getInstance().addEnchere(enchereCredit);
 				} else {
 					EncheresManager.getInstance().modifyEnchere(enchereCredit);
 				}
 				
+				// UPDATE DES CRÉDITS DE L'UTILISATEUR
 				Utilisateur utilisateurCredit = new Utilisateur(idUser, credit);
 				UtilisateursManager.getInstance().modifyCredit(utilisateurCredit);
+				
+				// UPDATE DU PRIX DE L'ARTICLE
+				ArticleVendu articleCredit = new ArticleVendu(credit);
+				ArticlesManager.getInstance().modifyCredit(articleCredit);
 				
 				
 			} else {
