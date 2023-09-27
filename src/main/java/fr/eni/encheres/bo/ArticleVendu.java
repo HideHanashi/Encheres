@@ -181,7 +181,7 @@ public class ArticleVendu {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
 				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + ", concerne=" + concerne
-				+ ", lieuRetrait=" + lieuRetrait + ", categorie=" + categorie + "]";
+				;
 	}
 
 	public Enchere getEnchere() {

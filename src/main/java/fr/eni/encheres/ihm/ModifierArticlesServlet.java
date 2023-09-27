@@ -96,7 +96,7 @@ public class ModifierArticlesServlet extends HttpServlet {
 			categorie.addArticle(articleVendu);
 
 			// CRÉATION DE L'ARTICLE DANS LA BDD
-			ArticlesManager.getInstance().addArticle(articleVendu);
+			ArticlesManager.getInstance().modifyArticle(articleVendu);
 
 			// CRÉATION DU LIEU DE RETRAIT POUR L'ARTICLE CRÉÉ
 			Retrait retrait = new Retrait(articleVendu, rue, codePostal, ville);

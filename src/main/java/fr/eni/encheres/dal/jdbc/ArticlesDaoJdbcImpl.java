@@ -21,27 +21,27 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
 			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
 			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur";
-	
+
 	private static final String SELECT = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
 			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
 			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
 			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
 			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur WHERE no_article = ?";
-	
+
 	private static final String SAVE = "INSERT ARTICLE_VENDU (nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,etat_vente,no_utilisateur,no_categorie) VALUES (?,?,?,?,?,?,?,?,?)";
 	private static final String DELETE = "DELETE ARTICLE_VENDU WHERE no_article = ?";
 	private static final String UPDATE = "UPDATE ARTICLE_VENDU SET nom_article=?,description=?,date_debut_encheres=?,date_fin_encheres=?,prix_initial=?,prix_vente=?,etat_vente=? WHERE no_article = ?";
-	
+
 	private static final String UPDATE_CREDIT = "UPDATE ARTICLE_VENDU SET prix_vente=? WHERE no_article = ?";
-	
+
 	private static final String FIND_BY_NAME = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
 			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
 			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
 			+ " FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie = c.no_categorie"
 			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur" + " WHERE a.nom_article LIKE ?";
-	
+
 	private static final String FIND_BY_ID = "SELECT * FROM ARTICLE_VENDU WHERE id_article LIKE ? ";
-	
+
 	private static final String FIND_ARTICLE_BY_CATEGORIE = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
 			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
 			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, a.no_categorie"
@@ -59,7 +59,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			pstmt.setDate(4, Date.valueOf(articleVendu.getDateFinEncheres()));
 			pstmt.setInt(5, articleVendu.getMiseAPrix());
 			pstmt.setInt(6, articleVendu.getPrixVente());
-			pstmt.setString(7, articleVendu.getEtatVente());
+			pstmt.setString(7, "Créé");
 			pstmt.setInt(8, articleVendu.getUtilisateur().getNoUtilisateur());
 			pstmt.setInt(9, articleVendu.getCategorie().getNoCategorie());
 
@@ -146,7 +146,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void modifyCredit(ArticleVendu credit) {
 		try (Connection connection = ConnectionProvider.getConnection();

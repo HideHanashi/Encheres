@@ -81,16 +81,18 @@ public class VendreArticleServlet extends HttpServlet {
 
 			// AJOUT DE L'ARTICLE DANS LA CATÉGORIE SELECTIONNÉ PAR L'UTILISATEUR
 			categorie.addArticle(articleVendu);
+			System.out.println(articleVendu);
+			Retrait retrait = new Retrait();
 
 			// CRÉATION DE L'ARTICLE DANS LA BDD
 			ArticlesManager.getInstance().addArticle(articleVendu);
 
 			// CRÉATION DU LIEU DE RETRAIT POUR L'ARTICLE CRÉÉ
-			Retrait retrait = new Retrait(articleVendu, rue, codePostal, ville);
+
+			retrait = new Retrait(articleVendu, rue, codePostal, ville);
+			RetraitManager.getInstance().addRetrait(retrait);
 
 			// CRÉATION DU LIEU DE RETRAIT DANS LA BDD
-
-			RetraitManager.getInstance().addRetrait(retrait);
 
 			// RENVOIE L'UTILISATEUR SUR LA PAGE D'ACCUEIL
 			response.sendRedirect(request.getContextPath() + "");

@@ -12,7 +12,7 @@ import fr.eni.encheres.dal.RetraitDao;
 
 public class RetraitDaoJdbcImpl implements RetraitDao {
 
-	private static final String SAVE = "INSERT RETRAIT (no_article,rue,code_postal,ville) VALUES (?,?,?,?)";
+	private static final String SAVE = "INSERT INTO RETRAIT (no_article,rue,code_postal,ville) VALUES (?,?,?,?)";
 
 	private static final String SELECT = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente"
 			+ " FROM ARTICLE_VENDU a INNER JOIN RETRAIT r ON a.no_article = r.no_article WHERE no_article = ?";
@@ -23,6 +23,7 @@ public class RetraitDaoJdbcImpl implements RetraitDao {
 				PreparedStatement pstmt = connection.prepareStatement(SAVE);) {
 			// valoriser les params de la requete
 			pstmt.setInt(1, retrait.getArticleVendu().getNoArticle());
+			System.out.println(retrait.getArticleVendu().getNoArticle());
 			pstmt.setString(2, retrait.getRue());
 			pstmt.setString(3, retrait.getCodePostal());
 			pstmt.setString(4, retrait.getVille());
