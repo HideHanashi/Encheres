@@ -25,6 +25,18 @@ public class ArticleVendu {
 		// TODO Auto-generated constructor stub
 	}
 
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int miseAPrix, Utilisateur user, Categorie categorie) {
+		this.noArticle = noArticle;
+		this.nomArticle = nomArticle;
+		this.description = description;
+		this.dateDebutEncheres = dateDebutEncheres;
+		this.dateFinEncheres = dateFinEncheres;
+		this.miseAPrix = miseAPrix;
+		this.utilisateur = user;
+		this.categorie = categorie;
+	}
+
 	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres, LocalDate dateFinEncheres,
 			int miseAPrix, Utilisateur user, Categorie categorie) {
 		this.nomArticle = nomArticle;

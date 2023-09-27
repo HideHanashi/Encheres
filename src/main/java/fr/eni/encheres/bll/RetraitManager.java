@@ -32,6 +32,11 @@ public class RetraitManager {
 		retraitDao.save(retrait);
 	}
 
+	public void ModifierRetrait(Retrait retrait) throws BLLException {
+		isValid(retrait);
+		retraitDao.update(retrait);
+	}
+
 	private void isValid(Retrait retrait) throws BLLException {
 		if (retrait == null)
 			throw new BLLException("L'article est vide. ");

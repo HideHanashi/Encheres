@@ -5,7 +5,9 @@ import fr.eni.encheres.bo.Retrait;
 public interface RetraitDao {
 
 	void save(Retrait retrait);
-	
+
 	Retrait findOne(int id);
-	
+
+	void update(Retrait retrait);
+
 }

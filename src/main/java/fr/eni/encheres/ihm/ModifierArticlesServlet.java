@@ -88,14 +88,15 @@ public class ModifierArticlesServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("user");
 			int id = utilisateurSession.getNoUtilisateur();
+			int idArticle = Integer.parseInt(request.getParameter("auction"));
 
 			// INTÉGRATION DES IDs DANS LES VARIABLES
 			Utilisateur user = UtilisateursManager.getInstance().recupUtilisateur(id);
 			Categorie categorie = CategoriesManager.getInstance().getCategorieById(categorie_id);
 
 			// CRÉATION D'UN ARTICLE VIA LES VARIABLES DE L'UTILISATEUR
-			ArticleVendu articleVendu = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres,
-					miseAPrix, user, categorie);
+			ArticleVendu articleVendu = new ArticleVendu(idArticle, nomArticle, description, dateDebutEncheres,
+					dateFinEncheres, miseAPrix, user, categorie);
 
 			// AJOUT DE L'ARTICLE DANS LA CATÉGORIE SELECTIONNÉ PAR L'UTILISATEUR
 			categorie.addArticle(articleVendu);
@@ -108,7 +109,7 @@ public class ModifierArticlesServlet extends HttpServlet {
 
 			// CRÉATION DU LIEU DE RETRAIT DANS LA BDD
 
-			RetraitManager.getInstance().addRetrait(retrait);
+			RetraitManager.getInstance().ModifierRetrait(retrait);
 
 			// RENVOIE L'UTILISATEUR SUR LA PAGE D'ACCUEIL
 			response.sendRedirect(request.getContextPath() + "");
