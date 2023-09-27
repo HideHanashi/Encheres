@@ -51,5 +51,9 @@ public class EncheresManager {
 	public void deleteEnchere(int id) {
 		enchereDao.remove(id);
 	}
+	
+	public boolean verifyIdAll(int idUser, int idArticle) {
+		return enchereDao.verifyIdAll(idUser, idArticle);
+	}
 
 }
