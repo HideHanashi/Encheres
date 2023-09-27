@@ -32,6 +32,9 @@ public class ModifierArticlesServlet extends HttpServlet {
 		try {
 			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
 			List<ArticleVendu> listArticles = null;
+			int idArticle = Integer.parseInt(request.getParameter("auction"));
+			Retrait retrait = RetraitManager.getInstance().recupRetrait(idArticle);
+			ArticleVendu article = ArticlesManager.getInstance().recupArticle(idArticle);
 
 			String recherche = request.getParameter("q");
 			String categorie = request.getParameter("c");
@@ -53,6 +56,8 @@ public class ModifierArticlesServlet extends HttpServlet {
 			request.setAttribute("image", imageArticle);
 			request.setAttribute("categorie", listCategories);
 			request.setAttribute("articles", listArticles);
+			request.setAttribute("article", article);
+			request.setAttribute("retrait", retrait);
 			// forward
 			request.getRequestDispatcher("/WEB-INF/pages/modifier-vente.jsp").forward(request, response);
 		} catch (Exception e) {

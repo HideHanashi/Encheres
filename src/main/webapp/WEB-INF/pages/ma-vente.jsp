@@ -46,7 +46,7 @@
 
 									</form>
 									<a class="btn btn-primary" role="button"
-										href="${ pageContext.request.contextPath }/modifiermesarticles">Modifier</a>
+										href="${ pageContext.request.contextPath }/modifiermesarticles?auction=${ article.noArticle }">Modifier</a>
 								</div>
 							</div>
 						</c:if>

@@ -4,7 +4,7 @@
 <main>
 	<div class="col position-absolute top-50 start-50 translate-middle">
 		<div class="row text-center">
-			<h1>Modifier cette enchère</h1>
+			<h1>Modifier l'enchère : " ${ article.nomArticle }"</h1>
 		</div>
 		<div class="container overflow-hidden text-center">
 			<c:if test="${ ! empty error }">
@@ -15,13 +15,13 @@
 					<div class="col">
 						<div class="p-3">
 							<label for="nomArticle" class="form-label">Article : </label> <input
-								type="text" class="form-control" value="${ param.pseudo }"
+								type="text" class="form-control" value="${ article.nomArticle }"
 								name="nomArticle" id="nomArticle">
 						</div>
 						<div class="p-3 form-floating">
 							<textarea class="form-control" placeholder="Leave a comment here"
 								name="description" id="description"
-								style="max-height: 168px; min-height: 168px;"></textarea>
+								style="max-height: 168px; min-height: 168px;">${ article.description }</textarea>
 							<label class="fw-lighter fst-italic mx-3 my-2" disabled
 								for="description">Description de l'objet . . .</label>
 						</div>
@@ -29,7 +29,7 @@
 							<label for="categorie" class="form-label">Catégorie :</label> <select
 								class="form-select" aria-label="Default select example"
 								id="categorie" name="categorie">
-								<option selected value="0">Choisir une catégorie</option>
+								<option selected disabled value="${ categories.noCategorie }">${ article.categorie.libelle }</option>
 								<c:forEach var="categories" items="${ categorie }">
 									<option value="${ categories.noCategorie }">${ categories.libelle }</option>
 								</c:forEach>
@@ -45,7 +45,8 @@
 							<label for="miseAPrix" class="form-label">Mise à prix: </label>
 							<div class="input-group">
 								<input type="number" class="form-control" name="miseAPrix"
-									id="miseAPrix" aria-label="Euro montant"> <span
+									id="miseAPrix" aria-label="Euro montant"
+									value="${ article.miseAPrix }"> <span
 									class="input-group-text"><i class="fa-solid fa-coins"></i></span>
 							</div>
 						</div>
@@ -54,12 +55,14 @@
 						<div class="p-3">
 							<label for="telephone" class="form-label">Début de
 								l'enchère: </label> <input type="date" class="form-control"
-								name="dateDebutEncheres" id="dateDebutEncheres">
+								name="dateDebutEncheres" id="dateDebutEncheres"
+								value="${ article.dateDebutEncheres }">
 						</div>
 						<div class="p-3">
 							<label for="codePostal" class="form-label">Fin de
 								l'enchère: </label> <input type="date" class="form-control"
-								name="dateFinEncheres" id="dateFinEncheres">
+								name="dateFinEncheres" id="dateFinEncheres"
+								value="${ article.dateFinEncheres }">
 						</div>
 						<div class="card p-3" style="width: 30rem;">
 							<div class="card-body">

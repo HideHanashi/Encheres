@@ -23,7 +23,6 @@ public class RetraitDaoJdbcImpl implements RetraitDao {
 				PreparedStatement pstmt = connection.prepareStatement(SAVE);) {
 			// valoriser les params de la requete
 			pstmt.setInt(1, retrait.getArticleVendu().getNoArticle());
-			System.out.println(retrait.getArticleVendu().getNoArticle());
 			pstmt.setString(2, retrait.getRue());
 			pstmt.setString(3, retrait.getCodePostal());
 			pstmt.setString(4, retrait.getVille());

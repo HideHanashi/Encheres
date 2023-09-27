@@ -136,7 +136,7 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			pstmt.setDate(4, Date.valueOf(articleVendu.getDateFinEncheres()));
 			pstmt.setInt(5, articleVendu.getMiseAPrix());
 			pstmt.setInt(6, articleVendu.getPrixVente());
-			pstmt.setString(7, articleVendu.getEtatVente());
+			pstmt.setString(7, "Crée");
 			// Where id
 			pstmt.setInt(8, articleVendu.getNoArticle());
 			// execute
