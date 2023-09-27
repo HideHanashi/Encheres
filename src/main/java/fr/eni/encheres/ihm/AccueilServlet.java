@@ -30,7 +30,7 @@ public class AccueilServlet extends HttpServlet {
 
 			// récupérer le param dans url
 			// Utilisateur users = UtilisateursManager.getInstance().recupUtilisateur(id);
-			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();
+			List<Categorie> listCategories = CategoriesManager.getInstance().searchByCategories();	
 			List<ArticleVendu> listArticles = null;
 
 			String recherche = request.getParameter("q");
