@@ -34,3 +34,26 @@
 .containerarticles {
 	display: inline-block;
 }
+
+body{
+    min-height: 100;
+    display: flex;
+    flex-direction: column;
+}
+footer{
+    bottom: 0;
+    position: fixed;
+}
+
+@media (min-width: 992px){
+.row-cols-lg-5>*{width:100%;
+display: flex;
+flex-wrap: wrap;
+gap: 20px;
+margin-left: 20px;
+margin-right: 20px;
+}
+.card{
+border-radius: 20px;
+}
+}
