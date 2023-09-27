@@ -28,7 +28,7 @@
 							<input type="text" class="form-control" readonly="readonly" value="${ enchere.montantEnchere }" id="prixactuel" name="prixactuel">
 						</div>
 					</c:if>
-					<c:if test="${ article.prixVente == null }">
+					<c:if test="${ enchere.montantEnchere == null }">
 						<div class="p-3">
 							<label for="meilleureOffre" class="form-label">Meilleure offre :</label>
 							<input type="text" class="form-control" readonly="readonly" value="${ article.miseAPrix }" id="prixactuel" name="prixactuel">
