@@ -15,7 +15,7 @@ public class Utilisateur {
 	private String codePostal;
 	private String ville;
 	private String motDePasse;
-	private int credit = 0;
+	private int credit = 1000;
 	private boolean administrateur = false;
 
 	private List<Enchere> encherit = new ArrayList<Enchere>();
@@ -28,7 +28,7 @@ public class Utilisateur {
 		this.noUtilisateur = noUtilisateur;
 		this.motDePasse = motDePasse;
 	}
-	
+
 	// AJOUT CREDIT
 	public Utilisateur(int noUtilisateur, int credit) {
 		this.noUtilisateur = noUtilisateur;
@@ -124,11 +124,12 @@ public class Utilisateur {
 	public void setVendu(List<ArticleVendu> vendu) {
 		this.vendu = vendu;
 	}
-	
+
 	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
-	public void setNoUtilisateur(int noUtilisateur) { 
+
+	public void setNoUtilisateur(int noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
 	}
 
