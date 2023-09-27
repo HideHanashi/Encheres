@@ -4,7 +4,7 @@
 <main class="row">
 	<div class="col position-absolute top-50 start-50 translate-middle">
 		<div class="row text-center mt-4">
-			<h1> Détail vente </h1>
+			<h1> Détail vente de : ${ article.nomArticle }</h1>
 		</div>
 		<c:if test="${ ! empty error }">
 			<div class="alert alert-danger">${ error }</div>
@@ -13,12 +13,10 @@
 			<div class="row gx-5">
 				<div class="col">
 					<div class="p-3">
-						<label for="enchere" class="form-label">Objet en vente :</label>
-						<input type="text" class="form-control" readonly="readonly" value="${ article.nomArticle }">
-					</div>
-					<div class="p-3">
 						<label for="description" class="form-label">Description :</label>
-						<input type="text" class="form-control" readonly="readonly" value="${ article.description }">
+						<textarea class="form-control" placeholder="Leave a comment here"
+								name="description" id="description" readonly="readonly"
+								style="max-height: 168px; min-height: 168px;">${ article.description }</textarea>
 					</div>
 					<c:if test="${ enchere.montantEnchere != null }">
 						<div class="p-3">
@@ -48,7 +46,11 @@
 					</div>
 				</div>
 				<div class="col">
-					<div class="card p-3" style="width: 30rem;">
+					<div class="p-3">
+						<label for="categorie" class="form-label">Catégorie :</label>
+						<input type="text" class="form-control" readonly="readonly" value="${ article.categorie.libelle }">
+					</div>
+					<div class="card p-3 center" style="width: 58rem;">
 						<div class="card-body">
 							<h5 class="card-title">Lieu de Retrait</h5>
 							<div class="p-3">
