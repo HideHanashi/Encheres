@@ -24,7 +24,7 @@
 				<div class="col">
 					<c:forEach var="article" items="${ articles }">
 						<c:if test="${ article.dateDebutEncheres <= LocalDate.now() }">
-							<div class="card p-3" style="width: 18rem;">
+							<div class="card p-3 " style="width: 18rem;">
 								<c:if test="${ image != null }">
 									<img src="..." class="card-img-top imagearticle" href="#"
 										alt="...">

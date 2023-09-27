@@ -29,7 +29,7 @@
 							<label for="categorie" class="form-label">Catégorie :</label> <select
 								class="form-select" aria-label="Default select example"
 								id="categorie" name="categorie">
-								<option selected disabled value="${ categories.noCategorie }">${ article.categorie.libelle }</option>
+								<option selected value="${ article.categorie.noCategorie }">${ article.categorie.libelle }</option>
 								<c:forEach var="categories" items="${ categorie }">
 									<option value="${ categories.noCategorie }">${ categories.libelle }</option>
 								</c:forEach>
@@ -72,17 +72,18 @@
 									de retrait est défini sur votre adresse de profil par défaut.</p>
 								<div class="p-3">
 									<label for="rue" class="form-label">Rue: </label> <input
-										type="text" class="form-control" value="${ user.rue }"
+										type="text" class="form-control" value="${ retrait.rue }"
 										name="rue" id="rue">
 								</div>
 								<div class="p-3">
 									<label for="codePostal" class="form-label">Code Postal:</label>
 									<input type="text" class="form-control"
-										value="${ user.codePostal }" name="codePostal" id="codePostal">
+										value="${ retrait.codePostal }" name="codePostal"
+										id="codePostal">
 								</div>
 								<div class="p-3">
 									<label for="ville" class="form-label">Ville: </label> <input
-										type="text" class="form-control" value="${ user.ville }"
+										type="text" class="form-control" value="${ retrait.ville }"
 										name="ville" id="ville">
 								</div>
 							</div>

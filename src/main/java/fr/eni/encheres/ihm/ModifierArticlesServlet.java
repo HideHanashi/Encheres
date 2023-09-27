@@ -80,6 +80,7 @@ public class ModifierArticlesServlet extends HttpServlet {
 			LocalDate dateFinEncheres = LocalDate.parse(request.getParameter("dateFinEncheres"));
 			int miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
 			int categorie_id = Integer.parseInt(request.getParameter("categorie"));
+
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");
@@ -97,9 +98,11 @@ public class ModifierArticlesServlet extends HttpServlet {
 			// CRÉATION D'UN ARTICLE VIA LES VARIABLES DE L'UTILISATEUR
 			ArticleVendu articleVendu = new ArticleVendu(idArticle, nomArticle, description, dateDebutEncheres,
 					dateFinEncheres, miseAPrix, user, categorie);
+			System.out.println(articleVendu);
 
 			// AJOUT DE L'ARTICLE DANS LA CATÉGORIE SELECTIONNÉ PAR L'UTILISATEUR
 			categorie.addArticle(articleVendu);
+			System.out.println(categorie);
 
 			// CRÉATION DE L'ARTICLE DANS LA BDD
 			ArticlesManager.getInstance().modifyArticle(articleVendu);

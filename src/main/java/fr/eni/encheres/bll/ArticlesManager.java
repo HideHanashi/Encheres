@@ -1,5 +1,7 @@
 package fr.eni.encheres.bll;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +48,8 @@ public class ArticlesManager {
 		articleDao.save(article);
 	}
 
-	public void modifyArticle(ArticleVendu article) {
+	public void modifyArticle(ArticleVendu article) throws BLLException {
+		isValid(article);
 		articleDao.modify(article);
 	}
 
@@ -78,18 +81,22 @@ public class ArticlesManager {
 
 	private void isValid(ArticleVendu article) throws BLLException {
 		if (article == null)
-			throw new BLLException("L'article est vide. ");
+			throw new BLLException("L'article est vide.");
 		if (article.getNomArticle() == null || article.getNomArticle().isBlank())
 			throw new BLLException("Le nom de l'article est obligatoire.");
 		if (article.getDescription() == null || article.getDescription().isBlank())
 			throw new BLLException("La description de l'article est obligatoire.");
 		if (article.getDateDebutEncheres() == null)
 			throw new BLLException("La date de début de l'enchère est obligatoire.");
+		if (article.getDateDebutEncheres().isBefore(LocalDate.now()))
+			throw new BLLException("La date de début doit être supérieur ou égale à la date d'aujourd'hui.");
 		if (article.getDateFinEncheres() == null)
 			throw new BLLException("La date de fin de l'enchère est obligatoire.");
-		if (article.getCategorie() == null)
+		if (!article.getDateFinEncheres().isAfter(LocalDate.now()))
+			throw new BLLException("La date de fin doit être supérieur à la date d'aujourd'hui.");
+		if (article.getCategorie().getNoCategorie() <= 0)
 			throw new BLLException("Une catégorie pour l'article est obligatoire.");
-		if (article.getMiseAPrix() < 0)
+		if (article.getMiseAPrix() <= 0)
 			throw new BLLException("Le prix pour l'article doit être supérieur à 0.");
 	}
 

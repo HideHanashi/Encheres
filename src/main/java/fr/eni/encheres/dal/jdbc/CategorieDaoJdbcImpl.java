@@ -10,49 +10,47 @@ import java.util.List;
 
 import fr.eni.encheres.bo.Categorie;
 import fr.eni.encheres.bo.Enchere;
+import fr.eni.encheres.bo.Retrait;
 import fr.eni.encheres.dal.CategorieDao;
 
-public class CategorieDaoJdbcImpl implements CategorieDao{
-	
+public class CategorieDaoJdbcImpl implements CategorieDao {
+
 	private static final String FIND_ALL_CATEGORIE = "SELECT * FROM CATEGORIE";
 	private static final String FIND_BY_ID = "SELECT * FROM CATEGORIE WHERE no_categorie = ?";
 
 	@Override
 	public List<Categorie> findByCategorie() {
-		try (
-				Connection connection = ConnectionProvider.getConnection();
-				Statement stmt = connection.createStatement();
-			){
-			List<Categorie> categories = new ArrayList<Categorie>();
+		List<Categorie> listesCat = new ArrayList<>();
+		try (Connection connection = ConnectionProvider.getConnection();
+				Statement stmt = connection.createStatement();) {
+
 			ResultSet rs = stmt.executeQuery(FIND_ALL_CATEGORIE);
 			while (rs.next()) {
-				categories.add( 
-							new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"))
-							);
+				Categorie categorie = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
+				listesCat.add(categorie);
 			}
-			return categories;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return listesCat;
 	}
 
 	@Override
 	public Categorie findCategorieById(int id) {
-		try (
-				Connection connection = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(FIND_BY_ID);
-			){
+		List<Categorie> listesCat = new ArrayList<>();
+		try (Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(FIND_BY_ID);) {
 			pstmt.setInt(1, id);
 			ResultSet rs = pstmt.executeQuery();
-			if (rs.next()) {
-				return new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
+			while (rs.next()) {
+				Categorie categorie = new Categorie(rs.getInt("no_categorie"), rs.getString("libelle"));
+				listesCat.add(categorie);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return listesCat.get(0);
 
 	}
-	
+
 }
