@@ -5,5 +5,5 @@
 		type="javax.sql.DataSource"
 		url="jdbc:sqlserver://localhost;databasename=bd_trocencheres;encrypt=false"
 		username="sa" password="Pa$$w0rd" maxTotal="10" maxIdle="6"
-		maxWaitMillis="3000" />
+		maxWaitMillis="30000" />
 </Context>
