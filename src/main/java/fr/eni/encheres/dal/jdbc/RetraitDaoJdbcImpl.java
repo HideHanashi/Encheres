@@ -14,8 +14,8 @@ public class RetraitDaoJdbcImpl implements RetraitDao {
 
 	private static final String SAVE = "INSERT RETRAIT (no_article,rue,code_postal,ville) VALUES (?,?,?,?)";
 
-	private static final String SELECT = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente"
-			+ " FROM ARTICLE_VENDU a INNER JOIN RETRAIT r ON a.no_article = r.no_article WHERE no_article = ?";
+	private static final String SELECT = "SELECT a.no_article, a.nom_article, a.description, a.date_debut_encheres, a.date_fin_encheres, a.prix_initial, a.prix_vente, r.rue, r.code_postal, r.ville"
+			+ " FROM ARTICLE_VENDU a INNER JOIN RETRAIT r ON a.no_article = r.no_article WHERE a.no_article = ?";
 
 	@Override
 	public void save(Retrait retrait) {

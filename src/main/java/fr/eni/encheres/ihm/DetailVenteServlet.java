@@ -2,6 +2,7 @@ package fr.eni.encheres.ihm;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.EncheresManager;
@@ -71,23 +72,29 @@ public class DetailVenteServlet extends HttpServlet {
 				int creditUser = utilisateurSession.getCredit();
 				int credit = creditUser - creditEncherir;
 				
+				// SELECT ALL DE ENCHÈRE
+				//List<Enchere> enchereList = EncheresManager.getInstance().searchAllEncheres();
+				
 				// CRÉATION / UPDATE D'UNE ENCHÈRE
 				Enchere enchereCredit = new Enchere(utilisateurSession, idArticle, localDate, creditEncherir);
-				System.out.println("Coucou toi");
-				if (enchereCredit.getUtilisateur().getNoUtilisateur() != idUser &&
-						enchereCredit.getArticleVendu().getNoArticle() != idArticleInt) {
-					System.out.println("Création enchère");
+				boolean bool = EncheresManager.getInstance().verifyIdAll(idUser, idArticleInt);
+				System.out.println("ID USER VAR : " + enchereCredit.getUtilisateur().getNoUtilisateur());
+				System.out.println("ID DE L'USER && L'ARTICLE : " + bool);
+				System.out.println("ID ARTICLE VAR : " + enchereCredit.getArticleVendu().getNoArticle());
+				
+				if (bool != true) {
 					EncheresManager.getInstance().addEnchere(enchereCredit);
+					System.out.println("Create");
 				} else {
-					System.out.println("Update enchère");
 					EncheresManager.getInstance().modifyEnchere(enchereCredit);
+					System.out.println("Update");
 				}
 				
 				// UPDATE DES CRÉDITS DE L'UTILISATEUR
 				Utilisateur utilisateurCredit = new Utilisateur(idUser, credit);
 				UtilisateursManager.getInstance().modifyCredit(utilisateurCredit); 
 				
-				
+				//request.getRequestDispatcher("/WEB-INF/pages/details-vente.jsp");
 			} else {
 				BLLException e = new BLLException("Vous devez mettre une valeur supérieur à la meilleur offre actuel !");
 				request.setAttribute("error", e.getMessage());

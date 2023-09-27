@@ -27,8 +27,8 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 	// "SELECT * FROM RETRAIT r INNER JOIN ARTICLE_VENDU a ON a.no_article =
 	// r.no_article"
 	
-	private static final String SELECT_PRIX_ARTICLE = "SELECT TOP(1) av.no_article, e.no_utilisateur, e.montant_encheres, e.date_encheres,"
-			+ " u.pseudo"
+	private static final String SELECT_PRIX_ARTICLE = "SELECT TOP(1) u.no_utilisateur, av.no_article, e.date_encheres,"
+			+ " e.montant_encheres, u.pseudo"
 			+ " FROM ENCHERES e"
 			+ " INNER JOIN ARTICLE_VENDU av ON e.no_article = av.no_article"
 			+ " INNER JOIN UTILISATEUR u ON u.no_utilisateur = e.no_utilisateur"
@@ -130,8 +130,10 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 	public List<Enchere> findAll() {
 
 		List<Enchere> listEncheres = new ArrayList<>();
-		try (Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_ENCHERES)) {
+		try (
+				Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_ENCHERES)
+			){
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -141,6 +143,28 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 			e.printStackTrace();
 		}
 		return listEncheres;
+	}
+	
+	@Override
+	public boolean verifyIdAll(int idUser, int idArticle) {
+		boolean verify = false;
+		try (
+				Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL_ENCHERES)
+			){
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				int idUserSQL = rs.getInt("no_utilisateur");
+				int idArticleSQL = rs.getInt("no_article");
+				
+				if (idUser == idUserSQL && idArticle == idArticleSQL) {
+					return verify = true;
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return verify;
 	}
 
 	private Enchere EnchereFromRs(ResultSet rs) throws SQLException {

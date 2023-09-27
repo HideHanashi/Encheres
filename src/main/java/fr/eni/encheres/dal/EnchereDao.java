@@ -21,6 +21,8 @@ public interface EnchereDao {
 
 	Enchere selectPrixArticle(int id);
 
+	boolean verifyIdAll(int idUser, int idArticle);
+
 //	void encherir(Enchere enchere);
 
 }
