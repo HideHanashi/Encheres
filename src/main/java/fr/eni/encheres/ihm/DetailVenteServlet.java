@@ -2,7 +2,6 @@ package fr.eni.encheres.ihm;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 import fr.eni.encheres.bll.ArticlesManager;
 import fr.eni.encheres.bll.EncheresManager;

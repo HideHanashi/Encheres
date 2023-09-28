@@ -15,7 +15,7 @@ import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.ArticlesDao;
 
 public class ArticlesDaoJdbcImpl implements ArticlesDao {
-
+	
 	private static final String SELECT_ALL = "SELECT a.no_article, a.nom_article, a.date_debut_encheres, a.date_fin_encheres, a.description, a.etat_vente,"
 			+ " a.prix_initial, a.prix_vente, a.no_utilisateur, u.pseudo, u.nom, u.prenom, u.telephone, u.ville, u.rue, u.code_postal,"
 			+ " u.mot_de_passe, u.email, u.credit, u.administrateur, c.libelle, c.no_categorie"
