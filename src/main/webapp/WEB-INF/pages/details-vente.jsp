@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf" %>
 <main class="row">
-	<div class="col position-absolute top-50 start-50 translate-middle">
+	<div class="details-vente">
 		<div class="row text-center mt-4">
 			<h1> Détail vente de : ${ article.nomArticle }</h1>
 		</div>

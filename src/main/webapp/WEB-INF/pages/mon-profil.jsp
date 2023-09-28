@@ -14,8 +14,8 @@
 				<div class="mb-3"> <label for="rue" class="form-label">Rue: </label> <input type="text" class="form-control" readonly="readonly" value="${ user.rue }" id="rue" name="rue"></div>
 				<div class="mb-3"><label for="ville" class="form-label">Ville: </label> <input type="text" class="form-control" readonly="readonly" value="${ user.ville }" id="ville" name="ville"></div>
 				<div class="row mt-5">
-					<div class="mb-3"><a class="btn btn-secondary" href="${pageContext.request.contextPath}">Retour</a></div>
-					<div class="mb-3"><a class="btn btn-info"href="${ pageContext.request.contextPath }/modifiermonprofil">Modifier</a></div>
+					<div class=""><a class="btn btn-secondary" href="${pageContext.request.contextPath}">Retour</a></div>
+					<div class=""><a class="btn btn-info"href="${ pageContext.request.contextPath }/modifiermonprofil">Modifier</a></div>
 				</div>
 			</div>
 		</div>
