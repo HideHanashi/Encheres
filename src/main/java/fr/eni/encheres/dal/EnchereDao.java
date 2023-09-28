@@ -2,7 +2,6 @@ package fr.eni.encheres.dal;
 
 import java.util.List;
 
-import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 
 public interface EnchereDao {
@@ -22,6 +21,10 @@ public interface EnchereDao {
 	Enchere selectPrixArticle(int id);
 
 	boolean verifyIdAll(int idUser, int idArticle);
+
+	List<Enchere> findAllParticipe(int id);
+	
+	List<Enchere> findAllParticipeWin(int id);
 
 //	void encherir(Enchere enchere);
 

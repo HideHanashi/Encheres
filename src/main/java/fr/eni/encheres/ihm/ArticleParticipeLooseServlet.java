@@ -16,8 +16,8 @@ import fr.eni.encheres.bo.ArticleVendu;
 import fr.eni.encheres.bo.Enchere;
 import fr.eni.encheres.bo.Utilisateur;
 
-@WebServlet("/articleparticipe")
-public class ArticleParticipeServlet extends HttpServlet {
+@WebServlet("/articleparticipeloose")
+public class ArticleParticipeLooseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,7 +30,7 @@ public class ArticleParticipeServlet extends HttpServlet {
 			listEncheres = EncheresManager.getInstance().searchAllParticipe(idUser);
 			
 			request.setAttribute("encheres", listEncheres);
-			request.getRequestDispatcher("/WEB-INF/pages/enchere-participe-inload.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/pages/enchere-participe-loose.jsp").forward(request, response);
 		} catch (Exception e) {
 
 			System.out.println(e.getMessage());

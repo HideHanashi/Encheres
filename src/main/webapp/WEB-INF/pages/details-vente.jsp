@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf" %>
 <main class="row">
-	<div class="col position-absolute top-50 start-50 translate-middle">
+	<div class="details-vente">
 		<div class="row text-center mt-4">
 			<h1> Détail vente de : ${ article.nomArticle }</h1>
 		</div>
@@ -67,21 +67,27 @@
 							</div>
 						</div>
 					</div>
-					<c:if test="${ user != null }">
+					<c:if test="${ user.noUtilisateur == article.utilisateur.noUtilisateur }">
 						<div class="p-3">
-								<label for="proposition" class="form-label">Ma proposition :</label>
-								<!-- <p class="fst-italic">Vous ne pouvez enchérir qu'une seule fois à la fois.</p> -->
-								<input type="number" class="form-control" id="encherir" name="encherir">
-								<button class="btn btn-primary" role="button" href="${ pageContext.request.contextPath }/detailvente" 
-								type="submit" >Enchérir</button>
+								<p><label for="proposition" class="form-label">Vous ne pouvez pas enchérir sur votre propre offre.</label></p>
 						</div>
 					</c:if>
-					<c:if test="${ user == null }">
-						<div class="p-3">
-							<p><label for="proposition" class="form-label">Vous devez être connecté pour enchérir</label></p>
-							<a class="btn btn-primary" role="button" href="${ pageContext.request.contextPath }/connexion" >Connexion</a>
-							<div class="mb-5 mt-2"><a href="${ pageContext.request.contextPath }/inscription">Vous n'avez pas encore de compte ?</a></div>
-						</div>
+					<c:if test="${ user.noUtilisateur != article.utilisateur.noUtilisateur }">
+						<c:if test="${ user != null }">
+							<div class="p-3">
+									<label for="proposition" class="form-label">Ma proposition :</label>
+									<input type="number" class="form-control" id="encherir" name="encherir">
+									<button class="btn btn-primary" role="button" href="${ pageContext.request.contextPath }/detailvente" 
+									type="submit" >Enchérir</button>
+							</div>
+						</c:if>
+						<c:if test="${ user == null }">
+							<div class="p-3">
+								<p><label for="proposition" class="form-label">Vous devez être connecté pour enchérir</label></p>
+								<a class="btn btn-primary" role="button" href="${ pageContext.request.contextPath }/connexion" >Connexion</a>
+								<div class="mb-5 mt-2"><a href="${ pageContext.request.contextPath }/inscription">Vous n'avez pas encore de compte ?</a></div>
+							</div>
+						</c:if>
 					</c:if>
 				</div>
 			</div>

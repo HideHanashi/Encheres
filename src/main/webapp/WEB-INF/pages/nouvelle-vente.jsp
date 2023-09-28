@@ -2,11 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf"%>
 <main>
-	<div class="col position-absolute top-50 start-50 translate-middle">
+	<div class="creation-vente" >
 		<div class="row text-center">
 			<h1>Création Enchère</h1>
 		</div>
-		<div class="container overflow-hidden text-center">
+		<div class="container overflow-hidden text-center ">
 			<c:if test="${ ! empty error }">
 				<div class="alert alert-danger">${ error }</div>
 			</c:if>
@@ -86,7 +86,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="p-3 mt-4 pt-4">
+				<div class="p-3 mt-4 pt-4 ">
 					<button class="btn btn-primary" role="button" type="submit">Enregistrer</button>
 					<a class="btn btn-secondary" role="button" type="reset"
 						href="${ pageContext.request.contextPath }">Effacer</a>
