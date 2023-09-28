@@ -16,16 +16,6 @@ import fr.eni.encheres.bo.Utilisateur;
 import fr.eni.encheres.dal.EnchereDao;
 
 public class EnchereDaoJdbcImpl implements EnchereDao {
-
-	// "SELECT * FROM ARTICLE_VENDU a INNER JOIN ENCHERES e ON a.no_article =
-	// e.no_article"
-	// "SELECT * FROM ARTICLE_VENDU a INNER JOIN UTILISATEUR u ON a.no_utilisateur =
-	// u.no_utilisateur
-	// "
-	// "SELECT * FROM ARTICLE_VENDU a INNER JOIN CATEGORIE c ON a.no_categorie =
-	// c.no_categorie"
-	// "SELECT * FROM RETRAIT r INNER JOIN ARTICLE_VENDU a ON a.no_article =
-	// r.no_article"
 	
 	private static final String SELECT_PRIX_ARTICLE = "SELECT TOP(1) u.no_utilisateur, av.no_article, e.date_encheres,"
 			+ " e.montant_encheres, u.pseudo"
@@ -34,6 +24,15 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 			+ " INNER JOIN UTILISATEUR u ON u.no_utilisateur = e.no_utilisateur"
 			+ " WHERE av.no_article = ?"
 			+ " ORDER BY e.montant_encheres DESC";
+	
+	private static final String SELECT_ALL_PARTICIPE_WIN = "select e.*"
+			+ " from ENCHERES AS e INNER JOIN (select no_article ,max(montant_encheres) as max_montant from ENCHERES"
+			+ "	GROUP BY no_article) AS MO ON MO.no_article = e.no_article AND e.montant_encheres = MO.max_montant"
+			+ " where e.no_utilisateur = ?";
+	
+	private static final String SELECT_ALL_PARTICIPE = "SELECT e.no_utilisateur, a.no_article, a.nom_article, a.date_debut_encheres,"
+			+ " a.date_fin_encheres, a.description, a.etat_vente, a.prix_initial, a.prix_vente, e.montant_encheres, e.date_encheres"
+			+ " FROM ENCHERES e INNER JOIN ARTICLE_VENDU a ON e.no_article = a.no_article WHERE e.no_utilisateur = ?";
 
 	private static final String INSERT_ENCHERE = "INSERT INTO ENCHERES (no_utilisateur,no_article,date_encheres,montant_encheres)"
 			+ " VALUES (?,?,?,?)";
@@ -58,6 +57,42 @@ public class EnchereDaoJdbcImpl implements EnchereDao {
 						ArticlesManager.getInstance().recupArticle(rs.getInt("no_article")),
 						rs.getDate("date_encheres").toLocalDate(), rs.getInt("montant_encheres"));
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
+	@Override
+	public List<Enchere> findAllParticipe(int id) {
+		try (Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_ALL_PARTICIPE);) {
+			pstmt.setInt(1, id);
+			List<Enchere> encheres = new ArrayList<Enchere>();
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				encheres.add(EnchereFromRs(rs));
+			}
+			return encheres;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+
+	}
+	
+	@Override
+	public List<Enchere> findAllParticipeWin(int id) {
+		try (Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_ALL_PARTICIPE_WIN);) {
+			pstmt.setInt(1, id);
+			List<Enchere> encheres = new ArrayList<Enchere>();
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				encheres.add(EnchereFromRs(rs));
+			}
+			return encheres;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
