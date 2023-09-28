@@ -58,10 +58,23 @@ public class VendreArticleServlet extends HttpServlet {
 			// INTÉGRATION DES VARIABLES DE L'UTILISATEUR DANS LES VARIABLES BACK
 			String nomArticle = request.getParameter("nomArticle");
 			String description = request.getParameter("description");
-			LocalDate dateDebutEncheres = LocalDate.parse(request.getParameter("dateDebutEncheres"));
-			LocalDate dateFinEncheres = LocalDate.parse(request.getParameter("dateFinEncheres"));
-			int miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
-			int categorie_id = Integer.parseInt(request.getParameter("categorie"));
+			LocalDate dateDebutEncheres = null;
+			LocalDate dateFinEncheres = null;
+			int miseAPrix, categorie_id = 0;
+
+			try {
+				dateDebutEncheres = LocalDate.parse(request.getParameter("dateDebutEncheres"));
+				dateFinEncheres = LocalDate.parse(request.getParameter("dateFinEncheres"));
+			} catch (Exception e) {
+				throw new BLLException("Les dates de début et de fin de l'enchère sont obligatoires.");
+			}
+			try {
+				miseAPrix = Integer.parseInt(request.getParameter("miseAPrix"));
+				categorie_id = Integer.parseInt(request.getParameter("categorie"));
+			} catch (Exception e) {
+				throw new BLLException("La mise à prix et la catégorie de l'enchère sont obligatoires.");
+			}
+
 			String rue = request.getParameter("rue");
 			String codePostal = request.getParameter("codePostal");
 			String ville = request.getParameter("ville");

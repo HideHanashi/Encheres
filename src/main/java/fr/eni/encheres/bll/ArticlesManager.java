@@ -86,16 +86,10 @@ public class ArticlesManager {
 			throw new BLLException("Le nom de l'article est obligatoire.");
 		if (article.getDescription() == null || article.getDescription().isBlank())
 			throw new BLLException("La description de l'article est obligatoire.");
-		if (article.getDateDebutEncheres() == null)
-			throw new BLLException("La date de début de l'enchère est obligatoire.");
 		if (article.getDateDebutEncheres().isBefore(LocalDate.now()))
 			throw new BLLException("La date de début doit être supérieur ou égale à la date d'aujourd'hui.");
-		if (article.getDateFinEncheres() == null)
-			throw new BLLException("La date de fin de l'enchère est obligatoire.");
 		if (!article.getDateFinEncheres().isAfter(LocalDate.now()))
 			throw new BLLException("La date de fin doit être supérieur à la date d'aujourd'hui.");
-		if (article.getCategorie().getNoCategorie() <= 0)
-			throw new BLLException("Une catégorie pour l'article est obligatoire.");
 		if (article.getMiseAPrix() <= 0)
 			throw new BLLException("Le prix pour l'article doit être supérieur à 0.");
 	}
