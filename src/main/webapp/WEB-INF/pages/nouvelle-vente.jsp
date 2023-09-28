@@ -61,7 +61,7 @@
 								l'enchère: </label> <input type="date" class="form-control"
 								name="dateFinEncheres" id="dateFinEncheres">
 						</div>
-						<div class="card p-3" style="width: 30rem;">
+						<div class="card p-3" style="width: 40rem;">
 							<div class="card-body">
 								<h5 class="card-title">Lieu de Retrait</h5>
 								<p class="fst-italic fw-lighter"
