@@ -1,7 +1,16 @@
 @charset "UTF-8";
 
+html{
+	overflow-x: hidden;;
+}
+
 * {
 	font-family: 'Montserrat', sans-serif;
+}
+
+footer{
+  bottom: 0;
+  width: 110%;
 }
 
 .headerblock {
@@ -21,6 +30,7 @@
 
 .navbarsearch {
 	font-size: small;
+	width: 200px;
 }
 
 .mdpforget {
@@ -31,18 +41,51 @@
 	background-color: rgb(240, 240, 240);
 }
 
+.connexion{
+	margin-top: 145px;
+	margin-bottom: 146px;
+}
+
+.creation-profil{
+	margin-top: 100px;
+	margin-bottom: 6px;
+}
+
+.mdp-oublie{
+	margin-top: 230px;
+}
+
+.mdp-reset{
+	margin-top: 145px;
+}
+
+.modifierprofil{
+	margin-top: 100px;
+}
+
+.creation-vente{
+	margin-top: 100px;
+}
+
+.profilmodifier{
+	margin-left: 220px;
+}
+
 .containerarticles {
 	display: inline-block;
 }
 
 body{
-    min-height: 100;
     display: flex;
     flex-direction: column;
 }
-footer{
-    bottom: 0;
-    position: fixed;
+
+.navbar-expand-lg .navbar-collapse{
+	display: flex;
+}
+
+.spaceheader{
+	margin-left: 1170px;
 }
 
 @media (min-width: 992px){

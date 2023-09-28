@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf" %>
 <main class="row">
-	<div class="col position-absolute top-50 start-50 translate-middle">	
+	<div class="connexion">	
 		<div class="row mt-5">
 			<div class="col-4 offset-4">
 				<h1 class="mb-3"> Connexion </h1>

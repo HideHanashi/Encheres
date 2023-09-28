@@ -2,15 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf"%>
-
 <main>
 	<div class="p-3">
 		<label for="categorie" class="form-label">Catégorie : </label>
 		<form class="d-flex ms-2" role="search">
 			<select class="form-select" aria-label="Categorie" id="c" name="c"
 				type="submit">
-				<option class="fst-italic disabled" disabled selected>Choisir
-					une catégorie . . .</option>
+				<option class="fst-italic disabled" disabled selected>Choisir une catégorie . . .</option>
 				<c:forEach var="categories" items="${ categorie }">
 					<option value="${ categories.noCategorie }">${ categories.libelle }</option>
 				</c:forEach>
