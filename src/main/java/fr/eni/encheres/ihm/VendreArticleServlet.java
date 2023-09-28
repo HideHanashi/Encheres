@@ -55,7 +55,7 @@ public class VendreArticleServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		try {
-			// INTÉGRATION DES VARIABLES DE L'UTILISATEUR DANS LES VARIABLES BACK
+			// INTÉGRATION DES PARAMÈTRES DE LA PAGE DANS LES VARIABLES
 			String nomArticle = request.getParameter("nomArticle");
 			String description = request.getParameter("description");
 			LocalDate dateDebutEncheres = null;
@@ -94,20 +94,15 @@ public class VendreArticleServlet extends HttpServlet {
 
 			// AJOUT DE L'ARTICLE DANS LA CATÉGORIE SELECTIONNÉ PAR L'UTILISATEUR
 			categorie.addArticle(articleVendu);
-			System.out.println(articleVendu);
-			Retrait retrait = new Retrait();
 
 			// CRÉATION DE L'ARTICLE DANS LA BDD
 			ArticlesManager.getInstance().addArticle(articleVendu);
 
 			// CRÉATION DU LIEU DE RETRAIT POUR L'ARTICLE CRÉÉ
-
-			retrait = new Retrait(articleVendu, rue, codePostal, ville);
+			Retrait retrait = new Retrait(articleVendu, rue, codePostal, ville);
 			RetraitManager.getInstance().addRetrait(retrait);
 
-			// CRÉATION DU LIEU DE RETRAIT DANS LA BDD
-
-			// RENVOIE L'UTILISATEUR SUR LA PAGE D'ACCUEIL
+			// ENVOIE L'UTILISATEUR SUR LA PAGE D'ACCUEIL
 			response.sendRedirect(request.getContextPath() + "");
 		} catch (BLLException e) {
 
