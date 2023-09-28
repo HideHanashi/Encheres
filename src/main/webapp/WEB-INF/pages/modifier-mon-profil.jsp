@@ -121,7 +121,7 @@
 						<div class="row">
 							<div class="col-2"><label>Crédit:</label></div>
 							<div class="col-1">
-								<div class=""><label id="credit">${user.credit}</label></div>
+								<div class=""><label id="credit">${user.credit} <i class="fa-solid fa-coins"></i></label></div>
 							</div>
 						</div>
 					</div>
