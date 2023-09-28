@@ -49,10 +49,13 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			+ " INNER JOIN UTILISATEUR u ON a.no_utilisateur = u.no_utilisateur" + " WHERE c.no_categorie = ?";
 
 	@Override
-	public void save(ArticleVendu articleVendu) {// passage par référence
-		try (Connection connection = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(SAVE, PreparedStatement.RETURN_GENERATED_KEYS);) {
-			// valoriser les params de la requete
+	public void save(ArticleVendu articleVendu) {
+		try (
+				Connection connection = ConnectionProvider.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SAVE, PreparedStatement.RETURN_GENERATED_KEYS);
+															// RÉCUPÈRE L'ID DE L'ARTICLE APRÈS CRÉATION DE L'ARTICLE
+			){
+			// ENVOIE LES INFORMATIONS À LA BDD
 			pstmt.setString(1, articleVendu.getNomArticle());
 			pstmt.setString(2, articleVendu.getDescription());
 			pstmt.setDate(3, Date.valueOf(articleVendu.getDateDebutEncheres()));
@@ -63,9 +66,9 @@ public class ArticlesDaoJdbcImpl implements ArticlesDao {
 			pstmt.setInt(8, articleVendu.getUtilisateur().getNoUtilisateur());
 			pstmt.setInt(9, articleVendu.getCategorie().getNoCategorie());
 
-			// executer la requete
 			pstmt.executeUpdate();
 
+			// RÉCUPÈRE L'ID DE L'ARTICLE DANS LA VARIABLE
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next()) {
 				articleVendu.setNoArticle(rs.getInt(1));
