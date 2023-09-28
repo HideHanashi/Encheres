@@ -1,6 +1,8 @@
+<%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/fragments/header.jspf"%>
+<c:set var="today" value="<%= LocalDate.now() %>"/>
 <main>
 	<div class="p-3">
 		<label for="categorie" class="form-label">Catégorie : </label>
@@ -22,8 +24,8 @@
 				<div class="col">
 
 					<c:forEach var="article" items="${ articles }">
-						<c:if
-							test="${ article.utilisateur.noUtilisateur == user.noUtilisateur }">
+						<c:if test="${ article.dateDebutEncheres > today }">
+						<c:if test="${ article.utilisateur.noUtilisateur == user.noUtilisateur }">
 
 							<div class="card p-3" style="width: 18rem;">
 								<c:if test="${ image != null }">
@@ -49,6 +51,7 @@
 										href="${ pageContext.request.contextPath }/modifiermesarticles?auction=${ article.noArticle }">Modifier</a>
 								</div>
 							</div>
+						</c:if>
 						</c:if>
 
 					</c:forEach>
