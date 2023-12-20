@@ -16,27 +16,44 @@ import fr.eni.encheres.dal.jdbc.exception.JDBCException;
 
 public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 
-	private static final String INSERT_USER = "INSERT INTO UTILISATEUR (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
-			+ " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	// Requête SQL pour insérer un utilisateur dans la base de données
+	private static final String INSERT_USER = "INSERT INTO UTILISATEUR (pseudo,nom,prenom,email," 
+	+ "telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
+	// Requête SQL pour sélectionner un utilisateur par son pseudo
 	private static final String SELECT_BY_USERNAME = "SELECT * FROM UTILISATEUR WHERE pseudo = ?";
 
+	// Contraintes d'unicité pour les champs dans la base de données
 	private static final String UNIQUE_USERNAME_CONSTRAINT = "uq_pseudo_user";
 	private static final String UNIQUE_TELEPHONE_CONSTRAINT = "uq_phone_user";
 	private static final String UNIQUE_EMAIL_CONSTRAINT = "uq_email_user";
 
+	// Requête SQL pour supprimer un utilisateur par son numéro d'identification
 	private static final String DELETE = "DELETE UTILISATEUR WHERE no_utilisateur = ?";
+	
+	// Requête SQL pour sélectionner un utilisateur par son adresse email
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM UTILISATEUR WHERE email = ?";
+	
+	// Requête SQL pour sélectionner un utilisateur par son numéro d'identification
 	private static final String SELECT_ONE = "SELECT * FROM UTILISATEUR WHERE no_utilisateur = ?";
+	
+	// Requête SQL pour sélectionner tous les utilisateurs
 	private static final String SELECT_ALL = "SELECT * FROM UTILISATEUR";
-//	UPDATE games SET name=?,company=?,category=?,price=?,releaseDate=?,age=?,format=?,version=? WHERE id = ?
+	
+	// Requête SQL pour mettre à jour les informations d'un utilisateur
 	private static final String UPDATE_USER_USER = "UPDATE UTILISATEUR SET pseudo=?,nom=?,prenom=?,email=?,telephone=?,rue=?,code_postal=?,ville=? WHERE no_utilisateur = ?";
+	
+	// Requête SQL pour mettre à jour le crédit d'un utilisateur
 	private static final String UPDATE_USER_CREDIT = "UPDATE UTILISATEUR SET credit=? WHERE no_utilisateur = ?";
+	
+	// Requête SQL pour mettre à jour le mot de passe d'un utilisateur
 	private static final String UPDATE_USER_PASSWORD = "UPDATE UTILISATEUR SET mot_de_passe = ? WHERE no_utilisateur = ?";
-
+	
+	// Requête SQL pour mettre à jour l'adresse de retrait d'un utilisateur
 	private static final String UPDATE_RETRAIT_RETRAIT = "UPDATE RETRAIT SET (rue,code_postal,ville)"
 			+ " VALUES (?,?,?) WHERE no_utilisateur = ?";
-
+	
+	// Requête SQL pour mettre à jour le mot de passe d'un utilisateur
 	private static final String UPDATE_PASSWORD_USER = "UPDATE UTILISATEUR SET mot_de_passe = ? WHERE no_utilisateur = ?";
 
 	@Override
@@ -79,10 +96,12 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 		return null;
 	}
 
+	// Méthode qui communique avec la base de données en utilisant la requête SQL
 	@Override
 	public void save(Utilisateur user) throws JDBCException {
 		try (Connection connection = ConnectionProvider.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(INSERT_USER);) {
+			// Insertion des données
 			pstmt.setString(1, user.getPseudo());
 			pstmt.setString(2, user.getNom());
 			pstmt.setString(3, user.getPrenom());
@@ -127,9 +146,9 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 		try (Connection connection = ConnectionProvider.getConnection();) {
 
 			PreparedStatement pstmt;
-				pstmt = connection.prepareStatement(UPDATE_USER_CREDIT);
-				pstmt.setInt(1, user.getCredit());
-				pstmt.setInt(2, user.getNoUtilisateur());
+			pstmt = connection.prepareStatement(UPDATE_USER_CREDIT);
+			pstmt.setInt(1, user.getCredit());
+			pstmt.setInt(2, user.getNoUtilisateur());
 
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -153,7 +172,6 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 				pstmt.setString(7, user.getCodePostal());
 				pstmt.setString(8, user.getVille());
 				pstmt.setInt(9, user.getNoUtilisateur());
-		
 
 			} else {
 				pstmt = connection.prepareStatement(UPDATE_USER_PASSWORD);
@@ -230,7 +248,6 @@ public class UtilisateurDaoJdbcImpl implements UtilisateurDao {
 			ResultSet rs = stmt.executeQuery(SELECT_ALL);
 			while (rs.next()) {
 				utilisateur.add(
-
 						new Utilisateur(rs.getInt("no_utilisateur"), rs.getString("pseudo"), rs.getString("nom"),
 								rs.getString("prenom"), rs.getString("email"), rs.getString("telephone"),
 								rs.getString("rue"), rs.getString("code_postal"), rs.getString("ville")));
